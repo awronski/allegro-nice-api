@@ -14,4 +14,7 @@ hs_err_pid*
 # IntelliJ
 .idea
 *.iml
+target
 
+# allegro webapi generated classes
+src/main/java/pl/allegro
