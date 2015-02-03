@@ -4,6 +4,8 @@ import com.apwglobal.nice.login.AbstractLoggedServiceBaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 
+import static org.junit.Assert.assertNotNull;
+
 public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
 
     @Test
@@ -13,7 +15,13 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
 
     @Test
     public void shouldReturnSessionId() {
-        Assert.assertNotNull(api.login().getSession());
+        assertNotNull(api.login().getSession());
     }
+
+    @Test
+    public void shouldReturnStatus() {
+        assertNotNull(api.getStatus());
+    }
+
 
 }

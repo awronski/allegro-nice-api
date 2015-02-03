@@ -4,6 +4,7 @@ import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.login.LoginService;
 import com.apwglobal.nice.system.SystemService;
 import pl.allegro.webapi.ServiceService;
+import pl.allegro.webapi.SysStatusType;
 
 public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
 
@@ -28,6 +29,10 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         return session;
     }
 
+    @Override
+    public SysStatusType getStatus() {
+        return systemService.getStatus();
+    }
 
     public static final class Builder {
         private Credentials cred;
