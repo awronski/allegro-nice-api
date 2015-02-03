@@ -1,46 +1,48 @@
 package com.apwglobal.nice.service;
 
 import com.apwglobal.nice.login.Credentials;
-import pl.allegro.webapi.ServicePort;
+import com.apwglobal.nice.login.LoginService;
+import com.apwglobal.nice.system.SystemService;
 import pl.allegro.webapi.ServiceService;
 
-public class AllegroNiceApi {
+public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
 
-    private ServicePort allegro;
-    private Credentials cred;
     private AllegroSession session;
-    private int countryId;
-
+    private LoginService loginService;
+    private SystemService systemService;
 
     private AllegroNiceApi(Builder builder) {
-        cred = builder.credentials;
-        countryId = builder.countryId;
         allegro = new ServiceService().getServicePort();
-        login();
+        cred = builder.cred;
+        conf = builder.conf;
+        loginService = new LoginService(allegro, cred, conf);
+        systemService = new SystemService(allegro, cred, conf);
     }
 
-    private void login() {
-
+    public IAllegroNiceApi login() {
+        this.session = loginService.login();
+        return this;
     }
 
     public AllegroSession getSession() {
         return session;
     }
 
+
     public static final class Builder {
-        private Credentials credentials;
-        private int countryId;
+        private Credentials cred;
+        private Configuration conf;
 
         public Builder() {
         }
 
-        public Builder credentials(Credentials credentials) {
-            this.credentials = credentials;
+        public Builder cred(Credentials cred) {
+            this.cred = cred;
             return this;
         }
 
-        public Builder countryId(int countryId) {
-            this.countryId = countryId;
+        public Builder conf(Configuration conf) {
+            this.conf = conf;
             return this;
         }
 
@@ -48,5 +50,4 @@ public class AllegroNiceApi {
             return new AllegroNiceApi(this);
         }
     }
-
 }

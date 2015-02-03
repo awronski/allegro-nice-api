@@ -1,21 +1,23 @@
 package com.apwglobal.nice.login;
 
+import com.apwglobal.nice.service.AbstractService;
 import com.apwglobal.nice.service.AllegroSession;
-import com.apwglobal.nice.system.SystemService;
+import com.apwglobal.nice.service.Configuration;
 import pl.allegro.webapi.DoLoginRequest;
 import pl.allegro.webapi.DoLoginResponse;
 import pl.allegro.webapi.ServicePort;
 
-public class LoginService {
+public class LoginService extends AbstractService {
 
-    public static AllegroSession login(ServicePort allegro, Credentials cred, int countryId) {
-        long version = SystemService.getStatus(allegro, countryId, cred.getKey()).getVerKey();
+    public LoginService(ServicePort allegro, Credentials cred, Configuration conf) {
+        super(allegro, cred, conf);
+    }
 
-        DoLoginRequest request = new DoLoginRequest(cred.getUsername(), cred.getPassowrd(), countryId, cred.getKey(), version);
+    public AllegroSession login() {
+        DoLoginRequest request = new DoLoginRequest(cred.getUsername(), cred.getPassowrd(), conf.getCountryId(), cred.getKey(), conf.getVersion());
         DoLoginResponse response = allegro.doLogin(request);
 
         return new AllegroSession.Builder()
-                .versionId(version)
                 .sessionId(response.getSessionHandlePart())
                 .userId(response.getUserId())
                 .build();

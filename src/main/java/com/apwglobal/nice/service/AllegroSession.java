@@ -2,19 +2,14 @@ package com.apwglobal.nice.service;
 
 public class AllegroSession {
 
-    private long versionId;
     private String sessionId;
     private long userId;
 
     private AllegroSession(Builder builder) {
-        versionId = builder.versionId;
         sessionId = builder.sessionId;
         userId = builder.userId;
     }
 
-    public long getVersionId() {
-        return versionId;
-    }
     public String getSessionId() {
         return sessionId;
     }
@@ -23,16 +18,10 @@ public class AllegroSession {
     }
 
     public static final class Builder {
-        private long versionId;
         private String sessionId;
         private long userId;
 
         public Builder() {
-        }
-
-        public Builder versionId(long versionId) {
-            this.versionId = versionId;
-            return this;
         }
 
         public Builder sessionId(String sessionId) {

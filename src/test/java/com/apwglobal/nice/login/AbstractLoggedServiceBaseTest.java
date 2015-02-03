@@ -5,15 +5,15 @@ import org.junit.BeforeClass;
 
 import java.io.IOException;
 
-public class AbstractLoggedServiceTest extends AbstractServiceTest {
+public class AbstractLoggedServiceBaseTest extends AbstractServiceBaseTest {
 
-    static AllegroNiceApi api;
+    protected static AllegroNiceApi api;
 
     @BeforeClass
     public static void abstractLoggedServiceSetup() throws IOException {
         api = new AllegroNiceApi.Builder()
-                .countryId(countryId)
-                .credentials(cred)
+                .conf(conf)
+                .cred(cred)
                 .build();
     }
 
