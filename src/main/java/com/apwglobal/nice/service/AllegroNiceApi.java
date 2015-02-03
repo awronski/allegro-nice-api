@@ -20,11 +20,13 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         systemService = new SystemService(allegro, cred, conf);
     }
 
+    @Override
     public IAllegroNiceApi login() {
         this.session = loginService.login();
         return this;
     }
 
+    @Override
     public AllegroSession getSession() {
         return session;
     }
