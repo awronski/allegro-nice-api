@@ -8,11 +8,12 @@ import pl.allegro.webapi.ServiceService;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
 import java.util.Properties;
 
 public abstract class AbstractServiceBaseTest {
 
-    protected static ServicePort allegro = new ServiceService().getServicePort();
+    protected static ServicePort allegro;
     protected static Credentials cred;
     protected static Configuration conf;
 
@@ -27,6 +28,9 @@ public abstract class AbstractServiceBaseTest {
                 properties.getProperty("alegro.password"),
                 properties.getProperty("alegro.key")
         );
+
+        String url = properties.getProperty("allegro.wsdl");
+        allegro = new ServiceService(new URL(url)).getServicePort();
 
         int countryId = Integer.valueOf(properties.getProperty("alegro.country"));
         long version = VersionUtil.getVersion(allegro, countryId, cred.getKey());

@@ -2,3 +2,4 @@ alegro.username=
 alegro.password=
 alegro.key=
 alegro.country=
+allegro.wsdl=https://webapi.allegro.pl.webapisandbox.pl/service.php?wsdl
