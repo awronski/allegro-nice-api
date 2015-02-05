@@ -1,5 +1,6 @@
 package com.apwglobal.nice.login;
 
+import com.apwglobal.nice.exception.AllegroExecutor;
 import com.apwglobal.nice.service.AbstractService;
 import com.apwglobal.nice.service.AllegroSession;
 import com.apwglobal.nice.service.Configuration;
@@ -15,7 +16,7 @@ public class LoginService extends AbstractService {
 
     public AllegroSession login() {
         DoLoginRequest request = new DoLoginRequest(cred.getUsername(), cred.getPassowrd(), conf.getCountryId(), cred.getKey(), conf.getVersion());
-        DoLoginResponse response = allegro.doLogin(request);
+        DoLoginResponse response = AllegroExecutor.execute(() -> allegro.doLogin(request));
 
         return new AllegroSession.Builder()
                 .sessionId(response.getSessionHandlePart())

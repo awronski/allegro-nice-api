@@ -1,7 +1,9 @@
 package com.apwglobal.nice.exception;
 
-public class AllegroException extends Exception {
+public abstract class AllegroException extends RuntimeException {
 
-
+    public AllegroException(String message, Throwable cause) {
+        super(message, cause);
+    }
 
 }
