@@ -2,15 +2,21 @@ package com.apwglobal.nice.service;
 
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.login.LoginService;
+import com.apwglobal.nice.message.AllegroMessage;
+import com.apwglobal.nice.message.MessageService;
 import com.apwglobal.nice.system.SystemService;
 import pl.allegro.webapi.ServiceService;
 import pl.allegro.webapi.SysStatusType;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
 
     private AllegroSession session;
     private LoginService loginService;
     private SystemService systemService;
+    private MessageService messageService;
 
     private AllegroNiceApi(Builder builder) {
         allegro = new ServiceService().getServicePort();
@@ -18,6 +24,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         conf = builder.conf;
         loginService = new LoginService(allegro, cred, conf);
         systemService = new SystemService(allegro, cred, conf);
+        messageService = new MessageService(allegro, cred, conf);
     }
 
     @Override
@@ -34,6 +41,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     @Override
     public SysStatusType getStatus() {
         return systemService.getStatus();
+    }
+
+    @Override
+    public List<AllegroMessage> getAllMessages(LocalDateTime from) {
+        return messageService.getAllMessages(from);
     }
 
     public static final class Builder {

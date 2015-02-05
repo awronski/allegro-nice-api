@@ -4,7 +4,10 @@ import com.apwglobal.nice.login.AbstractLoggedServiceBaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
 
@@ -23,5 +26,9 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         assertNotNull(api.getStatus());
     }
 
+    @Test
+    public void shouldReturnAllegroMessages()  {
+        assertTrue(api.getAllMessages(LocalDateTime.now().minusDays(1000)).size() > 0);
+    }
 
 }
