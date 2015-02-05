@@ -1,7 +1,6 @@
 package com.apwglobal.nice.login;
 
 import com.apwglobal.nice.service.Configuration;
-import com.apwglobal.nice.util.VersionUtil;
 import org.junit.BeforeClass;
 import pl.allegro.webapi.ServicePort;
 import pl.allegro.webapi.ServiceService;
@@ -33,8 +32,7 @@ public abstract class AbstractServiceBaseTest {
         allegro = new ServiceService(new URL(url)).getServicePort();
 
         int countryId = Integer.valueOf(properties.getProperty("alegro.country"));
-        long version = VersionUtil.getVersion(allegro, countryId, cred.getKey());
-        conf = new Configuration(countryId, version);
+        conf = new Configuration(countryId);
     }
 
 }

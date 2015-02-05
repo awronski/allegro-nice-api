@@ -22,6 +22,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         allegro = new ServiceService().getServicePort();
         cred = builder.cred;
         conf = builder.conf;
+
         loginService = new LoginService(allegro, cred, conf);
         systemService = new SystemService(allegro, cred, conf);
         messageService = new MessageService(allegro, cred, conf);
