@@ -20,7 +20,7 @@ allegro.login();
 
 ## Get system messages
 ```java
-List<AllegroMessage> msgs = allegro.getAllMessagesallegro(LocalDateTime.now().minusDays(30));
+List<AllegroMessage> msgs = allegro.getAllMessages(LocalDateTime.now().minusDays(30));
 ```
 
 ## _Work in progress_
