@@ -1,13 +1,14 @@
 package com.apwglobal.nice.login;
 
 import com.apwglobal.nice.service.AllegroNiceApi;
+import com.apwglobal.nice.service.IAllegroNiceApi;
 import org.junit.BeforeClass;
 
 import java.io.IOException;
 
 public class AbstractLoggedServiceBaseTest extends AbstractServiceBaseTest {
 
-    protected static AllegroNiceApi api;
+    protected static IAllegroNiceApi api;
 
     @BeforeClass
     public static void abstractLoggedServiceSetup() throws IOException {
