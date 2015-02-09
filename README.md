@@ -1,5 +1,5 @@
 # allegro-nice-api
-Flexible and easy to use java api for allegro service.
+Flexible and easy to use java api for allegro service focused on trading operation on allegro platform.
 
 ## Initialize object
 ```java
@@ -21,6 +21,16 @@ allegro.login();
 ## Get system messages
 ```java
 List<AllegroMessage> msgs = allegro.getAllMessages(LocalDateTime.now().minusDays(30));
+```
+
+## Subscribe to journal
+You can subscribe to users journal using ```api.getSiteJournal(0)```
+This method returns [RxJava](https://github.com/ReactiveX/RxJava)
+[Observable](http://reactivex.io/documentation/observable.html) object.
+```java
+    long startingPoint = 0;
+    api.getSiteJournal(startingPoint)
+        .subscribe(System.out::println);
 ```
 
 ## _Work in progress_
