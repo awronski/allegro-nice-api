@@ -24,16 +24,26 @@ List<AllegroMessage> msgs = allegro.getAllMessages(LocalDateTime.now().minusDays
 ```
 
 ## Subscribe to journal
-You can subscribe to users journal using ```api.getSiteJournal(0)```
-This method returns [RxJava](https://github.com/ReactiveX/RxJava)
-[Observable](http://reactivex.io/documentation/observable.html) object.
+You can subscribe to user's journal using ```api.getSiteJournal(startingPoint)```.
+This method returns [Observable](http://reactivex.io/documentation/observable.html) object.
 ```java
-    long startingPoint = 0;
-    api.getSiteJournal(startingPoint)
-        .subscribe(System.out::println);
+long startingPoint = 0;
+api.getSiteJournal(startingPoint)
+    .subscribe(System.out::println);
 ```
 
-## _Work in progress_
+To handle errors and on complete use:
+```java
+api.getSiteJournal(startingPoint)
+    .subscribe(
+        j -> System.out.println("on next: " + j),
+        t -> System.out.println("on error: " + t),
+        () -> System.out.println("on complete")
+    );
+```
+Read more on [RxJava](https://github.com/ReactiveX/RxJava).
+
+### _... work in progress_
 
 License
 =======

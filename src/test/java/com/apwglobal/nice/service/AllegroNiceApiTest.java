@@ -1,8 +1,10 @@
 package com.apwglobal.nice.service;
 
+import com.apwglobal.nice.journal.Journal;
 import com.apwglobal.nice.login.AbstractLoggedServiceBaseTest;
 import org.junit.Assert;
 import org.junit.Test;
+import rx.Observable;
 
 import java.time.LocalDateTime;
 
@@ -31,4 +33,15 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         assertTrue(api.getAllMessages(LocalDateTime.now().minusDays(1000)).size() > 0);
     }
 
+    @Test
+    public void testGetLastSiteJournalEventId() {
+        api.login();
+        Observable<Journal> o = api.getJournal(0);
+        o.limit(10)
+                .toBlocking()
+                .getIterator()
+                .forEachRemaining(Assert::assertNotNull);
+
+        assertNotNull(o);
+    }
 }
