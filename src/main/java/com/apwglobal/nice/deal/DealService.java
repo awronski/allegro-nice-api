@@ -5,12 +5,11 @@ import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractAllegroIterator;
 import com.apwglobal.nice.service.AbstractService;
 import com.apwglobal.nice.service.Configuration;
-import pl.allegro.webapi.DoGetSiteJournalDealsRequest;
-import pl.allegro.webapi.ServicePort;
-import pl.allegro.webapi.SiteJournalDealsStruct;
+import pl.allegro.webapi.*;
 import rx.Observable;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
@@ -42,6 +41,17 @@ public class DealService extends AbstractService {
         }
 
         private Deal createDeal(SiteJournalDealsStruct d) {
+            DoGetDealsRequest request = new DoGetDealsRequest(session, d.getDealItemId(), d.getDealBuyerId());
+            DoGetDealsResponse response = AllegroExecutor.execute(() -> allegro.doGetDeals(request));
+
+            double amountOriginal = response.getDealsList().getItem()
+                    .stream()
+                    .collect(Collectors.summingDouble(DealsStruct::getDealAmountOriginal));
+
+            double amountDiscounted = response.getDealsList().getItem()
+                    .stream()
+                    .collect(Collectors.summingDouble(DealsStruct::getDealAmountDiscounted));
+
             return new Deal.Builder()
                     .dealBuyerId(d.getDealBuyerId())
                     .dealEventId(d.getDealEventId())
@@ -52,6 +62,8 @@ public class DealService extends AbstractService {
                     .dealSellerId(d.getDealSellerId())
                     .dealTransactionId(d.getDealTransactionId())
                     .dealType(d.getDealEventType())
+                    .dealAmountOriginal(amountOriginal)
+                    .dealAmountDiscounted(amountDiscounted)
                     .build();
         }
 

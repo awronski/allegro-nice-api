@@ -15,6 +15,8 @@ public class Deal {
     protected long dealItemId;
     protected int dealBuyerId;
     protected int dealQuantity;
+    protected double dealAmountOriginal;
+    protected double dealAmountDiscounted;
 
     private Deal(Builder builder) {
         dealEventId = builder.dealEventId;
@@ -26,6 +28,8 @@ public class Deal {
         dealItemId = builder.dealItemId;
         dealBuyerId = builder.dealBuyerId;
         dealQuantity = builder.dealQuantity;
+        dealAmountOriginal = builder.dealAmountOriginal;
+        dealAmountDiscounted = builder.dealAmountDiscounted;
     }
 
     public long getDealEventId() {
@@ -55,6 +59,12 @@ public class Deal {
     public int getDealQuantity() {
         return dealQuantity;
     }
+    public double getDealAmountOriginal() {
+        return dealAmountOriginal;
+    }
+    public double getDealAmountDiscounted() {
+        return dealAmountDiscounted;
+    }
 
     public static final class Builder {
         private long dealEventId;
@@ -66,6 +76,8 @@ public class Deal {
         private long dealItemId;
         private int dealBuyerId;
         private int dealQuantity;
+        private double dealAmountOriginal;
+        private double dealAmountDiscounted;
 
         public Builder() {
         }
@@ -112,6 +124,16 @@ public class Deal {
 
         public Builder dealQuantity(int dealQuantity) {
             this.dealQuantity = dealQuantity;
+            return this;
+        }
+
+        public Builder dealAmountOriginal(double dealAmountOriginal) {
+            this.dealAmountOriginal = dealAmountOriginal;
+            return this;
+        }
+
+        public Builder dealAmountDiscounted(double dealAmountDiscounted) {
+            this.dealAmountDiscounted = dealAmountDiscounted;
             return this;
         }
 
