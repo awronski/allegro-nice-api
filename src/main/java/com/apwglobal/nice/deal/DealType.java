@@ -2,8 +2,8 @@ package com.apwglobal.nice.deal;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public enum DealType {
 
@@ -21,9 +21,10 @@ public enum DealType {
 
     public static final Map<Integer, DealType> VALUES;
     static {
-        VALUES = Collections.unmodifiableMap(new HashMap<>());
-        Arrays.stream(DealType.values())
-                .forEach(v -> VALUES.put(v.type, v));
+        VALUES = Collections.unmodifiableMap(
+                Arrays.stream(DealType.values())
+                        .collect(Collectors.toMap((DealType v) -> v.type, v -> v))
+        );
     }
 
 }
