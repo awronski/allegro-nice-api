@@ -1,5 +1,6 @@
 package com.apwglobal.nice.service;
 
+import com.apwglobal.nice.auction.Auction;
 import com.apwglobal.nice.deal.Deal;
 import com.apwglobal.nice.journal.Journal;
 import com.apwglobal.nice.message.AllegroMessage;
@@ -29,5 +30,8 @@ public interface IAllegroNiceApi {
     //deals
     Observable<Deal> getDeals(long startingPoint);
     void fillBuyersForms(List<Deal> deals);
+
+    //selling
+    Observable<Auction> getAuctions();
 
 }

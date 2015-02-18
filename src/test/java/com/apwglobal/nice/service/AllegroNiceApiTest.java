@@ -1,5 +1,6 @@
 package com.apwglobal.nice.service;
 
+import com.apwglobal.nice.auction.Auction;
 import com.apwglobal.nice.deal.Deal;
 import com.apwglobal.nice.journal.Journal;
 import com.apwglobal.nice.login.AbstractLoggedServiceBaseTest;
@@ -68,5 +69,19 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         deals
                 .stream()
                 .forEach(d -> assertNotNull(d.getPostBuyFormDataStruct()));
+    }
+
+    @Test
+    public void shouldReturnListOfAllSellersAuctions() {
+        api.login();
+        List<Auction> auctions = api.getAuctions()
+                .toList()
+                .toBlocking()
+                .single();
+
+        auctions
+                .stream()
+                .forEach(a -> assertNotNull(a));
+
     }
 }

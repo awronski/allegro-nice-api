@@ -1,5 +1,7 @@
 package com.apwglobal.nice.service;
 
+import com.apwglobal.nice.auction.Auction;
+import com.apwglobal.nice.auction.AuctionService;
 import com.apwglobal.nice.client.ClientService;
 import com.apwglobal.nice.deal.Deal;
 import com.apwglobal.nice.deal.DealService;
@@ -27,6 +29,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     private JournalService journalService;
     private ClientService clientService;
     private DealService dealService;
+    private AuctionService auctionService;
 
     private AllegroNiceApi(Builder builder) {
         allegro = new ServiceService().getServicePort();
@@ -39,6 +42,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         journalService = new JournalService(allegro, cred, conf);
         clientService = new ClientService(allegro, cred, conf);
         dealService = new DealService(allegro, cred, conf);
+        auctionService = new AuctionService(allegro, cred, conf);
     }
 
     @Override
@@ -80,6 +84,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     @Override
     public void fillBuyersForms(List<Deal> deals) {
         dealService.fillBuyersForms(session.getSessionId(), deals);
+    }
+
+    @Override
+    public Observable<Auction> getAuctions() {
+        return auctionService.getAuctions(session.getSessionId());
     }
 
     public static final class Builder {
