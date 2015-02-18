@@ -1,5 +1,8 @@
 package com.apwglobal.nice.service;
 
+import com.apwglobal.nice.client.ClientService;
+import com.apwglobal.nice.deal.Deal;
+import com.apwglobal.nice.deal.DealService;
 import com.apwglobal.nice.journal.Journal;
 import com.apwglobal.nice.journal.JournalService;
 import com.apwglobal.nice.login.Credentials;
@@ -7,6 +10,7 @@ import com.apwglobal.nice.login.LoginService;
 import com.apwglobal.nice.message.AllegroMessage;
 import com.apwglobal.nice.message.MessageService;
 import com.apwglobal.nice.system.SystemService;
+import pl.allegro.webapi.ItemPostBuyDataStruct;
 import pl.allegro.webapi.ServiceService;
 import pl.allegro.webapi.SysStatusType;
 import rx.Observable;
@@ -21,6 +25,8 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     private SystemService systemService;
     private MessageService messageService;
     private JournalService journalService;
+    private ClientService clientService;
+    private DealService dealService;
 
     private AllegroNiceApi(Builder builder) {
         allegro = new ServiceService().getServicePort();
@@ -31,6 +37,8 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         systemService = new SystemService(allegro, cred, conf);
         messageService = new MessageService(allegro, cred, conf);
         journalService = new JournalService(allegro, cred, conf);
+        clientService = new ClientService(allegro, cred, conf);
+        dealService = new DealService(allegro, cred, conf);
     }
 
     @Override
@@ -57,6 +65,16 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     @Override
     public Observable<Journal> getJournal(long startingPoint) {
         return journalService.getJournal(session.getSessionId(), startingPoint);
+    }
+
+    @Override
+    public List<ItemPostBuyDataStruct> getClientsDate(long itemId) {
+        return clientService.getClientsDate(session.getSessionId(), itemId);
+    }
+
+    @Override
+    public Observable<Deal> getDeals(long startingPoint) {
+        return dealService.getDeals(session.getSessionId(), startingPoint);
     }
 
     public static final class Builder {

@@ -1,7 +1,9 @@
 package com.apwglobal.nice.service;
 
+import com.apwglobal.nice.deal.Deal;
 import com.apwglobal.nice.journal.Journal;
 import com.apwglobal.nice.message.AllegroMessage;
+import pl.allegro.webapi.ItemPostBuyDataStruct;
 import pl.allegro.webapi.SysStatusType;
 import rx.Observable;
 
@@ -20,7 +22,11 @@ public interface IAllegroNiceApi {
     //messages
     List<AllegroMessage> getAllMessages(LocalDateTime from);
 
-    //journal
+    //journal + clients data
     Observable<Journal> getJournal(long startingPoint);
+    List<ItemPostBuyDataStruct> getClientsDate(long itemId);
+
+    //deals
+    Observable<Deal> getDeals(long startingPoint);
 
 }
