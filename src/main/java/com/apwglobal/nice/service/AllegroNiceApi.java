@@ -77,6 +77,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         return dealService.getDeals(session.getSessionId(), startingPoint);
     }
 
+    @Override
+    public void fillBuyersForms(List<Deal> deals) {
+        dealService.fillBuyersForms(session.getSessionId(), deals);
+    }
+
     public static final class Builder {
         private Credentials cred;
         private Configuration conf;

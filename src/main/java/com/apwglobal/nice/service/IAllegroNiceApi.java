@@ -28,5 +28,6 @@ public interface IAllegroNiceApi {
 
     //deals
     Observable<Deal> getDeals(long startingPoint);
+    void fillBuyersForms(List<Deal> deals);
 
 }

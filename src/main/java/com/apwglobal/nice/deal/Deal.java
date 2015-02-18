@@ -1,8 +1,10 @@
 package com.apwglobal.nice.deal;
 
 import com.apwglobal.nice.util.UnixDate;
+import pl.allegro.webapi.PostBuyFormDataStruct;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public class Deal {
 
@@ -15,8 +17,8 @@ public class Deal {
     protected long dealItemId;
     protected int dealBuyerId;
     protected int dealQuantity;
-    protected double dealAmountOriginal;
-    protected double dealAmountDiscounted;
+    protected Optional<PostBuyFormDataStruct> postBuyFormDataStruct;
+
 
     private Deal(Builder builder) {
         dealEventId = builder.dealEventId;
@@ -28,8 +30,6 @@ public class Deal {
         dealItemId = builder.dealItemId;
         dealBuyerId = builder.dealBuyerId;
         dealQuantity = builder.dealQuantity;
-        dealAmountOriginal = builder.dealAmountOriginal;
-        dealAmountDiscounted = builder.dealAmountDiscounted;
     }
 
     public long getDealEventId() {
@@ -59,11 +59,12 @@ public class Deal {
     public int getDealQuantity() {
         return dealQuantity;
     }
-    public double getDealAmountOriginal() {
-        return dealAmountOriginal;
+    public Optional<PostBuyFormDataStruct> getPostBuyFormDataStruct() {
+        return postBuyFormDataStruct;
     }
-    public double getDealAmountDiscounted() {
-        return dealAmountDiscounted;
+
+    public void setPostBuyFormDataStruct(Optional<PostBuyFormDataStruct> postBuyFormDataStruct) {
+        this.postBuyFormDataStruct = postBuyFormDataStruct;
     }
 
     public static final class Builder {
@@ -76,8 +77,6 @@ public class Deal {
         private long dealItemId;
         private int dealBuyerId;
         private int dealQuantity;
-        private double dealAmountOriginal;
-        private double dealAmountDiscounted;
 
         public Builder() {
         }
@@ -124,16 +123,6 @@ public class Deal {
 
         public Builder dealQuantity(int dealQuantity) {
             this.dealQuantity = dealQuantity;
-            return this;
-        }
-
-        public Builder dealAmountOriginal(double dealAmountOriginal) {
-            this.dealAmountOriginal = dealAmountOriginal;
-            return this;
-        }
-
-        public Builder dealAmountDiscounted(double dealAmountDiscounted) {
-            this.dealAmountDiscounted = dealAmountDiscounted;
             return this;
         }
 

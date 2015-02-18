@@ -43,6 +43,19 @@ api.getSiteJournal(startingPoint)
 ```
 Read more on [RxJava](https://github.com/ReactiveX/RxJava).
 
+## Get list of deals
+```java
+long startingPoint = 0;
+List<Deal> deals =  api.getDeals(startingPoint);
+    .toList()
+    .toBlocking()
+    .single();
+```
+### Fill deals with buyers forms data
+```java
+api.fillBuyersForms(deals);
+```
+
 ### _... work in progress_
 
 License

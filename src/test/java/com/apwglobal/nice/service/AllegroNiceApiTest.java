@@ -57,14 +57,16 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     }
 
     @Test
-    public void shouldResturnListOfDeals() {
+    public void shouldResturnListOfDealsWithFilledBuyersForms() {
         api.login();
-        Observable<Deal> o = api.getDeals(0);
-        List<Deal> deals = o
+        List<Deal> deals = api.getDeals(0)
                 .toList()
                 .toBlocking()
                 .single();
 
-        assertNotNull(deals);
+        api.fillBuyersForms(deals);
+        deals
+                .stream()
+                .forEach(d -> assertNotNull(d.getPostBuyFormDataStruct()));
     }
 }
