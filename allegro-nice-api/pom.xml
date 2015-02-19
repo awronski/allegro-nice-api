@@ -14,18 +14,20 @@
 
     <profiles>
         <profile>
-            <id>prod</id>
+            <id>prodprof</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <wsdl.location>https://webapi.allegro.pl/service.php?wsdl</wsdl.location>
+                <skip.tests>true</skip.tests>
             </properties>
         </profile>
         <profile>
-            <id>test</id>
+            <id>testprof</id>
             <properties>
                 <wsdl.location>${basedir}/src/test/resources/wsdl/service.xml</wsdl.location>
+                <skip.tests>false</skip.tests>
             </properties>
         </profile>
     </profiles>
@@ -60,7 +62,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.18.1</version>
                 <configuration>
-                    <skipTests>true</skipTests>
+                    <skipTests>${skip.tests}</skipTests>
                 </configuration>
             </plugin>
             <plugin>

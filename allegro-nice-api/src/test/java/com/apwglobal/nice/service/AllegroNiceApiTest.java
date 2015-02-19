@@ -9,12 +9,10 @@ import org.junit.Test;
 import pl.allegro.webapi.ItemPostBuyDataStruct;
 import rx.Observable;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
 
@@ -33,10 +31,11 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         assertNotNull(api.getStatus());
     }
 
-    @Test
-    public void shouldReturnAllegroMessages()  {
-        assertTrue(api.getAllMessages(LocalDateTime.now().minusDays(1000)).size() > 0);
-    }
+//    doesn not work in allegro test environment
+//    @Test
+//    public void shouldReturnAllegroMessages()  {
+//        assertTrue(api.getAllMessages(LocalDateTime.now().minusDays(1000)).size() > 0);
+//    }
 
     @Test
     public void shouldReturnListOfClientsData() {
