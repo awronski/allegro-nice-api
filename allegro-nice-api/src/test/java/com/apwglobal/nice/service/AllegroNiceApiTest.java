@@ -81,7 +81,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
 
         auctions
                 .stream()
-                .forEach(a -> assertNotNull(a));
+                .forEach(Assert::assertNotNull);
 
     }
 }

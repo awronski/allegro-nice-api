@@ -16,4 +16,8 @@ hs_err_pid*
 *.iml
 target
 
+# allegro webapi generated classes
+src/main/java/pl/allegro
 
+# credentials to run tests on allegro
+src/test/resources/test-credentions.properties
