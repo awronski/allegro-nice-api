@@ -7,6 +7,7 @@ import com.apwglobal.nice.service.AbstractService;
 import com.apwglobal.nice.service.Configuration;
 import pl.allegro.webapi.DoGetMySellItemsRequest;
 import pl.allegro.webapi.DoGetMySellItemsResponse;
+import pl.allegro.webapi.SellItemStruct;
 import pl.allegro.webapi.ServicePort;
 import rx.Observable;
 
@@ -35,8 +36,29 @@ public class AuctionService extends AbstractService {
 
             return response.getSellItemsList().getItem()
                     .stream()
-                    .map(s -> new Auction(s.getItemSoldQuantity()))
+                    .map(this::createAuction)
                     .collect(Collectors.toList());
+        }
+
+        private Auction createAuction(SellItemStruct s) {
+            return new Auction.Builder()
+                    .itemId(s.getItemId())
+                    .itemTitle(s.getItemTitle())
+                    .itemThumbnailUrl(s.getItemThumbnailUrl())
+                    .itemStartQuantity(s.getItemStartQuantity())
+                    .itemSoldQuantity(s.getItemSoldQuantity())
+                    .itemQuantityType(s.getItemQuantityType())
+                    .itemStartTime(s.getItemStartTime())
+                    .itemEndTime(s.getItemEndTime())
+                    .itemBiddersCounter(s.getItemBiddersCounter())
+                    .itemCategoryId(s.getItemCategoryId())
+                    .itemWatchersCounter(s.getItemWatchersCounter())
+                    .itemViewsCounter(s.getItemViewsCounter())
+                    .itemNote(s.getItemNote())
+                    .special(s.getItemSpecialInfo())
+                    .shop(s.getItemShopInfo())
+                    .payu(s.getItemPayuInfo())
+                    .build();
         }
 
         @Override
