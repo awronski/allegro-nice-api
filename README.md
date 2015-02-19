@@ -1,6 +1,16 @@
 # allegro-nice-api
 Flexible and easy to use java api for allegro service focused on trading operation on allegro platform.
 
+## Install
+```
+git clone https://github.com/awronski/allegro-nice-api.git
+cd allegro-nice-api
+mvn package
+```
+Tests are skipped by default during packaging because of bugs in allegro test environment.
+
+# Usage
+
 ## Initialize object
 ```java
 int countryId = 1;
