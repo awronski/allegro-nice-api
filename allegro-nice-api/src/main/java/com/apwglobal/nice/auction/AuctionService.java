@@ -5,10 +5,7 @@ import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractAllegroIterator;
 import com.apwglobal.nice.service.AbstractService;
 import com.apwglobal.nice.service.Configuration;
-import pl.allegro.webapi.DoGetMySellItemsRequest;
-import pl.allegro.webapi.DoGetMySellItemsResponse;
-import pl.allegro.webapi.SellItemStruct;
-import pl.allegro.webapi.ServicePort;
+import pl.allegro.webapi.*;
 import rx.Observable;
 
 import java.util.List;
@@ -41,6 +38,13 @@ public class AuctionService extends AbstractService {
         }
 
         private Auction createAuction(SellItemStruct s) {
+            List<ItemPriceStruct> item = s.getItemPrice().getItem();
+            ItemPriceStruct itemPriceStruct;
+
+            if (item.size() != 1 || (itemPriceStruct = item.get(0)).getPriceType() != ItemPriceType.BUY_NOW.getType()) {
+                throw new IllegalArgumentException("Cannot support auction with sale diffrent than buy now");
+            }
+
             return new Auction.Builder()
                     .itemId(s.getItemId())
                     .itemTitle(s.getItemTitle())
@@ -58,6 +62,8 @@ public class AuctionService extends AbstractService {
                     .special(s.getItemSpecialInfo())
                     .shop(s.getItemShopInfo())
                     .payu(s.getItemPayuInfo())
+                    .price(itemPriceStruct.getPriceValue())
+                    .priceType(itemPriceStruct.getPriceType())
                     .build();
         }
 

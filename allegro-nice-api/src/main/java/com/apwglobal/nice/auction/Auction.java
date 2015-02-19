@@ -23,6 +23,9 @@ public class Auction {
     protected boolean shop;
     protected boolean payu;
 
+    protected double price;
+    protected ItemPriceType priceType;
+
     private Auction(Builder builder) {
         itemId = builder.itemId;
         itemTitle = builder.itemTitle;
@@ -40,6 +43,8 @@ public class Auction {
         special = builder.special;
         shop = builder.shop;
         payu = builder.payu;
+        price = builder.price;
+        priceType = builder.priceType;
     }
 
     public static final class Builder {
@@ -59,6 +64,8 @@ public class Auction {
         private boolean special;
         private boolean shop;
         private boolean payu;
+        private double price;
+        private ItemPriceType priceType;
 
         public Builder() {
         }
@@ -143,6 +150,16 @@ public class Auction {
             return this;
         }
 
+        public Builder price(float price) {
+            this.price = price;
+            return this;
+        }
+
+        public Builder priceType(int priceType) {
+            this.priceType = ItemPriceType.VALUES.get(priceType);
+            return this;
+        }
+
         public Auction build() {
             return new Auction(this);
         }
@@ -158,6 +175,7 @@ public class Auction {
                 ", special=" + special +
                 ", shop=" + shop +
                 ", payu=" + payu +
+                ", price=" + price +
                 '}';
     }
 }
