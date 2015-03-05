@@ -1,7 +1,6 @@
-package com.apwglobal.nice.deal;
+package com.apwglobal.nice.domain;
 
 import com.apwglobal.nice.util.UnixDate;
-import pl.allegro.webapi.PostBuyFormDataStruct;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -17,7 +16,7 @@ public class Deal {
     protected long dealItemId;
     protected int dealBuyerId;
     protected int dealQuantity;
-    protected Optional<PostBuyFormDataStruct> postBuyFormDataStruct;
+    protected Optional<Object> postBuyFormDataStruct;
 
 
     private Deal(Builder builder) {
@@ -59,11 +58,11 @@ public class Deal {
     public int getDealQuantity() {
         return dealQuantity;
     }
-    public Optional<PostBuyFormDataStruct> getPostBuyFormDataStruct() {
+    public Optional<Object> getPostBuyFormDataStruct() {
         return postBuyFormDataStruct;
     }
 
-    public void setPostBuyFormDataStruct(Optional<PostBuyFormDataStruct> postBuyFormDataStruct) {
+    public void setPostBuyFormDataStruct(Optional<Object> postBuyFormDataStruct) {
         this.postBuyFormDataStruct = postBuyFormDataStruct;
     }
 

@@ -1,4 +1,4 @@
-package com.apwglobal.nice.journal;
+package com.apwglobal.nice.domain;
 
 import java.util.Arrays;
 import java.util.Collections;

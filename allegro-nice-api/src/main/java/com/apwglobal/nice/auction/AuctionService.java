@@ -1,5 +1,7 @@
 package com.apwglobal.nice.auction;
 
+import com.apwglobal.nice.domain.Auction;
+import com.apwglobal.nice.domain.ItemPriceType;
 import com.apwglobal.nice.exception.AllegroExecutor;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractAllegroIterator;

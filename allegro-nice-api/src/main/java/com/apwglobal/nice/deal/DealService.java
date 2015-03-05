@@ -1,5 +1,6 @@
 package com.apwglobal.nice.deal;
 
+import com.apwglobal.nice.domain.Deal;
 import com.apwglobal.nice.exception.AllegroExecutor;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractAllegroIterator;
@@ -42,10 +43,11 @@ public class DealService extends AbstractService {
     }
 
     private void setPostBuyForm(List<PostBuyFormDataStruct> forms, Deal deal) {
-        deal.setPostBuyFormDataStruct(
-                forms.stream()
-                        .filter(f -> Long.valueOf(deal.getDealTransactionId()).equals(deal.dealTransactionId))
-                        .findAny()
+        deal.setPostBuyFormDataStruct(null
+                //TODO copy user details
+//                forms.stream()
+//                        .filter(f -> Long.valueOf(deal.getDealTransactionId()).equals(deal.getDealTransactionId()))
+//                        .findAny()
         );
     }
 

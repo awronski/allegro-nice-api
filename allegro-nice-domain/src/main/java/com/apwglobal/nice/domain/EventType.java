@@ -1,4 +1,4 @@
-package com.apwglobal.nice.journal;
+package com.apwglobal.nice.domain;
 
 public enum EventType {
     USER(0), All(1);

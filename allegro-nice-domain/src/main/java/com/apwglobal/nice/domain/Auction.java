@@ -1,4 +1,4 @@
-package com.apwglobal.nice.auction;
+package com.apwglobal.nice.domain;
 
 import com.apwglobal.nice.util.UnixDate;
 
@@ -6,25 +6,80 @@ import java.time.LocalDateTime;
 
 public class Auction {
 
-    protected long itemId;
-    protected String itemTitle;
-    protected String itemThumbnailUrl;
-    protected int itemStartQuantity;
-    protected int itemSoldQuantity;
-    protected ItemQuantityType itemQuantityType;
-    protected LocalDateTime itemStartTime;
-    protected LocalDateTime itemEndTime;
-    protected int itemBiddersCounter;
-    protected int itemCategoryId;
-    protected int itemWatchersCounter;
-    protected int itemViewsCounter;
-    protected String itemNote;
-    protected boolean special;
-    protected boolean shop;
-    protected boolean payu;
+    private long itemId;
+    private String itemTitle;
+    private String itemThumbnailUrl;
+    private int itemStartQuantity;
+    private int itemSoldQuantity;
+    private ItemQuantityType itemQuantityType;
+    private LocalDateTime itemStartTime;
+    private LocalDateTime itemEndTime;
+    private int itemBiddersCounter;
+    private int itemCategoryId;
+    private int itemWatchersCounter;
+    private int itemViewsCounter;
+    private String itemNote;
+    private boolean special;
+    private boolean shop;
+    private boolean payu;
 
-    protected double price;
-    protected ItemPriceType priceType;
+    private double price;
+    private ItemPriceType priceType;
+
+    public long getItemId() {
+        return itemId;
+    }
+    public String getItemTitle() {
+        return itemTitle;
+    }
+    public String getItemThumbnailUrl() {
+        return itemThumbnailUrl;
+    }
+    public int getItemStartQuantity() {
+        return itemStartQuantity;
+    }
+    public int getItemSoldQuantity() {
+        return itemSoldQuantity;
+    }
+    public ItemQuantityType getItemQuantityType() {
+        return itemQuantityType;
+    }
+    public LocalDateTime getItemStartTime() {
+        return itemStartTime;
+    }
+    public LocalDateTime getItemEndTime() {
+        return itemEndTime;
+    }
+    public int getItemBiddersCounter() {
+        return itemBiddersCounter;
+    }
+    public int getItemCategoryId() {
+        return itemCategoryId;
+    }
+    public int getItemWatchersCounter() {
+        return itemWatchersCounter;
+    }
+    public int getItemViewsCounter() {
+        return itemViewsCounter;
+    }
+    public String getItemNote() {
+        return itemNote;
+    }
+    public boolean isSpecial() {
+        return special;
+    }
+    public boolean isShop() {
+        return shop;
+    }
+    public boolean isPayu() {
+        return payu;
+    }
+    public double getPrice() {
+        return price;
+    }
+    public ItemPriceType getPriceType() {
+        return priceType;
+    }
 
     private Auction(Builder builder) {
         itemId = builder.itemId;

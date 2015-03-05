@@ -1,4 +1,4 @@
-package com.apwglobal.nice.journal;
+package com.apwglobal.nice.domain;
 
 import com.apwglobal.nice.util.UnixDate;
 

@@ -1,11 +1,11 @@
 package com.apwglobal.nice.service;
 
-import com.apwglobal.nice.auction.Auction;
 import com.apwglobal.nice.auction.AuctionService;
 import com.apwglobal.nice.client.ClientService;
-import com.apwglobal.nice.deal.Deal;
 import com.apwglobal.nice.deal.DealService;
-import com.apwglobal.nice.journal.Journal;
+import com.apwglobal.nice.domain.Auction;
+import com.apwglobal.nice.domain.Deal;
+import com.apwglobal.nice.domain.Journal;
 import com.apwglobal.nice.journal.JournalService;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.login.LoginService;

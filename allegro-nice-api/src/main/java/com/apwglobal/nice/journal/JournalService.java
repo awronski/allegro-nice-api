@@ -1,5 +1,7 @@
 package com.apwglobal.nice.journal;
 
+import com.apwglobal.nice.domain.EventType;
+import com.apwglobal.nice.domain.Journal;
 import com.apwglobal.nice.exception.AllegroExecutor;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractAllegroIterator;
