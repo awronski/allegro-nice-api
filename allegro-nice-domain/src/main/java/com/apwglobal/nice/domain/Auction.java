@@ -81,6 +81,8 @@ public class Auction {
         return priceType;
     }
 
+    public Auction() { }
+
     private Auction(Builder builder) {
         itemId = builder.itemId;
         itemTitle = builder.itemTitle;

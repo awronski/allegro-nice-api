@@ -18,6 +18,7 @@ public class Deal {
     protected int dealQuantity;
     protected Optional<Object> postBuyFormDataStruct;
 
+    public Deal() { }
 
     private Deal(Builder builder) {
         dealEventId = builder.dealEventId;
