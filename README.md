@@ -8,6 +8,11 @@ cd allegro-nice-api
 mvn package
 ```
 Tests are skipped by default during packaging because of bugs in allegro test environment.
+If you want to run the test you have to rename ```test-credentions.template``` to ```test-credentions.properties``` and set the credentials.
+Than run the tests:
+```
+mvn test -P testprof
+```
 
 # Usage
 
