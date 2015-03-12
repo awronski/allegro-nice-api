@@ -3,8 +3,15 @@ package com.apwglobal.nice.domain;
 import com.apwglobal.nice.util.UnixDate;
 
 import java.util.Date;
+import java.util.Optional;
 
 public class Journal {
+
+    private long rowId;
+    private long itemId;
+    private JournalType changeType;
+    private Date changeDate;
+    private Optional<Double> currentPrice;
 
     private Journal(Builder builder) {
         rowId = builder.rowId;
@@ -13,12 +20,6 @@ public class Journal {
         changeDate = builder.changeDate;
         currentPrice = builder.currentPrice;
     }
-
-    private long rowId;
-    private long itemId;
-    private JournalType changeType;
-    private Date changeDate;
-    private double currentPrice;
 
     public long getRowId() {
         return rowId;
@@ -32,7 +33,7 @@ public class Journal {
     public Date getChangeDate() {
         return changeDate;
     }
-    public double getCurrentPrice() {
+    public Optional<Double> getCurrentPrice() {
         return currentPrice;
     }
 
@@ -41,7 +42,7 @@ public class Journal {
         private long itemId;
         private JournalType changeType;
         private Date changeDate;
-        private double currentPrice;
+        private Optional<Double> currentPrice;
 
         public Builder() {
         }
@@ -67,7 +68,11 @@ public class Journal {
         }
 
         public Builder currentPrice(double currentPrice) {
-            this.currentPrice = currentPrice;
+            if (currentPrice == 0.0) {
+                this.currentPrice = Optional.empty();
+            } else {
+                this.currentPrice = Optional.of(currentPrice);
+            }
             return this;
         }
 
