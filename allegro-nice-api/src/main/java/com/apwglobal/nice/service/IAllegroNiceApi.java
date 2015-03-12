@@ -8,7 +8,7 @@ import pl.allegro.webapi.ItemPostBuyDataStruct;
 import pl.allegro.webapi.SysStatusType;
 import rx.Observable;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public interface IAllegroNiceApi {
@@ -21,7 +21,7 @@ public interface IAllegroNiceApi {
     SysStatusType getStatus();
 
     //messages
-    List<AllegroMessage> getAllMessages(LocalDateTime from);
+    List<AllegroMessage> getAllMessages(Date from);
 
     //journal + clients data
     Observable<Journal> getJournal(long startingPoint);

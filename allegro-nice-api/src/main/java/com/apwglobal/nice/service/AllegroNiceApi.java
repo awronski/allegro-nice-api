@@ -17,7 +17,7 @@ import pl.allegro.webapi.ServiceService;
 import pl.allegro.webapi.SysStatusType;
 import rx.Observable;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
@@ -62,7 +62,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     }
 
     @Override
-    public List<AllegroMessage> getAllMessages(LocalDateTime from) {
+    public List<AllegroMessage> getAllMessages(Date from) {
         return messageService.getAllMessages(from);
     }
 

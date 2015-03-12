@@ -2,7 +2,8 @@ package com.apwglobal.nice.domain;
 
 import com.apwglobal.nice.util.UnixDate;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Optional;
 
 public class Auction {
 
@@ -12,8 +13,8 @@ public class Auction {
     private int itemStartQuantity;
     private int itemSoldQuantity;
     private ItemQuantityType itemQuantityType;
-    private LocalDateTime itemStartTime;
-    private LocalDateTime itemEndTime;
+    private Date itemStartTime;
+    private Optional<Date> itemEndTime;
     private int itemBiddersCounter;
     private int itemCategoryId;
     private int itemWatchersCounter;
@@ -44,10 +45,10 @@ public class Auction {
     public ItemQuantityType getItemQuantityType() {
         return itemQuantityType;
     }
-    public LocalDateTime getItemStartTime() {
+    public Date getItemStartTime() {
         return itemStartTime;
     }
-    public LocalDateTime getItemEndTime() {
+    public Optional<Date> getItemEndTime() {
         return itemEndTime;
     }
     public int getItemBiddersCounter() {
@@ -111,8 +112,8 @@ public class Auction {
         private int itemStartQuantity;
         private int itemSoldQuantity;
         private ItemQuantityType itemQuantityType;
-        private LocalDateTime itemStartTime;
-        private LocalDateTime itemEndTime;
+        private Date itemStartTime;
+        private Optional<Date> itemEndTime;
         private int itemBiddersCounter;
         private int itemCategoryId;
         private int itemWatchersCounter;
@@ -163,7 +164,11 @@ public class Auction {
         }
 
         public Builder itemEndTime(long itemEndTime) {
-            this.itemEndTime = UnixDate.toDate(itemEndTime);
+            if (itemEndTime == 0) {
+                this.itemEndTime = Optional.empty();
+            } else {
+                this.itemEndTime = Optional.of(UnixDate.toDate(itemEndTime));
+            }
             return this;
         }
 

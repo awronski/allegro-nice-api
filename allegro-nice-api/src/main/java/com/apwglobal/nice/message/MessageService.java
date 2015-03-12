@@ -9,9 +9,9 @@ import pl.allegro.webapi.DoGetServiceInfoRequest;
 import pl.allegro.webapi.ServiceInfoCatStruct;
 import pl.allegro.webapi.ServicePort;
 
-import java.time.LocalDateTime;
 import java.util.Base64;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,7 +28,7 @@ public class MessageService extends AbstractService {
     }
 
 
-    public List<AllegroMessage> getAllMessages(LocalDateTime from) {
+    public List<AllegroMessage> getAllMessages(Date from) {
         long unixDate = UnixDate.toUnixTimestamp(from);
         return getServiceInfoCategories()
                 .stream()

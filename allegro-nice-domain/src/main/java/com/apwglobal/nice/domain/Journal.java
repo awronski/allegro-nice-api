@@ -2,7 +2,7 @@ package com.apwglobal.nice.domain;
 
 import com.apwglobal.nice.util.UnixDate;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Journal {
 
@@ -17,7 +17,7 @@ public class Journal {
     private long rowId;
     private long itemId;
     private JournalType changeType;
-    private LocalDateTime changeDate;
+    private Date changeDate;
     private double currentPrice;
 
     public long getRowId() {
@@ -29,7 +29,7 @@ public class Journal {
     public JournalType getChangeType() {
         return changeType;
     }
-    public LocalDateTime getChangeDate() {
+    public Date getChangeDate() {
         return changeDate;
     }
     public double getCurrentPrice() {
@@ -40,7 +40,7 @@ public class Journal {
         private long rowId;
         private long itemId;
         private JournalType changeType;
-        private LocalDateTime changeDate;
+        private Date changeDate;
         private double currentPrice;
 
         public Builder() {

@@ -1,13 +1,13 @@
 package com.apwglobal.nice.message;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class AllegroMessage {
 
     private int catId;
     private String title;
     private String body;
-    private LocalDateTime date;
+    private Date date;
 
     private AllegroMessage(Builder builder) {
         catId = builder.catId;
@@ -28,7 +28,7 @@ public class AllegroMessage {
         return body;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
@@ -37,7 +37,7 @@ public class AllegroMessage {
         private int catId;
         private String title;
         private String body;
-        private LocalDateTime date;
+        private Date date;
 
         public Builder() {
         }
@@ -57,7 +57,7 @@ public class AllegroMessage {
             return this;
         }
 
-        public Builder date(LocalDateTime date) {
+        public Builder date(Date date) {
             this.date = date;
             return this;
         }

@@ -2,14 +2,14 @@ package com.apwglobal.nice.domain;
 
 import com.apwglobal.nice.util.UnixDate;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 
 public class Deal {
 
     protected long dealEventId;
     protected DealType dealType;
-    protected LocalDateTime dealEventTime;
+    protected Date dealEventTime;
     protected long dealId;
     protected long dealTransactionId;
     protected int dealSellerId;
@@ -38,7 +38,7 @@ public class Deal {
     public DealType getDealType() {
         return dealType;
     }
-    public LocalDateTime getDealEventTime() {
+    public Date getDealEventTime() {
         return dealEventTime;
     }
     public long getDealId() {
@@ -70,7 +70,7 @@ public class Deal {
     public static final class Builder {
         private long dealEventId;
         private DealType dealType;
-        private LocalDateTime dealEventTime;
+        private Date dealEventTime;
         private long dealId;
         private long dealTransactionId;
         private int dealSellerId;
