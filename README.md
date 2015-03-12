@@ -66,9 +66,9 @@ List<Deal> deals =  api.getDeals(startingPoint)
     .toBlocking()
     .single();
 ```
-### Fill deals with buyers forms data
+### Get list of Post buy forms for given deals
 ```java
-api.fillBuyersForms(deals);
+api.getPostBuyForms(deals);
 ```
 
 ### _... work in progress_
