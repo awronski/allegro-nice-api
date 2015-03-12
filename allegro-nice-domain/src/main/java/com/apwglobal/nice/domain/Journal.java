@@ -13,6 +13,8 @@ public class Journal {
     private Date changeDate;
     private Optional<Double> currentPrice;
 
+    public Journal() { }
+
     private Journal(Builder builder) {
         rowId = builder.rowId;
         itemId = builder.itemId;
