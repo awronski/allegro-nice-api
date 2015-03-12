@@ -1,4 +1,4 @@
-package com.apwglobal.nice.message;
+package com.apwglobal.nice.domain;
 
 import java.util.Date;
 
@@ -8,6 +8,8 @@ public class AllegroMessage {
     private String title;
     private String body;
     private Date date;
+
+    public AllegroMessage() { }
 
     private AllegroMessage(Builder builder) {
         catId = builder.catId;

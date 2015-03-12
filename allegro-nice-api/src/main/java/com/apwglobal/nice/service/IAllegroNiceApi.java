@@ -1,9 +1,9 @@
 package com.apwglobal.nice.service;
 
+import com.apwglobal.nice.domain.AllegroMessage;
 import com.apwglobal.nice.domain.Auction;
 import com.apwglobal.nice.domain.Deal;
 import com.apwglobal.nice.domain.Journal;
-import com.apwglobal.nice.message.AllegroMessage;
 import pl.allegro.webapi.ItemPostBuyDataStruct;
 import pl.allegro.webapi.SysStatusType;
 import rx.Observable;

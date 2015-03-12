@@ -19,11 +19,6 @@ public class JournalService extends AbstractService {
         super(allegro, cred, conf);
     }
 
-    private DoGetSiteJournalInfoResponse getNumberOfEvents(String session, long startingPoing, EventType type) {
-        DoGetSiteJournalInfoRequest request = new DoGetSiteJournalInfoRequest(session, startingPoing, type.getType());
-        return AllegroExecutor.execute(() -> allegro.doGetSiteJournalInfo(request));
-    }
-
     public Observable<Journal> getJournal(String session, long startingPoint) {
         return Observable.from(() -> new JournalIterator(session, startingPoint));
     }

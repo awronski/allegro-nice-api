@@ -1,5 +1,6 @@
 package com.apwglobal.nice.message;
 
+import com.apwglobal.nice.domain.AllegroMessage;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractService;
 import com.apwglobal.nice.service.Configuration;
