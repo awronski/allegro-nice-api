@@ -3,7 +3,6 @@ package com.apwglobal.nice.domain;
 import com.apwglobal.nice.util.UnixDate;
 
 import java.util.Date;
-import java.util.Optional;
 
 public class Deal {
 
@@ -16,7 +15,6 @@ public class Deal {
     protected long dealItemId;
     protected int dealBuyerId;
     protected int dealQuantity;
-    protected Optional<Object> postBuyFormDataStruct;
 
     public Deal() { }
 
@@ -58,13 +56,6 @@ public class Deal {
     }
     public int getDealQuantity() {
         return dealQuantity;
-    }
-    public Optional<Object> getPostBuyFormDataStruct() {
-        return postBuyFormDataStruct;
-    }
-
-    public void setPostBuyFormDataStruct(Optional<Object> postBuyFormDataStruct) {
-        this.postBuyFormDataStruct = postBuyFormDataStruct;
     }
 
     public static final class Builder {
