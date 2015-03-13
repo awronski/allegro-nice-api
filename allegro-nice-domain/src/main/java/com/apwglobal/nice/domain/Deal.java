@@ -6,114 +6,115 @@ import java.util.Date;
 
 public class Deal {
 
-    protected long dealEventId;
+    protected long eventId;
     protected DealType dealType;
-    protected Date dealEventTime;
-    protected long dealId;
-    protected long dealTransactionId;
-    protected int dealSellerId;
-    protected long dealItemId;
-    protected int dealBuyerId;
-    protected int dealQuantity;
+    protected Date eventTime;
+    protected long id;
+    protected long transactionId;
+    protected int sellerId;
+    protected long itemId;
+    protected int buyerId;
+    protected int quantity;
 
     public Deal() { }
 
     private Deal(Builder builder) {
-        dealEventId = builder.dealEventId;
+        eventId = builder.eventId;
         dealType = builder.dealType;
-        dealEventTime = builder.dealEventTime;
-        dealId = builder.dealId;
-        dealTransactionId = builder.dealTransactionId;
-        dealSellerId = builder.dealSellerId;
-        dealItemId = builder.dealItemId;
-        dealBuyerId = builder.dealBuyerId;
-        dealQuantity = builder.dealQuantity;
+        eventTime = builder.eventTime;
+        id = builder.id;
+        transactionId = builder.transactionId;
+        sellerId = builder.sellerId;
+        itemId = builder.itemId;
+        buyerId = builder.buyerId;
+        quantity = builder.quantity;
     }
 
-    public long getDealEventId() {
-        return dealEventId;
+
+    public long getEventId() {
+        return eventId;
     }
     public DealType getDealType() {
         return dealType;
     }
-    public Date getDealEventTime() {
-        return dealEventTime;
+    public Date getEventTime() {
+        return eventTime;
     }
-    public long getDealId() {
-        return dealId;
+    public long getId() {
+        return id;
     }
-    public long getDealTransactionId() {
-        return dealTransactionId;
+    public long getTransactionId() {
+        return transactionId;
     }
-    public int getDealSellerId() {
-        return dealSellerId;
+    public int getSellerId() {
+        return sellerId;
     }
-    public long getDealItemId() {
-        return dealItemId;
+    public long getItemId() {
+        return itemId;
     }
-    public int getDealBuyerId() {
-        return dealBuyerId;
+    public int getBuyerId() {
+        return buyerId;
     }
-    public int getDealQuantity() {
-        return dealQuantity;
+    public int getQuantity() {
+        return quantity;
     }
 
     public static final class Builder {
-        private long dealEventId;
+        private long eventId;
         private DealType dealType;
-        private Date dealEventTime;
-        private long dealId;
-        private long dealTransactionId;
-        private int dealSellerId;
-        private long dealItemId;
-        private int dealBuyerId;
-        private int dealQuantity;
+        private Date eventTime;
+        private long id;
+        private long transactionId;
+        private int sellerId;
+        private long itemId;
+        private int buyerId;
+        private int quantity;
 
         public Builder() {
         }
 
-        public Builder dealEventId(long dealEventId) {
-            this.dealEventId = dealEventId;
+        public Builder eventId(long eventId) {
+            this.eventId = eventId;
             return this;
         }
 
-        public Builder dealType(int dealEventType) {
-            this.dealType = DealType.VALUES.get(dealEventType);
+        public Builder dealType(int dealType) {
+            this.dealType = DealType.VALUES.get(dealType);
             return this;
         }
 
-        public Builder dealEventTime(long dealEventTime) {
-            this.dealEventTime = UnixDate.toDate(dealEventTime);
+        public Builder eventTime(long eventTime) {
+            this.eventTime = UnixDate.toDate(eventTime);
             return this;
         }
 
-        public Builder dealId(long dealId) {
-            this.dealId = dealId;
+        public Builder id(long id) {
+            this.id = id;
             return this;
         }
 
-        public Builder dealTransactionId(long dealTransactionId) {
-            this.dealTransactionId = dealTransactionId;
+        public Builder transactionId(long transactionId) {
+            this.transactionId = transactionId;
             return this;
         }
 
-        public Builder dealSellerId(int dealSellerId) {
-            this.dealSellerId = dealSellerId;
+        public Builder sellerId(int sellerId) {
+            this.sellerId = sellerId;
             return this;
         }
 
-        public Builder dealItemId(long dealItemId) {
-            this.dealItemId = dealItemId;
+        public Builder itemId(long itemId) {
+            this.itemId = itemId;
             return this;
         }
 
-        public Builder dealBuyerId(int dealBuyerId) {
-            this.dealBuyerId = dealBuyerId;
+        public Builder buyerId(int buyerId) {
+            this.buyerId = buyerId;
             return this;
         }
 
-        public Builder dealQuantity(int dealQuantity) {
-            this.dealQuantity = dealQuantity;
+        public Builder quantity(int quantity) {
+            this.quantity = quantity;
             return this;
         }
 
@@ -125,14 +126,14 @@ public class Deal {
     @Override
     public String toString() {
         return "Deal{" +
-                "dealEventId=" + dealEventId +
-                ", dealTransactionId=" + dealTransactionId +
-                ", dealItemId=" + dealItemId +
-                ", dealBuyerId=" + dealBuyerId +
-                ", dealQuantity=" + dealQuantity +
+                "eventId=" + eventId +
                 ", dealType=" + dealType +
-                ", dealEventTime=" + dealEventTime +
+                ", eventTime=" + eventTime +
+                ", id=" + id +
+                ", transactionId=" + transactionId +
+                ", itemId=" + itemId +
+                ", buyerId=" + buyerId +
+                ", quantity=" + quantity +
                 '}';
     }
-
 }
