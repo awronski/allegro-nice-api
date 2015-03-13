@@ -26,7 +26,7 @@ public interface IAllegroNiceApi {
 
     //deals
     Observable<Deal> getDeals(long startingPoint);
-    List<PostBuyForm> getPostBuyForms(List<Deal> deals);
+    Observable<PostBuyForm> getPostBuyForms(Observable<Deal> deals);
 
     //selling
     Observable<Auction> getAuctions();

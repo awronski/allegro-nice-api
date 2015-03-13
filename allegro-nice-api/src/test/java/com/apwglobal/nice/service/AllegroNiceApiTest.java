@@ -1,16 +1,10 @@
 package com.apwglobal.nice.service;
 
-import com.apwglobal.nice.domain.Auction;
 import com.apwglobal.nice.domain.Deal;
-import com.apwglobal.nice.domain.Journal;
 import com.apwglobal.nice.login.AbstractLoggedServiceBaseTest;
 import org.junit.Assert;
 import org.junit.Test;
-import pl.allegro.webapi.ItemPostBuyDataStruct;
 import rx.Observable;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertNotNull;
 
@@ -39,46 +33,27 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
 
     @Test
     public void shouldReturnListOfClientsData() {
-        api.login();
-        Observable<Journal> o = api.getJournal(0);
-        List<Journal> jourlans = o.limit(10)
-                .toList()
-                .toBlocking()
-                .single();
-
-        assertNotNull(jourlans);
-
-        List<ItemPostBuyDataStruct> postBuy = jourlans
-                .stream()
-                .flatMap(j -> api.getClientsDate(j.getItemId()).stream())
-                .collect(Collectors.toList());
-
-        assertNotNull(postBuy);
+        api
+                .login()
+                .getJournal(0)
+                .limit(10)
+                .forEach(j -> assertNotNull(api.getClientsDate(j.getItemId())));
     }
 
     @Test
     public void shouldResturnPostBuyFormsForGivenDeals() {
         api.login();
-        List<Deal> deals = api.getDeals(0)
-                .toList()
-                .toBlocking()
-                .single();
+        Observable<Deal> deals = api.getDeals(0);
 
         api.getPostBuyForms(deals)
-                .stream()
                 .forEach(f -> assertNotNull(f.getEmail()));
     }
 
     @Test
     public void shouldReturnListOfAllSellersAuctions() {
-        api.login();
-        List<Auction> auctions = api.getAuctions()
-                .toList()
-                .toBlocking()
-                .single();
-
-        auctions
-                .stream()
+        api
+                .login()
+                .getAuctions()
                 .forEach(Assert::assertNotNull);
 
     }

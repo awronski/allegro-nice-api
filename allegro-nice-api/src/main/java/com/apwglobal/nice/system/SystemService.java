@@ -14,6 +14,9 @@ public class SystemService extends AbstractService {
         super(allegro, cred, conf);
     }
 
+    /**
+     * http://allegro.pl/webapi/documentation.php/show/id,62#method-output
+     */
     public SysStatusType getStatus() {
         DoQueryAllSysStatusRequest request = new DoQueryAllSysStatusRequest(conf.getCountryId(), cred.getKey());
         return allegro.doQueryAllSysStatus(request)

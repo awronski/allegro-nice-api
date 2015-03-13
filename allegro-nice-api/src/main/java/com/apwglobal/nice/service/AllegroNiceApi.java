@@ -79,7 +79,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     }
 
     @Override
-    public List<PostBuyForm> getPostBuyForms(List<Deal> deals) {
+    public Observable<PostBuyForm> getPostBuyForms(Observable<Deal> deals) {
         return dealService.getPostBuyForms(session.getSessionId(), deals);
     }
 

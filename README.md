@@ -11,7 +11,7 @@ Tests are skipped by default during packaging because of bugs in allegro test en
 If you want to run the test you have to rename ```test-credentions.template``` to ```test-credentions.properties``` and set the credentials.
 Than run the tests:
 ```
-mvn test -P testprof
+mvn compile test -P testprof
 ```
 
 # Usage
@@ -61,14 +61,12 @@ Read more on [RxJava](https://github.com/ReactiveX/RxJava).
 ## Get list of deals
 ```java
 long startingPoint = 0;
-List<Deal> deals =  api.getDeals(startingPoint)
-    .toList()
-    .toBlocking()
-    .single();
+Observable<Deal> deals =  api.getDeals(startingPoint);
 ```
 ### Get list of Post buy forms for given deals
 ```java
-api.getPostBuyForms(deals);
+api.getPostBuyForms(deals)
+    .forEach(f -> System.out::println);
 ```
 
 ### _... work in progress_
