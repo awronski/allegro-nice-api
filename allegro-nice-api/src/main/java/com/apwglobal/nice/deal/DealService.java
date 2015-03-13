@@ -29,9 +29,9 @@ public class DealService extends AbstractService {
 
     public Observable<PostBuyForm> getPostBuyForms(String session, Observable<Deal> deals) {
         Observable<Long> transactionsIds = deals
-                .filter(d -> d.getDealTransactionId() > 0)
+                .filter(d -> d.getTransactionId() > 0)
                 .filter(d -> d.getDealType().equals(DealType.PAYMENT))
-                .map(Deal::getDealTransactionId)
+                .map(Deal::getTransactionId)
                 .distinct();
 
         return transactionsIds
@@ -71,7 +71,7 @@ public class DealService extends AbstractService {
 
         @Override
         protected long getItemId(Deal deal) {
-            return deal.getDealEventId();
+            return deal.getEventId();
         }
 
     }

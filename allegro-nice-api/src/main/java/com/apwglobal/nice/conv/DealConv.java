@@ -7,14 +7,14 @@ public class DealConv {
 
     public static Deal convert(SiteJournalDealsStruct d) {
         return new Deal.Builder()
-                .dealBuyerId(d.getDealBuyerId())
-                .dealEventId(d.getDealEventId())
-                .dealEventTime(d.getDealEventTime())
-                .dealId(d.getDealId())
-                .dealItemId(d.getDealItemId())
-                .dealQuantity(d.getDealQuantity())
-                .dealSellerId(d.getDealSellerId())
-                .dealTransactionId(d.getDealTransactionId())
+                .buyerId(d.getDealBuyerId())
+                .eventId(d.getDealEventId())
+                .eventTime(d.getDealEventTime())
+                .id(d.getDealId())
+                .itemId(d.getDealItemId())
+                .quantity(d.getDealQuantity())
+                .sellerId(d.getDealSellerId())
+                .transactionId(d.getDealTransactionId())
                 .dealType(d.getDealEventType())
                 .build();
     }
