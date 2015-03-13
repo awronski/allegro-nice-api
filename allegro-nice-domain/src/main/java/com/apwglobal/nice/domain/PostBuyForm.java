@@ -1,5 +1,7 @@
 package com.apwglobal.nice.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class PostBuyForm {
@@ -21,6 +23,8 @@ public class PostBuyForm {
     private Optional<Address> invoice;
     private Address shipment;
 
+    private List<Item> items;
+
     public PostBuyForm() { }
 
     private PostBuyForm(Builder builder) {
@@ -37,6 +41,11 @@ public class PostBuyForm {
         shipmentId = builder.shipmentId;
         invoice = builder.invoice;
         shipment = builder.shipment;
+        if (builder.items == null) {
+            items = new ArrayList<>();
+        } else {
+            items = builder.items;
+        }
     }
 
     public long getTransactionId() {
@@ -93,6 +102,7 @@ public class PostBuyForm {
         private Optional<Address> invoice;
         private Address shipment;
         private long transactionId;
+        private List<Item> items;
 
         public Builder() {
         }
@@ -119,11 +129,6 @@ public class PostBuyForm {
 
         public Builder paymentAmount(double paymentAmount) {
             this.paymentAmount = paymentAmount;
-            return this;
-        }
-
-        public Builder withInvoice(Boolean withInvoice) {
-            this.withInvoice = withInvoice;
             return this;
         }
 
@@ -162,7 +167,7 @@ public class PostBuyForm {
         }
 
         public Builder invoice(Address invoice) {
-            if (withInvoice) {
+            if (this.withInvoice) {
                 this.invoice = Optional.empty();
             } else {
                 this.invoice = Optional.of(invoice);
@@ -175,14 +180,20 @@ public class PostBuyForm {
             return this;
         }
 
-        public PostBuyForm build() {
-            return new PostBuyForm(this);
-        }
-
         public Builder transactionId(long transactionId) {
             this.transactionId = transactionId;
             return this;
         }
+
+        public Builder items(List<Item> items) {
+            this.items = items;
+            return this;
+        }
+
+        public PostBuyForm build() {
+            return new PostBuyForm(this);
+        }
+
     }
 
     @Override
@@ -194,6 +205,7 @@ public class PostBuyForm {
                 ", paymentAmount=" + paymentAmount +
                 ", withInvoice=" + withInvoice +
                 ", payStatus='" + payStatus + '\'' +
+                ", items.size='" + items.size() + '\'' +
                 '}';
     }
 
