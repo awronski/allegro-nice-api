@@ -12,8 +12,8 @@ public class PostBuyFormConv {
 
     public static PostBuyForm convert(PostBuyFormDataStruct f) {
 
-        Address shipment = AddressConv.convert(f.getPostBuyFormShipmentAddress());
-        Address invoice = AddressConv.convert(f.getPostBuyFormInvoiceData());
+        Address receiver = AddressConv.convert(f.getPostBuyFormShipmentAddress());
+        Address orderer = AddressConv.convert(f.getPostBuyFormInvoiceData());
 
         List<Item> items = f.getPostBuyFormItems()
                 .getItem()
@@ -33,8 +33,8 @@ public class PostBuyFormConv {
                 .payId(f.getPostBuyFormPayId())
                 .payStatus(f.getPostBuyFormPayStatus())
                 .shipmentId(f.getPostBuyFormShipmentId())
-                .invoice(invoice)
-                .shipment(shipment)
+                .receiver(receiver)
+                .orderer(orderer)
                 .items(items)
                 .build();
     }

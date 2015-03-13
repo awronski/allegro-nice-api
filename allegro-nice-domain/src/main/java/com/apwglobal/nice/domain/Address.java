@@ -4,14 +4,15 @@ import java.util.Optional;
 
 public class Address {
 
-    protected int countryId;
-    protected String street;
-    protected String code;
-    protected String city;
-    protected String fullname;
-    protected Optional<String> company;
-    protected String phone;
-    protected Optional<String> nip;
+    private long id;
+    private int countryId;
+    private String street;
+    private String code;
+    private String city;
+    private String fullname;
+    private Optional<String> company;
+    private String phone;
+    private Optional<String> nip;
 
     public Address() { }
 
@@ -26,6 +27,9 @@ public class Address {
         nip = builder.nip;
     }
 
+    public long getId() {
+        return id;
+    }
     public int getCountryId() {
         return countryId;
     }

@@ -20,8 +20,8 @@ public class PostBuyForm {
     private String payStatus;
     private int shipmentId;
 
-    private Optional<Address> invoice;
-    private Address shipment;
+    private Address orderer;
+    private Address receiver;
 
     private List<Item> items;
 
@@ -39,13 +39,9 @@ public class PostBuyForm {
         payId = builder.payId;
         payStatus = builder.payStatus;
         shipmentId = builder.shipmentId;
-        invoice = builder.invoice;
-        shipment = builder.shipment;
-        if (builder.items == null) {
-            items = new ArrayList<>();
-        } else {
-            items = builder.items;
-        }
+        orderer = builder.orderer;
+        receiver = builder.receiver;
+        items = new ArrayList<>();
     }
 
     public long getTransactionId() {
@@ -81,11 +77,11 @@ public class PostBuyForm {
     public int getShipmentId() {
         return shipmentId;
     }
-    public Optional<Address> getInvoice() {
-        return invoice;
+    public Address getReceiver() {
+        return receiver;
     }
-    public Address getShipment() {
-        return shipment;
+    public Address getOrderer() {
+        return orderer;
     }
 
     public static final class Builder {
@@ -99,8 +95,8 @@ public class PostBuyForm {
         private long payId;
         private String payStatus;
         private int shipmentId;
-        private Optional<Address> invoice;
-        private Address shipment;
+        private Address orderer;
+        private Address receiver;
         private long transactionId;
         private List<Item> items;
 
@@ -166,17 +162,13 @@ public class PostBuyForm {
             return this;
         }
 
-        public Builder invoice(Address invoice) {
-            if (this.withInvoice) {
-                this.invoice = Optional.empty();
-            } else {
-                this.invoice = Optional.of(invoice);
-            }
+        public Builder orderer(Address orderer) {
+            this.orderer = orderer;
             return this;
         }
 
-        public Builder shipment(Address shipment) {
-            this.shipment = shipment;
+        public Builder receiver(Address receiver) {
+            this.receiver = receiver;
             return this;
         }
 
@@ -191,6 +183,9 @@ public class PostBuyForm {
         }
 
         public PostBuyForm build() {
+            if (!this.withInvoice) {
+                this.orderer = receiver;
+            }
             return new PostBuyForm(this);
         }
 
@@ -205,7 +200,7 @@ public class PostBuyForm {
                 ", paymentAmount=" + paymentAmount +
                 ", withInvoice=" + withInvoice +
                 ", payStatus='" + payStatus + '\'' +
-                ", items.size='" + items.size() + '\'' +
+                ", items.size='" + (items != null ? items.size() : 0) + '\'' +
                 '}';
     }
 
