@@ -1,5 +1,6 @@
 package com.apwglobal.nice.deal;
 
+import com.apwglobal.nice.conv.DealConv;
 import com.apwglobal.nice.conv.PostBuyFormConv;
 import com.apwglobal.nice.domain.Deal;
 import com.apwglobal.nice.domain.DealType;
@@ -64,22 +65,8 @@ public class DealService extends AbstractService {
                     .getSiteJournalDeals()
                     .getItem()
                     .stream()
-                    .map(this::createDeal)
+                    .map(DealConv::convert)
                     .collect(toList());
-        }
-
-        private Deal createDeal(SiteJournalDealsStruct d) {
-            return new Deal.Builder()
-                    .dealBuyerId(d.getDealBuyerId())
-                    .dealEventId(d.getDealEventId())
-                    .dealEventTime(d.getDealEventTime())
-                    .dealId(d.getDealId())
-                    .dealItemId(d.getDealItemId())
-                    .dealQuantity(d.getDealQuantity())
-                    .dealSellerId(d.getDealSellerId())
-                    .dealTransactionId(d.getDealTransactionId())
-                    .dealType(d.getDealEventType())
-                    .build();
         }
 
         @Override
