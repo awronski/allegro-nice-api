@@ -3,6 +3,7 @@ package com.apwglobal.nice.domain;
 import com.apwglobal.nice.util.UnixDate;
 
 import java.util.Date;
+import java.util.Optional;
 
 public class Deal {
 
@@ -10,7 +11,7 @@ public class Deal {
     protected DealType dealType;
     protected Date eventTime;
     protected long id;
-    protected long transactionId;
+    protected Optional<Long> transactionId;
     protected int sellerId;
     protected long itemId;
     protected int buyerId;
@@ -43,7 +44,7 @@ public class Deal {
     public long getId() {
         return id;
     }
-    public long getTransactionId() {
+    public Optional<Long> getTransactionId() {
         return transactionId;
     }
     public int getSellerId() {
@@ -64,7 +65,7 @@ public class Deal {
         private DealType dealType;
         private Date eventTime;
         private long id;
-        private long transactionId;
+        private Optional<Long> transactionId;
         private int sellerId;
         private long itemId;
         private int buyerId;
@@ -94,7 +95,11 @@ public class Deal {
         }
 
         public Builder transactionId(long transactionId) {
-            this.transactionId = transactionId;
+            if (transactionId == 0) {
+                this.transactionId = Optional.empty();
+            } else {
+                this.transactionId = Optional.of(transactionId);
+            }
             return this;
         }
 

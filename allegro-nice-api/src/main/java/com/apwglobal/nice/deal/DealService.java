@@ -14,6 +14,7 @@ import pl.allegro.webapi.*;
 import rx.Observable;
 
 import java.util.List;
+import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -29,9 +30,10 @@ public class DealService extends AbstractService {
 
     public Observable<PostBuyForm> getPostBuyForms(String session, Observable<Deal> deals) {
         Observable<Long> transactionsIds = deals
-                .filter(d -> d.getTransactionId() > 0)
+                .filter(d -> d.getTransactionId().isPresent())
                 .filter(d -> d.getDealType().equals(DealType.PAYMENT))
                 .map(Deal::getTransactionId)
+                .map(Optional::get)
                 .distinct();
 
         return transactionsIds
