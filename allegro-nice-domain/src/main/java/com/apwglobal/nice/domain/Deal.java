@@ -121,4 +121,18 @@ public class Deal {
             return new Deal(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Deal{" +
+                "dealEventId=" + dealEventId +
+                ", dealTransactionId=" + dealTransactionId +
+                ", dealItemId=" + dealItemId +
+                ", dealBuyerId=" + dealBuyerId +
+                ", dealQuantity=" + dealQuantity +
+                ", dealType=" + dealType +
+                ", dealEventTime=" + dealEventTime +
+                '}';
+    }
+
 }

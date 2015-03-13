@@ -21,19 +21,15 @@ public class AllegroMessage {
     public int getCatId() {
         return catId;
     }
-
     public String getTitle() {
         return title;
     }
-
     public String getBody() {
         return body;
     }
-
     public Date getDate() {
         return date;
     }
-
 
     public static final class Builder {
         private int catId;
@@ -67,6 +63,14 @@ public class AllegroMessage {
         public AllegroMessage build() {
             return new AllegroMessage(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "AllegroMessage{" +
+                "catId=" + catId +
+                ", date=" + date +
+                '}';
     }
 
 }

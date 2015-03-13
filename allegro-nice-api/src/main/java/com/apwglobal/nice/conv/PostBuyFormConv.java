@@ -12,6 +12,7 @@ public class PostBuyFormConv {
         PostBuyFormAddressStruct invoice = f.getPostBuyFormInvoiceData();
 
         return new PostBuyForm.Builder()
+                .transactionId(f.getPostBuyFormId())
                 .buyerId(f.getPostBuyFormBuyerId())
                 .email(f.getPostBuyFormBuyerEmail())
                 .amount(f.getPostBuyFormAmount())

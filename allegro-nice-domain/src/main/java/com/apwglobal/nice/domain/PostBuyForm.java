@@ -4,6 +4,7 @@ import java.util.Optional;
 
 public class PostBuyForm {
 
+    private long transactionId;
     private long buyerId;
     private String email;
 
@@ -23,6 +24,7 @@ public class PostBuyForm {
     public PostBuyForm() { }
 
     private PostBuyForm(Builder builder) {
+        transactionId = builder.transactionId;
         buyerId = builder.buyerId;
         email = builder.email;
         amount = builder.amount;
@@ -37,6 +39,9 @@ public class PostBuyForm {
         shipment = builder.shipment;
     }
 
+    public long getTransactionId() {
+        return transactionId;
+    }
     public long getBuyerId() {
         return buyerId;
     }
@@ -87,6 +92,7 @@ public class PostBuyForm {
         private int shipmentId;
         private Optional<Address> invoice;
         private Address shipment;
+        private long transactionId;
 
         public Builder() {
         }
@@ -113,6 +119,16 @@ public class PostBuyForm {
 
         public Builder paymentAmount(double paymentAmount) {
             this.paymentAmount = paymentAmount;
+            return this;
+        }
+
+        public Builder withInvoice(Boolean withInvoice) {
+            this.withInvoice = withInvoice;
+            return this;
+        }
+
+        public Builder msg(Optional<String> msg) {
+            this.msg = msg;
             return this;
         }
 
@@ -162,6 +178,23 @@ public class PostBuyForm {
         public PostBuyForm build() {
             return new PostBuyForm(this);
         }
+
+        public Builder transactionId(long transactionId) {
+            this.transactionId = transactionId;
+            return this;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "PostBuyForm{" +
+                "transactionId=" + transactionId +
+                ", email='" + email + '\'' +
+                ", amount=" + amount +
+                ", paymentAmount=" + paymentAmount +
+                ", withInvoice=" + withInvoice +
+                ", payStatus='" + payStatus + '\'' +
+                '}';
     }
 
 }

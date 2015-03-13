@@ -27,6 +27,29 @@ public class Auction {
     private double price;
     private ItemPriceType priceType;
 
+    public Auction() { }
+
+    private Auction(Builder builder) {
+        itemId = builder.itemId;
+        itemTitle = builder.itemTitle;
+        itemThumbnailUrl = builder.itemThumbnailUrl;
+        itemStartQuantity = builder.itemStartQuantity;
+        itemSoldQuantity = builder.itemSoldQuantity;
+        itemQuantityType = builder.itemQuantityType;
+        itemStartTime = builder.itemStartTime;
+        itemEndTime = builder.itemEndTime;
+        itemBiddersCounter = builder.itemBiddersCounter;
+        itemCategoryId = builder.itemCategoryId;
+        itemWatchersCounter = builder.itemWatchersCounter;
+        itemViewsCounter = builder.itemViewsCounter;
+        itemNote = builder.itemNote;
+        special = builder.special;
+        shop = builder.shop;
+        payu = builder.payu;
+        price = builder.price;
+        priceType = builder.priceType;
+    }
+
     public long getItemId() {
         return itemId;
     }
@@ -80,29 +103,6 @@ public class Auction {
     }
     public ItemPriceType getPriceType() {
         return priceType;
-    }
-
-    public Auction() { }
-
-    private Auction(Builder builder) {
-        itemId = builder.itemId;
-        itemTitle = builder.itemTitle;
-        itemThumbnailUrl = builder.itemThumbnailUrl;
-        itemStartQuantity = builder.itemStartQuantity;
-        itemSoldQuantity = builder.itemSoldQuantity;
-        itemQuantityType = builder.itemQuantityType;
-        itemStartTime = builder.itemStartTime;
-        itemEndTime = builder.itemEndTime;
-        itemBiddersCounter = builder.itemBiddersCounter;
-        itemCategoryId = builder.itemCategoryId;
-        itemWatchersCounter = builder.itemWatchersCounter;
-        itemViewsCounter = builder.itemViewsCounter;
-        itemNote = builder.itemNote;
-        special = builder.special;
-        shop = builder.shop;
-        payu = builder.payu;
-        price = builder.price;
-        priceType = builder.priceType;
     }
 
     public static final class Builder {

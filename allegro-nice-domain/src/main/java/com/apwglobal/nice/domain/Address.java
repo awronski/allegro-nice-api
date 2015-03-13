@@ -116,4 +116,11 @@ public class Address {
             return new Address(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "fullname='" + fullname + '\'' +
+                '}';
+    }
 }
