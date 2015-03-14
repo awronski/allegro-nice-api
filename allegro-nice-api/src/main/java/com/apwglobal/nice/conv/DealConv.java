@@ -10,7 +10,7 @@ public class DealConv {
                 .buyerId(d.getDealBuyerId())
                 .eventId(d.getDealEventId())
                 .eventTime(d.getDealEventTime())
-                .id(d.getDealId())
+                .dealId(d.getDealId())
                 .itemId(d.getDealItemId())
                 .quantity(d.getDealQuantity())
                 .sellerId(d.getDealSellerId())

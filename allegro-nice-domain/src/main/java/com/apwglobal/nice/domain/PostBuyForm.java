@@ -1,6 +1,5 @@
 package com.apwglobal.nice.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,7 +40,7 @@ public class PostBuyForm {
         shipmentId = builder.shipmentId;
         orderer = builder.orderer;
         receiver = builder.receiver;
-        items = new ArrayList<>();
+        items = builder.items;
     }
 
     public long getTransactionId() {
