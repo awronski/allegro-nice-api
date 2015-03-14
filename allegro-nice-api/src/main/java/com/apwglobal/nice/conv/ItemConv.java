@@ -5,9 +5,10 @@ import pl.allegro.webapi.PostBuyFormItemStruct;
 
 public class ItemConv {
 
-    public static Item convert(PostBuyFormItemStruct s) {
+    public static Item convert(PostBuyFormItemStruct s, long transactionId) {
         return new Item.Builder()
                 .id(s.getPostBuyFormItId())
+                .transactionId(transactionId)
                 .country(s.getPostBuyFormItCountry())
                 .title(s.getPostBuyFormItTitle())
                 .price(s.getPostBuyFormItPrice())

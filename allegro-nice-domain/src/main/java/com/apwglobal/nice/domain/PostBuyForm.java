@@ -82,6 +82,9 @@ public class PostBuyForm {
     public Address getOrderer() {
         return orderer;
     }
+    public List<Item> getItems() {
+        return items;
+    }
 
     public static final class Builder {
         private long buyerId;

@@ -18,7 +18,7 @@ public class PostBuyFormConv {
         List<Item> items = f.getPostBuyFormItems()
                 .getItem()
                 .stream()
-                .map(ItemConv::convert)
+                .map(i -> ItemConv.convert(i, f.getPostBuyFormId()))
                 .collect(Collectors.toList());
 
         return new PostBuyForm.Builder()

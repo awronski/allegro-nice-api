@@ -3,6 +3,7 @@ package com.apwglobal.nice.domain;
 public class Item {
 
     private long id;
+    private long transactionId;
     private String title;
     private int country;
 
@@ -14,6 +15,7 @@ public class Item {
 
     private Item(Builder builder) {
         id = builder.id;
+        transactionId = builder.transactionId;
         title = builder.title;
         country = builder.country;
         price = builder.price;
@@ -39,9 +41,13 @@ public class Item {
     public double getAmount() {
         return amount;
     }
+    public long getTransactionId() {
+        return transactionId;
+    }
 
     public static final class Builder {
         private long id;
+        private long transactionId;
         private String title;
         private int country;
         private float price;
@@ -53,6 +59,11 @@ public class Item {
 
         public Builder id(long id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder transactionId(long transactionId) {
+            this.transactionId = transactionId;
             return this;
         }
 
@@ -90,6 +101,7 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "id=" + id +
+                ", transactionId='" + transactionId + '\'' +
                 ", title='" + title + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
