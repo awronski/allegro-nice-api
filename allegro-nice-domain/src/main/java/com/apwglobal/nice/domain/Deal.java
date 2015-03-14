@@ -10,7 +10,7 @@ public class Deal {
     protected long eventId;
     protected DealType dealType;
     protected Date eventTime;
-    protected long id;
+    protected long dealId;
     protected Optional<Long> transactionId;
     protected int sellerId;
     protected long itemId;
@@ -23,7 +23,7 @@ public class Deal {
         eventId = builder.eventId;
         dealType = builder.dealType;
         eventTime = builder.eventTime;
-        id = builder.id;
+        dealId = builder.dealId;
         transactionId = builder.transactionId;
         sellerId = builder.sellerId;
         itemId = builder.itemId;
@@ -41,8 +41,8 @@ public class Deal {
     public Date getEventTime() {
         return eventTime;
     }
-    public long getId() {
-        return id;
+    public long getDealId() {
+        return dealId;
     }
     public Optional<Long> getTransactionId() {
         return transactionId;
@@ -64,7 +64,7 @@ public class Deal {
         private long eventId;
         private DealType dealType;
         private Date eventTime;
-        private long id;
+        private long dealId;
         private Optional<Long> transactionId;
         private int sellerId;
         private long itemId;
@@ -89,8 +89,8 @@ public class Deal {
             return this;
         }
 
-        public Builder id(long id) {
-            this.id = id;
+        public Builder dealId(long dealId) {
+            this.dealId = dealId;
             return this;
         }
 
@@ -134,7 +134,7 @@ public class Deal {
                 "eventId=" + eventId +
                 ", dealType=" + dealType +
                 ", eventTime=" + eventTime +
-                ", id=" + id +
+                ", dealId=" + dealId +
                 ", transactionId=" + transactionId +
                 ", itemId=" + itemId +
                 ", buyerId=" + buyerId +
