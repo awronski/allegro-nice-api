@@ -9,7 +9,6 @@ public class ItemConv {
         return new Item.Builder()
                 .id(s.getPostBuyFormItId())
                 .transactionId(transactionId)
-                .country(s.getPostBuyFormItCountry())
                 .title(s.getPostBuyFormItTitle())
                 .price(s.getPostBuyFormItPrice())
                 .quantity(s.getPostBuyFormItQuantity())
