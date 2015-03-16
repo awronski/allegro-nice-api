@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import rx.Observable;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
@@ -23,6 +24,11 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     @Test
     public void shouldReturnStatus() {
         assertNotNull(api.getStatus());
+    }
+
+    @Test
+    public void shouldReturnCountries() {
+        assertFalse(api.getCountries().isEmpty());
     }
 
 //    doesn not work in allegro test environment

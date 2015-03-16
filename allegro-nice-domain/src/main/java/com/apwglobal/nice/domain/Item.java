@@ -5,7 +5,6 @@ public class Item {
     private long id;
     private long transactionId;
     private String title;
-    private int country;
 
     private double price;
     private int quantity;
@@ -17,7 +16,6 @@ public class Item {
         id = builder.id;
         transactionId = builder.transactionId;
         title = builder.title;
-        country = builder.country;
         price = builder.price;
         quantity = builder.quantity;
         amount = builder.amount;
@@ -28,9 +26,6 @@ public class Item {
     }
     public String getTitle() {
         return title;
-    }
-    public int getCountry() {
-        return country;
     }
     public double getPrice() {
         return price;
@@ -49,7 +44,6 @@ public class Item {
         private long id;
         private long transactionId;
         private String title;
-        private int country;
         private float price;
         private int quantity;
         private double amount;
@@ -69,11 +63,6 @@ public class Item {
 
         public Builder title(String title) {
             this.title = title;
-            return this;
-        }
-
-        public Builder country(int country) {
-            this.country = country;
             return this;
         }
 

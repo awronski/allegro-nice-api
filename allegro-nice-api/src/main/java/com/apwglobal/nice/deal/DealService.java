@@ -2,6 +2,7 @@ package com.apwglobal.nice.deal;
 
 import com.apwglobal.nice.conv.DealConv;
 import com.apwglobal.nice.conv.PostBuyFormConv;
+import com.apwglobal.nice.country.CountryService;
 import com.apwglobal.nice.domain.Deal;
 import com.apwglobal.nice.domain.DealType;
 import com.apwglobal.nice.domain.PostBuyForm;
@@ -20,8 +21,11 @@ import static java.util.stream.Collectors.toList;
 
 public class DealService extends AbstractService {
 
-    public DealService(ServicePort allegro, Credentials cred, Configuration conf) {
+    private CountryService countryService;
+
+    public DealService(ServicePort allegro, Credentials cred, Configuration conf, CountryService countryService) {
         super(allegro, cred, conf);
+        this.countryService = countryService;
     }
 
     public Observable<Deal> getDeals(String session, long startingPoint) {
@@ -39,7 +43,7 @@ public class DealService extends AbstractService {
         return transactionsIds
                 .buffer(25)
                 .flatMap(l -> Observable.from(getPostBuyFormsDataForSellers(session, l)))
-                .map(PostBuyFormConv::convert);
+                .map(f -> PostBuyFormConv.convert(f, countryService.getCountries()));
     }
 
     /**

@@ -7,12 +7,16 @@ import rx.Observable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public interface IAllegroNiceApi {
 
     //login
     IAllegroNiceApi login();
     AllegroSession getSession();
+
+    //countries
+    Map<Integer, String> getCountries();
 
     //status and components
     SysStatusType getStatus();

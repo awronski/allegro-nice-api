@@ -2,6 +2,7 @@ package com.apwglobal.nice.service;
 
 import com.apwglobal.nice.auction.AuctionService;
 import com.apwglobal.nice.client.ClientService;
+import com.apwglobal.nice.country.CountryService;
 import com.apwglobal.nice.deal.DealService;
 import com.apwglobal.nice.domain.*;
 import com.apwglobal.nice.journal.JournalService;
@@ -16,11 +17,13 @@ import rx.Observable;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
 
     private AllegroSession session;
     private LoginService loginService;
+    private CountryService countryService;
     private SystemService systemService;
     private MessageService messageService;
     private JournalService journalService;
@@ -34,11 +37,12 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         conf = builder.conf;
 
         loginService = new LoginService(allegro, cred, conf);
+        countryService = new CountryService(allegro, cred, conf);
         systemService = new SystemService(allegro, cred, conf);
         messageService = new MessageService(allegro, cred, conf);
         journalService = new JournalService(allegro, cred, conf);
         clientService = new ClientService(allegro, cred, conf);
-        dealService = new DealService(allegro, cred, conf);
+        dealService = new DealService(allegro, cred, conf, countryService);
         auctionService = new AuctionService(allegro, cred, conf);
     }
 
@@ -51,6 +55,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     @Override
     public AllegroSession getSession() {
         return session;
+    }
+
+    @Override
+    public Map<Integer, String> getCountries() {
+        return countryService.getCountries();
     }
 
     @Override

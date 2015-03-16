@@ -5,11 +5,11 @@ import java.util.Optional;
 public class Address {
 
     private long id;
-    private int countryId;
     private String street;
     private String code;
     private String city;
     private String fullname;
+    private String country;
     private Optional<String> company;
     private String phone;
     private Optional<String> nip;
@@ -17,7 +17,7 @@ public class Address {
     public Address() { }
 
     private Address(Builder builder) {
-        countryId = builder.countryId;
+        country = builder.country;
         street = builder.street;
         code = builder.code;
         city = builder.city;
@@ -30,8 +30,8 @@ public class Address {
     public long getId() {
         return id;
     }
-    public int getCountryId() {
-        return countryId;
+    public String getCountry() {
+        return country;
     }
     public String getStreet() {
         return street;
@@ -56,7 +56,7 @@ public class Address {
     }
 
     public static final class Builder {
-        private int countryId;
+        private String country;
         private String street;
         private String code;
         private String city;
@@ -68,8 +68,8 @@ public class Address {
         public Builder() {
         }
 
-        public Builder countryId(int countryId) {
-            this.countryId = countryId;
+        public Builder country(String country) {
+            this.country = country;
             return this;
         }
 
