@@ -1,5 +1,6 @@
 package com.apwglobal.nice.domain;
 
+import com.apwglobal.bd.BD;
 import com.apwglobal.nice.util.UnixDate;
 
 import java.util.Date;
@@ -213,7 +214,7 @@ public class Auction {
         }
 
         public Builder price(float price) {
-            this.price = price;
+            this.price = new BD(price).doubleValue();
             return this;
         }
 

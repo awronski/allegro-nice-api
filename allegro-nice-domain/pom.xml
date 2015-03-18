@@ -12,4 +12,12 @@
     <artifactId>allegro-nice-domain</artifactId>
     <packaging>jar</packaging>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.apwglobal</groupId>
+            <artifactId>bd</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
 </project>

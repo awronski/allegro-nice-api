@@ -1,5 +1,7 @@
 package com.apwglobal.nice.domain;
 
+import com.apwglobal.bd.BD;
+
 public class Item {
 
     private long id;
@@ -44,7 +46,7 @@ public class Item {
         private long id;
         private long transactionId;
         private String title;
-        private float price;
+        private double price;
         private int quantity;
         private double amount;
 
@@ -67,7 +69,7 @@ public class Item {
         }
 
         public Builder price(float price) {
-            this.price = price;
+            this.price = new BD(price).doubleValue();
             return this;
         }
 
