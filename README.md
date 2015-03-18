@@ -1,11 +1,15 @@
 # allegro-nice-api
 Flexible and easy to use java api for allegro service focused on trading operation on allegro platform.
 
+## Requirements
+- Java 8
+- [BD lib](https://github.com/awronski/bd)
+
 ## Install
 ```
 git clone https://github.com/awronski/allegro-nice-api.git
 cd allegro-nice-api
-mvn package
+mvn package install
 ```
 Tests are skipped by default during packaging because of bugs in allegro test environment.
 If you want to run the test you have to rename ```test-credentions.template``` to ```test-credentions.properties``` and set the credentials.
@@ -73,8 +77,6 @@ api.getPostBuyForms(deals)
 
 License
 =======
-
-    Copyright 2013 Square, Inc.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
