@@ -1,13 +1,15 @@
 package com.apwglobal.nice.service;
 
+import com.apwglobal.nice.domain.Category;
 import com.apwglobal.nice.domain.Deal;
 import com.apwglobal.nice.login.AbstractLoggedServiceBaseTest;
 import org.junit.Assert;
 import org.junit.Test;
 import rx.Observable;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
 
@@ -61,6 +63,15 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
                 .login()
                 .getAuctions()
                 .forEach(Assert::assertNotNull);
+    }
+
+    @Test
+    public void shouldReturnListCategories() {
+        List<Category> categories = api
+                .login()
+                .getCategories();
+        assertNotNull(categories);
+        assertTrue(!categories.isEmpty());
 
     }
 }

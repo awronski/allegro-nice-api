@@ -9,6 +9,7 @@ import com.apwglobal.nice.journal.JournalService;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.login.LoginService;
 import com.apwglobal.nice.message.MessageService;
+import com.apwglobal.nice.sell.SellService;
 import com.apwglobal.nice.system.SystemService;
 import pl.allegro.webapi.ItemPostBuyDataStruct;
 import pl.allegro.webapi.ServiceService;
@@ -30,6 +31,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     private ClientService clientService;
     private DealService dealService;
     private AuctionService auctionService;
+    private SellService sellService;
 
     private AllegroNiceApi(Builder builder) {
         allegro = new ServiceService().getServicePort();
@@ -44,6 +46,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         clientService = new ClientService(allegro, cred, conf);
         dealService = new DealService(allegro, cred, conf, countryService);
         auctionService = new AuctionService(allegro, cred, conf);
+        sellService = new SellService(allegro, cred, conf);
     }
 
     @Override
@@ -95,6 +98,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     @Override
     public Observable<Auction> getAuctions() {
         return auctionService.getAuctions(session.getSessionId());
+    }
+
+    @Override
+    public List<Category> getCategories() {
+        return sellService.getCategories();
     }
 
     public static final class Builder {
