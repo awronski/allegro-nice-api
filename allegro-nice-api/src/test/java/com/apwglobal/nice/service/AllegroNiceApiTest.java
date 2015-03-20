@@ -2,11 +2,15 @@ package com.apwglobal.nice.service;
 
 import com.apwglobal.nice.domain.*;
 import com.apwglobal.nice.login.AbstractLoggedServiceBaseTest;
+import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import rx.Observable;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
@@ -14,11 +18,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
-
-    @Test
-    public void shouldNotReturnSessionId() {
-        Assert.assertNull(api.getSession());
-    }
 
     @Test
     public void shouldReturnSessionId() {
@@ -34,12 +33,6 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     public void shouldReturnCountries() {
         assertFalse(api.getCountries().isEmpty());
     }
-
-//    doesn not work in allegro test environment
-//    @Test
-//    public void shouldReturnAllegroMessages()  {
-//        assertTrue(api.getAllMessages(LocalDateTime.now().minusDays(1000)).size() > 0);
-//    }
 
     @Test
     public void shouldReturnListOfClientsData() {
@@ -90,7 +83,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     }
 
     @Test
-    public void shouldReturnPriceForAuction() {
+    public void shouldReturnPriceForAuction() throws IOException {
 
         List<NewAuctionField> fields = createNewAuctionFields();
 
@@ -100,7 +93,20 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         assertNotNull(res.getPrice());
     }
 
-    private List<NewAuctionField> createNewAuctionFields() {
+    @Test
+    public void shouldCreateNewAuction() throws IOException {
+        List<NewAuctionField> fields = createNewAuctionFields();
+
+        CreatedAuction res = api
+                .login()
+                .createNewAuction(fields);
+        assertNotNull(res);
+    }
+
+    private List<NewAuctionField> createNewAuctionFields() throws IOException {
+        InputStream is = getClass().getResourceAsStream("/resources/test.png");
+        byte[] img = Base64.getEncoder().encode(IOUtils.toByteArray(is));
+
         return Arrays.asList(
                 new NewAuctionField(1, FieldType.Type.STRING, System.nanoTime() + ": Testing 123"),      //title
                 new NewAuctionField(2, FieldType.Type.INTEGER, 76661),                                   //category
@@ -113,6 +119,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
                 new NewAuctionField(11, FieldType.Type.STRING, "Warszawa"),                              //city
                 new NewAuctionField(12, FieldType.Type.INTEGER, 1),                                      //transport, paid by buyer
                 new NewAuctionField(14, FieldType.Type.INTEGER, 32),                                     //invoice possible
+                new NewAuctionField(16, FieldType.Type.IMAGE, img),                                      //image
                 new NewAuctionField(24, FieldType.Type.STRING, "This is description <b>with html</b>"),  //desc
                 new NewAuctionField(28, FieldType.Type.INTEGER, 0),                                      //unit, pcs
                 new NewAuctionField(32, FieldType.Type.STRING, "01-234"),                                //zip
@@ -122,7 +129,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
                 new NewAuctionField(144, FieldType.Type.FLOAT, 0f),                                      //price for courier, next pcs
                 new NewAuctionField(243, FieldType.Type.INTEGER, 50),                                    //qty in letter
                 new NewAuctionField(244, FieldType.Type.INTEGER, 250),                                   //qty in parcel
-                new NewAuctionField(340, FieldType.Type.INTEGER, 24),                                    //sending time
+                new NewAuctionField(340, FieldType.Type.INTEGER, 1),                                     //sending time
                 new NewAuctionField(3110, FieldType.Type.INTEGER, 1)                                     //color
                 //3120 - shape
         );

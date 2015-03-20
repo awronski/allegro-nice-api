@@ -3,10 +3,7 @@ package com.apwglobal.nice.sell;
 import com.apwglobal.nice.conv.CategoryConv;
 import com.apwglobal.nice.conv.FormFieldConv;
 import com.apwglobal.nice.conv.NewAuctionFieldConv;
-import com.apwglobal.nice.domain.Category;
-import com.apwglobal.nice.domain.FormField;
-import com.apwglobal.nice.domain.NewAuctionField;
-import com.apwglobal.nice.domain.NewAuctionPrice;
+import com.apwglobal.nice.domain.*;
 import com.apwglobal.nice.exception.AllegroExecutor;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractService;
@@ -38,7 +35,6 @@ public class SellService extends AbstractService {
     }
 
     /**
-     *
      * http://allegro.pl/webapi/documentation.php/show/id,782#method-output
      */
     public List<FormField> getSellFormFields(int categoryId) {
@@ -51,17 +47,10 @@ public class SellService extends AbstractService {
     }
 
     /**
-     *
      * http://allegro.pl/webapi/documentation.php/show/id,41#method-output
      */
     public NewAuctionPrice checkNewAuction(List<NewAuctionField> fields, String session) {
-        ArrayOfFieldsvalue values = new ArrayOfFieldsvalue(
-                fields
-                .stream()
-                .map(NewAuctionFieldConv::convert)
-                .collect(Collectors.toList())
-        );
-        DoCheckNewAuctionExtRequest req = new DoCheckNewAuctionExtRequest(session, values, new ArrayOfVariantstruct());
+        DoCheckNewAuctionExtRequest req = new DoCheckNewAuctionExtRequest(session, convert(fields), null);
         DoCheckNewAuctionExtResponse res = AllegroExecutor.execute(() -> allegro.doCheckNewAuctionExt(req));
 
         return new NewAuctionPrice.Builder()
@@ -70,4 +59,35 @@ public class SellService extends AbstractService {
                 .allegroStandard(res.getItemIsAllegroStandard())
                 .build();
     }
+
+    private ArrayOfFieldsvalue convert(List<NewAuctionField> fields) {
+        return new ArrayOfFieldsvalue(
+                fields
+                        .stream()
+                        .map(NewAuctionFieldConv::convert)
+                        .collect(Collectors.toList())
+        );
+    }
+
+    /**
+     * http://allegro.pl/webapi/documentation.php/show/id,113#method-output
+     */
+    public CreatedAuction createNewAuction(List<NewAuctionField> fields, String session) {
+        DoNewAuctionExtRequest req = createDoNewAuctionExtRequest(fields, session);
+        DoNewAuctionExtResponse res = AllegroExecutor.execute(() -> allegro.doNewAuctionExt(req));
+        return new CreatedAuction.Builder()
+                .itemId(res.getItemId())
+                .info(res.getItemInfo())
+                .allegroStandard(res.getItemIsAllegroStandard())
+                .build();
+    }
+
+    private DoNewAuctionExtRequest createDoNewAuctionExtRequest(List<NewAuctionField> fields, String session) {
+        DoNewAuctionExtRequest req = new DoNewAuctionExtRequest();
+        req.setSessionHandle(session);
+        req.setFields(convert(fields));
+        req.setLocalId((int) (Math.random() * Integer.MAX_VALUE));
+        return req;
+    }
+
 }
