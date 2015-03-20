@@ -2,6 +2,7 @@ package com.apwglobal.nice.service;
 
 import com.apwglobal.nice.domain.Category;
 import com.apwglobal.nice.domain.Deal;
+import com.apwglobal.nice.domain.FormField;
 import com.apwglobal.nice.login.AbstractLoggedServiceBaseTest;
 import org.junit.Assert;
 import org.junit.Test;
@@ -9,7 +10,9 @@ import rx.Observable;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static java.util.stream.Collectors.toList;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
 
@@ -71,7 +74,20 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
                 .login()
                 .getCategories();
         assertNotNull(categories);
-        assertTrue(!categories.isEmpty());
+        assertFalse(categories.isEmpty());
+
+    }
+
+    @Test
+    public void shouldReturnSellFormFields() {
+        List<FormField> fields = api
+                .login()
+                .getSellFormFields(76661)
+                .stream()
+                .filter(FormField::isRequired)
+                .collect(toList());
+
+        assertFalse(fields.isEmpty());
 
     }
 }

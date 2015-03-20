@@ -105,6 +105,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         return sellService.getCategories();
     }
 
+    @Override
+    public List<FormField> getSellFormFields(int categoryId) {
+        return sellService.getSellFormFields(categoryId);
+    }
+
     public static final class Builder {
         private Credentials cred;
         private Configuration conf;

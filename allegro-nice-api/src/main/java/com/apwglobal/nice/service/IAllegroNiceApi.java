@@ -35,5 +35,6 @@ public interface IAllegroNiceApi {
     //selling
     Observable<Auction> getAuctions();
     List<Category> getCategories();
+    List<FormField> getSellFormFields(int categoryId);
 
 }
