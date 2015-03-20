@@ -110,6 +110,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         return sellService.getSellFormFields(categoryId);
     }
 
+    @Override
+    public NewAuctionPrice checkNewAuction(List<NewAuctionField> fields) {
+        return sellService.checkNewAuction(fields, session.getSessionId());
+    }
+
     public static final class Builder {
         private Credentials cred;
         private Configuration conf;

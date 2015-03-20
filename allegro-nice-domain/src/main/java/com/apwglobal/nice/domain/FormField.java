@@ -74,4 +74,12 @@ public class FormField {
         }
     }
 
+    @Override
+    public String toString() {
+        return "FormField{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", required=" + required +
+                '}';
+    }
 }

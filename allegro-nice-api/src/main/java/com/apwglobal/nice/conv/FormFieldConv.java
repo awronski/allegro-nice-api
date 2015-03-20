@@ -6,7 +6,7 @@ import pl.allegro.webapi.SellFormType;
 
 public class FormFieldConv {
 
-    public static FormField conv(SellFormType t) {
+    public static FormField convert(SellFormType t) {
         return new FormField.Builder()
                 .id(t.getSellFormId())
                 .required(t.getSellFormOpt())
