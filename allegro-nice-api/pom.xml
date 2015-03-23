@@ -42,7 +42,7 @@
         </dependency>
 
         <dependency>
-            <groupId>com.apwglobal.</groupId>
+            <groupId>com.apwglobal</groupId>
             <artifactId>allegro-nice-domain</artifactId>
             <version>0.1.1-SNAPSHOT</version>
         </dependency>
