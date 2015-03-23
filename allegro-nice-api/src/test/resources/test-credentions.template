@@ -1,6 +1,4 @@
-alegro.username=
-alegro.password=
-alegro.key=
-alegro.country=
-allegro.wsdl=https://webapi.allegro.pl.webapisandbox.pl/service.php?wsdl
-allegro.serviceName=urn:SandboxWebApi
+alegro.username=user
+alegro.password=password
+alegro.key=12345
+alegro.country=1

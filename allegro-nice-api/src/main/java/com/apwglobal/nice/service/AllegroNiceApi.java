@@ -12,15 +12,27 @@ import com.apwglobal.nice.message.MessageService;
 import com.apwglobal.nice.sell.SellService;
 import com.apwglobal.nice.system.SystemService;
 import pl.allegro.webapi.ItemPostBuyDataStruct;
+import pl.allegro.webapi.ServicePort;
 import pl.allegro.webapi.ServiceService;
 import pl.allegro.webapi.SysStatusType;
 import rx.Observable;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import javax.xml.namespace.QName;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
+
+    private static final String URN_SANDBOX_WEB_API = "urn:SandboxWebApi";
+    private static final String ALLEGRO_WEBAPISANDBOX_WSDL =
+            "https://webapi.allegro.pl.webapisandbox.pl/service.php?wsdl";
 
     private AllegroSession session;
     private LoginService loginService;
@@ -34,7 +46,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     private SellService sellService;
 
     private AllegroNiceApi(Builder builder) {
-        allegro = new ServiceService().getServicePort();
+        allegro = createAllegro(builder);
         cred = builder.cred;
         conf = builder.conf;
 
@@ -47,6 +59,28 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         dealService = new DealService(allegro, cred, conf, countryService);
         auctionService = new AuctionService(allegro, cred, conf);
         sellService = new SellService(allegro, cred, conf);
+    }
+
+    private ServicePort createAllegro(Builder builder) {
+        ServicePort allegro;
+
+        if (builder.test) {
+            QName SERVICE_PORT = new QName(URN_SANDBOX_WEB_API, "servicePort");
+            QName SERVICE_NAME = new QName(URN_SANDBOX_WEB_API, "serviceService");
+            allegro = new ServiceService(getWsdlLocation(), SERVICE_NAME).getPort(SERVICE_PORT, ServicePort.class);
+        } else {
+            allegro = new ServiceService().getServicePort();
+        }
+
+        return allegro;
+    }
+
+    private URL getWsdlLocation() {
+        try {
+            return new URL(ALLEGRO_WEBAPISANDBOX_WSDL);
+        } catch (MalformedURLException e) {
+            throw new IllegalStateException(e.getMessage(), e);
+        }
     }
 
     @Override
@@ -128,6 +162,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     public static final class Builder {
         private Credentials cred;
         private Configuration conf;
+        private boolean test;
 
         public Builder() {
         }
@@ -142,8 +177,41 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
             return this;
         }
 
+        public Builder test() {
+            this.test = true;
+            allegroIncorrectCertificateWorkaround();
+
+            return this;
+        }
+
         public AllegroNiceApi build() {
             return new AllegroNiceApi(this);
         }
     }
+
+    /*
+    * Workaround for allegro ssl cert bug
+     */
+    private static void allegroIncorrectCertificateWorkaround() {
+        TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
+            public java.security.cert.X509Certificate[] getAcceptedIssuers() {
+                return null;
+            }
+
+            public void checkClientTrusted(java.security.cert.X509Certificate[] certs, String authType) {
+            }
+
+            public void checkServerTrusted(java.security.cert.X509Certificate[] certs, String authType) {
+            }
+        }};
+
+        try {
+            SSLContext sc = SSLContext.getInstance("SSL");
+            sc.init(null, trustAllCerts, new java.security.SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        } catch (Exception e) {
+            throw new RuntimeException(e.getMessage(), e);
+        }
+    }
+
 }
