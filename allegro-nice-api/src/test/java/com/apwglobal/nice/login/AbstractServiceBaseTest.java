@@ -20,15 +20,15 @@ public abstract class AbstractServiceBaseTest {
         properties.load(resourceAsStream);
 
         cred = new Credentials(
-                properties.getProperty("alegro.username"),
-                properties.getProperty("alegro.password"),
-                properties.getProperty("alegro.key")
+                properties.getProperty("allegro.username"),
+                properties.getProperty("allegro.password"),
+                properties.getProperty("allegro.key")
         );
 
-        int countryId = Integer.valueOf(properties.getProperty("alegro.country"));
+        int countryId = Integer.valueOf(properties.getProperty("allegro.country"));
         conf = new Configuration(countryId);
 
-        test = Boolean.valueOf(properties.getProperty("alegro.sandbox"));
+        test = Boolean.valueOf(properties.getProperty("allegro.sandbox"));
     }
 
 }

@@ -1,5 +1,5 @@
-alegro.username=user
-alegro.password=password
-alegro.key=12345
-alegro.country=1
-alegro.sandbox=true
+allegro.username=user
+allegro.password=password
+allegro.key=12345
+allegro.country=1
+allegro.sandbox=true
