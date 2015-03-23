@@ -4,7 +4,6 @@ import com.apwglobal.nice.conv.CategoryConv;
 import com.apwglobal.nice.conv.FormFieldConv;
 import com.apwglobal.nice.conv.NewAuctionFieldConv;
 import com.apwglobal.nice.domain.*;
-import com.apwglobal.nice.exception.AllegroExecutor;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractService;
 import com.apwglobal.nice.service.Configuration;
@@ -13,6 +12,7 @@ import pl.allegro.webapi.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.apwglobal.nice.exception.AllegroExecutor.execute;
 import static java.util.stream.Collectors.toList;
 
 public class SellService extends AbstractService {
@@ -27,7 +27,7 @@ public class SellService extends AbstractService {
      */
     public List<Category> getCategories() {
         DoGetCatsDataRequest req = new DoGetCatsDataRequest(conf.getCountryId(), 0l, cred.getKey());
-        DoGetCatsDataResponse res = AllegroExecutor.execute(() -> allegro.doGetCatsData(req));
+        DoGetCatsDataResponse res = execute(() -> allegro.doGetCatsData(req));
         return res.getCatsList().getItem()
                 .stream()
                 .map(CategoryConv::convert)
@@ -39,7 +39,7 @@ public class SellService extends AbstractService {
      */
     public List<FormField> getSellFormFields(int categoryId) {
         DoGetSellFormFieldsForCategoryRequest req = new DoGetSellFormFieldsForCategoryRequest(cred.getKey(), conf.getCountryId(), categoryId);
-        DoGetSellFormFieldsForCategoryResponse res = AllegroExecutor.execute(() -> allegro.doGetSellFormFieldsForCategory(req));
+        DoGetSellFormFieldsForCategoryResponse res = execute(() -> allegro.doGetSellFormFieldsForCategory(req));
         return res.getSellFormFieldsForCategory().getSellFormFieldsList().getItem()
                 .stream()
                 .map(FormFieldConv::convert)
@@ -51,7 +51,7 @@ public class SellService extends AbstractService {
      */
     public NewAuctionPrice checkNewAuction(List<NewAuctionField> fields, String session) {
         DoCheckNewAuctionExtRequest req = new DoCheckNewAuctionExtRequest(session, convert(fields), null);
-        DoCheckNewAuctionExtResponse res = AllegroExecutor.execute(() -> allegro.doCheckNewAuctionExt(req));
+        DoCheckNewAuctionExtResponse res = execute(() -> allegro.doCheckNewAuctionExt(req));
 
         return new NewAuctionPrice.Builder()
                 .price(res.getItemPrice())
@@ -74,7 +74,7 @@ public class SellService extends AbstractService {
      */
     public CreatedAuction createNewAuction(List<NewAuctionField> fields, String session) {
         DoNewAuctionExtRequest req = createDoNewAuctionExtRequest(fields, session);
-        DoNewAuctionExtResponse res = AllegroExecutor.execute(() -> allegro.doNewAuctionExt(req));
+        DoNewAuctionExtResponse res = execute(() -> allegro.doNewAuctionExt(req));
         return new CreatedAuction.Builder()
                 .itemId(res.getItemId())
                 .info(res.getItemInfo())
@@ -90,4 +90,16 @@ public class SellService extends AbstractService {
         return req;
     }
 
+    public ChangedQty changeAuctionQty(String session, long itemId, int newQty) {
+        DoChangeQuantityItemRequest req = new DoChangeQuantityItemRequest(session, itemId, newQty);
+        DoChangeQuantityItemResponse res = execute(() -> allegro.doChangeQuantityItem(req));
+
+        return new ChangedQty.Builder()
+                .itemId(res.getItemId())
+                .left(res.getItemQuantityLeft())
+                .sold(res.getItemQuantitySold())
+                .info(res.getItemInfo())
+                .build();
+
+    }
 }

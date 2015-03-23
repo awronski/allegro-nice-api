@@ -14,6 +14,7 @@ import java.util.Base64;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
@@ -94,13 +95,16 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     }
 
     @Test
-    public void shouldCreateNewAuction() throws IOException {
+    public void shouldCreateNewAuctionAndChangeQty() throws IOException {
         List<NewAuctionField> fields = createNewAuctionFields();
 
-        CreatedAuction res = api
+        CreatedAuction auction = api
                 .login()
                 .createNewAuction(fields);
-        assertNotNull(res);
+        assertNotNull(auction);
+
+        ChangedQty changedQty = api.changeQty(auction.getItemId(), 5);
+        assertEquals(5, changedQty.getLeft());
     }
 
     private List<NewAuctionField> createNewAuctionFields() throws IOException {
