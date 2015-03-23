@@ -6,6 +6,8 @@ public class NewAuctionField {
     private FieldType.Type type;
     private Object value;
 
+    public NewAuctionField() { }
+
     public NewAuctionField(int id, FieldType.Type type, Object value) {
         this.id = id;
         this.type = type;
