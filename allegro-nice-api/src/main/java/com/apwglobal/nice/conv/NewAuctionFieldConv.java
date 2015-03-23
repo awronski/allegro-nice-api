@@ -1,5 +1,6 @@
 package com.apwglobal.nice.conv;
 
+import com.apwglobal.bd.BD;
 import com.apwglobal.nice.domain.NewAuctionField;
 import pl.allegro.webapi.FieldsValue;
 
@@ -25,7 +26,11 @@ public class NewAuctionFieldConv {
                 break;
 
             case FLOAT:
-                fv.setFvalueFloat((Float) f.getValue());
+                if (f.getValue() instanceof Float) {
+                    fv.setFvalueFloat((Float) f.getValue());
+                } else {
+                    fv.setFvalueFloat(new BD((Double) f.getValue()).floatValue());
+                }
                 break;
 
             case IMAGE:
