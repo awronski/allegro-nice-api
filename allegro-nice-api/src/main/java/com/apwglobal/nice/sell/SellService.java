@@ -7,10 +7,10 @@ import com.apwglobal.nice.domain.*;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractService;
 import com.apwglobal.nice.service.Configuration;
+import com.google.common.collect.Lists;
 import pl.allegro.webapi.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.apwglobal.nice.exception.AllegroExecutor.execute;
 import static java.util.stream.Collectors.toList;
@@ -65,7 +65,7 @@ public class SellService extends AbstractService {
                 fields
                         .stream()
                         .map(NewAuctionFieldConv::convert)
-                        .collect(Collectors.toList())
+                        .collect(toList())
         );
     }
 
@@ -100,6 +100,36 @@ public class SellService extends AbstractService {
                 .sold(res.getItemQuantitySold())
                 .info(res.getItemInfo())
                 .build();
+    }
 
+    /**
+     * http://allegro.pl/webapi/documentation.php/show/id,623#method-output
+     */
+    public List<FinishAuctionFailure> finishAuctions(String session, List<Long> itemsIds) {
+        return Lists.partition(itemsIds, 25)
+                .stream()
+                .flatMap(l -> finish(session, l)
+                        .stream())
+                .map(f -> new FinishAuctionFailure.Builder()
+                        .itemId(f.getFinishItemId())
+                        .errorCode(f.getFinishErrorCode())
+                        .errorMessage(f.getFinishErrorMessage())
+                        .build()
+                )
+                .collect(toList());
+    }
+
+    private List<FinishFailureStruct> finish(String session, List<Long> ids) {
+        DoFinishItemsRequest req = new DoFinishItemsRequest(session, getItemsToFinish(ids));
+        return execute(() -> allegro.doFinishItems(req)).getFinishItemsFailed().getItem();
+    }
+
+    private ArrayOfFinishitemsstruct getItemsToFinish(List<Long> ids) {
+        return new ArrayOfFinishitemsstruct(
+                ids
+                        .stream()
+                        .map(id -> new FinishItemsStruct(id, 0, null))
+                        .collect(toList())
+        );
     }
 }

@@ -156,7 +156,14 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
 
     @Override
     public ChangedQty changeQty(long itemId, int newQty) {
+        //TODO update auction in db
         return sellService.changeAuctionQty(session.getSessionId(), itemId, newQty);
+    }
+
+    @Override
+    public List<FinishAuctionFailure> finishAuctions(List<Long> itemsIds) {
+        //TODO update auction in db
+        return sellService.finishAuctions(session.getSessionId(), itemsIds);
     }
 
     public static final class Builder {
