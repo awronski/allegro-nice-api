@@ -15,7 +15,7 @@ public class AbstractLoggedServiceBaseTest extends AbstractServiceBaseTest {
         api = new AllegroNiceApi.Builder()
                 .conf(conf)
                 .cred(cred)
-                .test()
+                .test(test)
                 .build();
     }
 

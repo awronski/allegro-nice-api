@@ -177,10 +177,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
             return this;
         }
 
-        public Builder test() {
-            this.test = true;
-            allegroIncorrectCertificateWorkaround();
-
+        public Builder test(boolean test) {
+            if (test) {
+                this.test = true;
+                allegroIncorrectCertificateWorkaround();
+            }
             return this;
         }
 

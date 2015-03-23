@@ -14,7 +14,7 @@ public class LoginExceptionTest extends AbstractServiceBaseTest {
         IAllegroNiceApi api = new AllegroNiceApi.Builder()
                 .conf(conf)
                 .cred(badCred)
-                .test()
+                .test(test)
                 .build();
 
         api.login();

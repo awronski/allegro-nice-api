@@ -11,6 +11,7 @@ public abstract class AbstractServiceBaseTest {
 
     protected static Credentials cred;
     protected static Configuration conf;
+    protected static boolean test;
 
     @BeforeClass
     public static void abstractServiceSetup() throws IOException {
@@ -26,6 +27,8 @@ public abstract class AbstractServiceBaseTest {
 
         int countryId = Integer.valueOf(properties.getProperty("alegro.country"));
         conf = new Configuration(countryId);
+
+        test = Boolean.valueOf(properties.getProperty("alegro.sandbox"));
     }
 
 }

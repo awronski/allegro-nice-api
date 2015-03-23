@@ -2,3 +2,4 @@ alegro.username=user
 alegro.password=password
 alegro.key=12345
 alegro.country=1
+alegro.sandbox=true
