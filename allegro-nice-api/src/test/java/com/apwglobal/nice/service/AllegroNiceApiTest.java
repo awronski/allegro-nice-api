@@ -120,7 +120,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
 
     private List<NewAuctionField> createNewAuctionFields() throws IOException {
         InputStream is = getClass().getResourceAsStream("/resources/test.png");
-        byte[] img = Base64.getEncoder().encode(IOUtils.toByteArray(is));
+        String img = Base64.getEncoder().encodeToString(IOUtils.toByteArray(is));
 
         return Arrays.asList(
                 new NewAuctionField(1, FieldType.Type.STRING, System.nanoTime() + ": Testing 123"),      //title

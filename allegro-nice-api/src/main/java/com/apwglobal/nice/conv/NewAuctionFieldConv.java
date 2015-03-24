@@ -34,7 +34,7 @@ public class NewAuctionFieldConv {
                 break;
 
             case IMAGE:
-                fv.setFvalueImage((byte[]) f.getValue());
+                fv.setFvalueImage(((String) f.getValue()).getBytes());
                 break;
 
             case UNIX_DATE:
