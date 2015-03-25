@@ -2,7 +2,7 @@ package com.apwglobal.nice.service;
 
 import com.apwglobal.nice.auction.AuctionService;
 import com.apwglobal.nice.client.ClientService;
-import com.apwglobal.nice.country.CountryService;
+import com.apwglobal.nice.country.InfoService;
 import com.apwglobal.nice.deal.DealService;
 import com.apwglobal.nice.domain.*;
 import com.apwglobal.nice.journal.JournalService;
@@ -36,7 +36,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
 
     private AllegroSession session;
     private LoginService loginService;
-    private CountryService countryService;
+    private InfoService infoService;
     private SystemService systemService;
     private MessageService messageService;
     private JournalService journalService;
@@ -51,12 +51,12 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         conf = builder.conf;
 
         loginService = new LoginService(allegro, cred, conf);
-        countryService = new CountryService(allegro, cred, conf);
+        infoService = new InfoService(allegro, cred, conf);
         systemService = new SystemService(allegro, cred, conf);
         messageService = new MessageService(allegro, cred, conf);
         journalService = new JournalService(allegro, cred, conf);
         clientService = new ClientService(allegro, cred, conf);
-        dealService = new DealService(allegro, cred, conf, countryService);
+        dealService = new DealService(allegro, cred, conf, infoService);
         auctionService = new AuctionService(allegro, cred, conf);
         sellService = new SellService(allegro, cred, conf);
     }
@@ -96,7 +96,12 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
 
     @Override
     public Map<Integer, String> getCountries() {
-        return countryService.getCountries();
+        return infoService.getCountries();
+    }
+
+    @Override
+    public Map<Integer, String> getShippment() {
+        return infoService.getShipping();
     }
 
     @Override

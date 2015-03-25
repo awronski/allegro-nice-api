@@ -15,8 +15,9 @@ public interface IAllegroNiceApi {
     IAllegroNiceApi login();
     AllegroSession getSession();
 
-    //countries
+    //info
     Map<Integer, String> getCountries();
+    Map<Integer, String> getShippment();
 
     //status and components
     SysStatusType getStatus();

@@ -28,6 +28,7 @@ public class PostBuyFormConv {
                 .transactionId(f.getPostBuyFormId())
                 .buyerId(f.getPostBuyFormBuyerId())
                 .email(f.getPostBuyFormBuyerEmail())
+                .date(f.getPostBuyFormDateInit())
                 .amount(f.getPostBuyFormAmount())
                 .postageAmount(f.getPostBuyFormPostageAmount())
                 .paymentAmount(f.getPostBuyFormPaymentAmount())

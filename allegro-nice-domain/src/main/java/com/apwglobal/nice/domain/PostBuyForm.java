@@ -1,5 +1,8 @@
 package com.apwglobal.nice.domain;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +11,7 @@ public class PostBuyForm {
     private long transactionId;
     private long buyerId;
     private String email;
+    private Date date;
 
     private double amount;
     private double postageAmount;
@@ -31,6 +35,7 @@ public class PostBuyForm {
         buyerId = builder.buyerId;
         email = builder.email;
         amount = builder.amount;
+        date = builder.date;
         postageAmount = builder.postageAmount;
         paymentAmount = builder.paymentAmount;
         withInvoice = builder.withInvoice;
@@ -51,6 +56,9 @@ public class PostBuyForm {
     }
     public String getEmail() {
         return email;
+    }
+    public Date getDate() {
+        return date;
     }
     public double getAmount() {
         return amount;
@@ -89,6 +97,7 @@ public class PostBuyForm {
     public static final class Builder {
         private long buyerId;
         private String email;
+        private Date date;
         private double amount;
         private double postageAmount;
         private double paymentAmount;
@@ -112,6 +121,15 @@ public class PostBuyForm {
 
         public Builder email(String email) {
             this.email = email;
+            return this;
+        }
+
+        public Builder date(String date) {
+            try {
+                this.date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(date);
+            } catch (ParseException e) {
+                throw new IllegalArgumentException(e.getMessage(), e);
+            }
             return this;
         }
 

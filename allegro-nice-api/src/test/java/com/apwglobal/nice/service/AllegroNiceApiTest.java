@@ -47,7 +47,8 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         api.login();
         Observable<Deal> deals = api.getDeals(0);
 
-        api.getPostBuyForms(deals)
+        Observable<PostBuyForm> postBuyForms = api.getPostBuyForms(deals);
+        postBuyForms
                 .forEach(f -> assertNotNull(f.getEmail()));
     }
 
