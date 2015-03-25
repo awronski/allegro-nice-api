@@ -21,7 +21,7 @@ public class PostBuyForm {
     private Optional<String> msg;
     private long payId;
     private String payStatus;
-    private int shipmentId;
+    private Shipment shipment;
 
     private Address orderer;
     private Address receiver;
@@ -42,7 +42,7 @@ public class PostBuyForm {
         msg = builder.msg;
         payId = builder.payId;
         payStatus = builder.payStatus;
-        shipmentId = builder.shipmentId;
+        shipment = builder.shipment;
         orderer = builder.orderer;
         receiver = builder.receiver;
         items = builder.items;
@@ -81,8 +81,8 @@ public class PostBuyForm {
     public String getPayStatus() {
         return payStatus;
     }
-    public int getShipmentId() {
-        return shipmentId;
+    public Shipment getShipment() {
+        return shipment;
     }
     public Address getReceiver() {
         return receiver;
@@ -105,7 +105,7 @@ public class PostBuyForm {
         private Optional<String> msg;
         private long payId;
         private String payStatus;
-        private int shipmentId;
+        private Shipment shipment;
         private Address orderer;
         private Address receiver;
         private long transactionId;
@@ -178,7 +178,7 @@ public class PostBuyForm {
         }
 
         public Builder shipmentId(int shipmentId) {
-            this.shipmentId = shipmentId;
+            this.shipment = Shipment.VALUES.get(shipmentId);
             return this;
         }
 
