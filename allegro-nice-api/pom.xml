@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.apwglobal</groupId>
         <artifactId>allegro-nice-parent</artifactId>
-        <version>0.1.1-SNAPSHOT</version>
+        <version>0.1.2-SNAPSHOT</version>
     </parent>
     <artifactId>allegro-nice-api</artifactId>
     <packaging>jar</packaging>
@@ -44,7 +44,7 @@
         <dependency>
             <groupId>com.apwglobal</groupId>
             <artifactId>allegro-nice-domain</artifactId>
-            <version>0.1.1-SNAPSHOT</version>
+            <version>0.1.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.netflix.rxjava</groupId>
