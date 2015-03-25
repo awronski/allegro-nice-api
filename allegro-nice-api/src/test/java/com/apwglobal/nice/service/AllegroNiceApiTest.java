@@ -12,7 +12,9 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
+import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.*;
 
@@ -31,6 +33,12 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     @Test
     public void shouldReturnCountries() {
         assertFalse(api.getCountries().isEmpty());
+    }
+
+    @Test
+    public void shouldReturnShippment() {
+        Map<Integer, String> shippment = api.getShippment();
+        assertFalse(shippment.isEmpty());
     }
 
     @Test
@@ -115,7 +123,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
                 .createNewAuction(fields);
         assertNotNull(auction);
 
-        List<FinishAuctionFailure> failures = api.finishAuctions(Arrays.asList(auction.getItemId()));
+        List<FinishAuctionFailure> failures = api.finishAuctions(singletonList(auction.getItemId()));
         assertTrue(failures.isEmpty());
     }
 
