@@ -13,10 +13,10 @@ public class SearchJournal {
     private Optional<Long> itemId = Optional.empty();
     private Optional<JournalType> changeType = Optional.empty();
 
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Optional<Date> from = Optional.empty();
 
-    @DateTimeFormat(pattern="yyyy-MM-dd")
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Optional<Date> to = Optional.empty();
 
     public SearchJournal() { }
