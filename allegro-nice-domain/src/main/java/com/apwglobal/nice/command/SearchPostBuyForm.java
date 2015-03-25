@@ -11,6 +11,8 @@ public class SearchPostBuyForm {
     private Optional<Boolean> withInvoice;
     private Optional<Boolean> withMsg;
 
+    private Optional<Integer> limit;
+
     public SearchPostBuyForm() { }
 
     private SearchPostBuyForm(Builder builder) {
@@ -18,6 +20,7 @@ public class SearchPostBuyForm {
         buyerId = builder.buyerId;
         email = builder.email;
         withInvoice = builder.withInvoice;
+        limit = builder.limit;
         withMsg = builder.withMsg;
     }
 
@@ -36,6 +39,9 @@ public class SearchPostBuyForm {
     public Optional<Boolean> getWithMsg() {
         return withMsg;
     }
+    public Optional<Integer> getLimit() {
+        return limit;
+    }
 
     public static final class Builder {
         private Optional<Long> transactionId;
@@ -43,6 +49,7 @@ public class SearchPostBuyForm {
         private Optional<String> email;
         private Optional<Boolean> withInvoice;
         private Optional<Boolean> withMsg;
+        private Optional<Integer> limit;
 
         public Builder() {
         }
@@ -72,8 +79,26 @@ public class SearchPostBuyForm {
             return this;
         }
 
+        public Builder limit(int limit) {
+            this.limit = Optional.of(limit);
+            return this;
+        }
+
         public SearchPostBuyForm build() {
             return new SearchPostBuyForm(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "SearchPostBuyForm{" +
+                "transactionId=" + transactionId +
+                ", buyerId=" + buyerId +
+                ", email=" + email +
+                ", withInvoice=" + withInvoice +
+                ", withMsg=" + withMsg +
+                ", limit=" + limit +
+                '}';
+    }
+
 }
