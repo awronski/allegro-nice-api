@@ -14,6 +14,16 @@ public class FinishAuctionFailure {
         errorMessage = builder.errorMessage;
     }
 
+    public long getItemId() {
+        return itemId;
+    }
+    public String getErrorCode() {
+        return errorCode;
+    }
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
     public static final class Builder {
 
         private long itemId;
