@@ -50,7 +50,9 @@ public class SellService extends AbstractService {
      * http://allegro.pl/webapi/documentation.php/show/id,41#method-output
      */
     public NewAuctionPrice checkNewAuction(List<NewAuctionField> fields, String session) {
-        DoCheckNewAuctionExtRequest req = new DoCheckNewAuctionExtRequest(session, convert(fields), null);
+        DoCheckNewAuctionExtRequest req = new DoCheckNewAuctionExtRequest();
+        req.setSessionHandle(session);
+        req.setFields(convert(fields));
         DoCheckNewAuctionExtResponse res = execute(() -> allegro.doCheckNewAuctionExt(req));
 
         return new NewAuctionPrice.Builder()

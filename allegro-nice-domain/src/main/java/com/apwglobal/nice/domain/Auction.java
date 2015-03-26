@@ -8,19 +8,19 @@ import java.util.Optional;
 
 public class Auction {
 
-    private long itemId;
-    private String itemTitle;
-    private String itemThumbnailUrl;
-    private int itemStartQuantity;
-    private int itemSoldQuantity;
-    private ItemQuantityType itemQuantityType;
-    private Date itemStartTime;
-    private Optional<Date> itemEndTime;
-    private int itemBiddersCounter;
-    private int itemCategoryId;
-    private int itemWatchersCounter;
-    private int itemViewsCounter;
-    private String itemNote;
+    private long id;
+    private String title;
+    private String thumbnailUrl;
+    private int startQuantity;
+    private int soldQuantity;
+    private ItemQuantityType quantityType;
+    private Date startTime;
+    private Optional<Date> endTime;
+    private int biddersCounter;
+    private int categoryId;
+    private int watchersCounter;
+    private int viewsCounter;
+    private String note;
     private boolean special;
     private boolean shop;
     private boolean payu;
@@ -31,19 +31,19 @@ public class Auction {
     public Auction() { }
 
     private Auction(Builder builder) {
-        itemId = builder.itemId;
-        itemTitle = builder.itemTitle;
-        itemThumbnailUrl = builder.itemThumbnailUrl;
-        itemStartQuantity = builder.itemStartQuantity;
-        itemSoldQuantity = builder.itemSoldQuantity;
-        itemQuantityType = builder.itemQuantityType;
-        itemStartTime = builder.itemStartTime;
-        itemEndTime = builder.itemEndTime;
-        itemBiddersCounter = builder.itemBiddersCounter;
-        itemCategoryId = builder.itemCategoryId;
-        itemWatchersCounter = builder.itemWatchersCounter;
-        itemViewsCounter = builder.itemViewsCounter;
-        itemNote = builder.itemNote;
+        id = builder.id;
+        title = builder.title;
+        thumbnailUrl = builder.thumbnailUrl;
+        startQuantity = builder.startQuantity;
+        soldQuantity = builder.soldQuantity;
+        quantityType = builder.quantityType;
+        startTime = builder.startTime;
+        endTime = builder.endTime;
+        biddersCounter = builder.biddersCounter;
+        categoryId = builder.categoryId;
+        watchersCounter = builder.watchersCounter;
+        viewsCounter = builder.viewsCounter;
+        note = builder.note;
         special = builder.special;
         shop = builder.shop;
         payu = builder.payu;
@@ -51,44 +51,44 @@ public class Auction {
         priceType = builder.priceType;
     }
 
-    public long getItemId() {
-        return itemId;
+    public long getId() {
+        return id;
     }
-    public String getItemTitle() {
-        return itemTitle;
+    public String getTitle() {
+        return title;
     }
-    public String getItemThumbnailUrl() {
-        return itemThumbnailUrl;
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
-    public int getItemStartQuantity() {
-        return itemStartQuantity;
+    public int getStartQuantity() {
+        return startQuantity;
     }
-    public int getItemSoldQuantity() {
-        return itemSoldQuantity;
+    public int getSoldQuantity() {
+        return soldQuantity;
     }
-    public ItemQuantityType getItemQuantityType() {
-        return itemQuantityType;
+    public ItemQuantityType getQuantityType() {
+        return quantityType;
     }
-    public Date getItemStartTime() {
-        return itemStartTime;
+    public Date getStartTime() {
+        return startTime;
     }
-    public Optional<Date> getItemEndTime() {
-        return itemEndTime;
+    public Optional<Date> getEndTime() {
+        return endTime;
     }
-    public int getItemBiddersCounter() {
-        return itemBiddersCounter;
+    public int getBiddersCounter() {
+        return biddersCounter;
     }
-    public int getItemCategoryId() {
-        return itemCategoryId;
+    public int getCategoryId() {
+        return categoryId;
     }
-    public int getItemWatchersCounter() {
-        return itemWatchersCounter;
+    public int getWatchersCounter() {
+        return watchersCounter;
     }
-    public int getItemViewsCounter() {
-        return itemViewsCounter;
+    public int getViewsCounter() {
+        return viewsCounter;
     }
-    public String getItemNote() {
-        return itemNote;
+    public String getNote() {
+        return note;
     }
     public boolean isSpecial() {
         return special;
@@ -107,19 +107,19 @@ public class Auction {
     }
 
     public static final class Builder {
-        private long itemId;
-        private String itemTitle;
-        private String itemThumbnailUrl;
-        private int itemStartQuantity;
-        private int itemSoldQuantity;
-        private ItemQuantityType itemQuantityType;
-        private Date itemStartTime;
-        private Optional<Date> itemEndTime;
-        private int itemBiddersCounter;
-        private int itemCategoryId;
-        private int itemWatchersCounter;
-        private int itemViewsCounter;
-        private String itemNote;
+        private long id;
+        private String title;
+        private String thumbnailUrl;
+        private int startQuantity;
+        private int soldQuantity;
+        private ItemQuantityType quantityType;
+        private Date startTime;
+        private Optional<Date> endTime;
+        private int biddersCounter;
+        private int categoryId;
+        private int watchersCounter;
+        private int viewsCounter;
+        private String note;
         private boolean special;
         private boolean shop;
         private boolean payu;
@@ -129,72 +129,72 @@ public class Auction {
         public Builder() {
         }
 
-        public Builder itemId(long itemId) {
-            this.itemId = itemId;
+        public Builder id(long id) {
+            this.id = id;
             return this;
         }
 
-        public Builder itemTitle(String itemTitle) {
-            this.itemTitle = itemTitle;
+        public Builder title(String title) {
+            this.title = title;
             return this;
         }
 
-        public Builder itemThumbnailUrl(String itemThumbnailUrl) {
-            this.itemThumbnailUrl = itemThumbnailUrl;
+        public Builder thumbnailUrl(String thumbnailUrl) {
+            this.thumbnailUrl = thumbnailUrl;
             return this;
         }
 
-        public Builder itemStartQuantity(int itemStartQuantity) {
-            this.itemStartQuantity = itemStartQuantity;
+        public Builder startQuantity(int startQuantity) {
+            this.startQuantity = startQuantity;
             return this;
         }
 
-        public Builder itemSoldQuantity(int itemSoldQuantity) {
-            this.itemSoldQuantity = itemSoldQuantity;
+        public Builder soldQuantity(int soldQuantity) {
+            this.soldQuantity = soldQuantity;
             return this;
         }
 
-        public Builder itemQuantityType(int itemQuantityType) {
-            this.itemQuantityType = ItemQuantityType.VALUES.get(itemQuantityType);
+        public Builder quantityType(int quantityType) {
+            this.quantityType = ItemQuantityType.VALUES.get(quantityType);
             return this;
         }
 
-        public Builder itemStartTime(long itemStartTime) {
-            this.itemStartTime = UnixDate.toDate(itemStartTime);
+        public Builder startTime(long startTime) {
+            this.startTime = UnixDate.toDate(startTime);
             return this;
         }
 
-        public Builder itemEndTime(long itemEndTime) {
-            if (itemEndTime == 0) {
-                this.itemEndTime = Optional.empty();
+        public Builder endTime(long endTime) {
+            if (endTime == 0) {
+                this.endTime = Optional.empty();
             } else {
-                this.itemEndTime = Optional.of(UnixDate.toDate(itemEndTime));
+                this.endTime = Optional.of(UnixDate.toDate(endTime));
             }
             return this;
         }
 
-        public Builder itemBiddersCounter(int itemBiddersCounter) {
-            this.itemBiddersCounter = itemBiddersCounter;
+        public Builder biddersCounter(int biddersCounter) {
+            this.biddersCounter = biddersCounter;
             return this;
         }
 
-        public Builder itemCategoryId(int itemCategoryId) {
-            this.itemCategoryId = itemCategoryId;
+        public Builder categoryId(int categoryId) {
+            this.categoryId = categoryId;
             return this;
         }
 
-        public Builder itemWatchersCounter(int itemWatchersCounter) {
-            this.itemWatchersCounter = itemWatchersCounter;
+        public Builder watchersCounter(int watchersCounter) {
+            this.watchersCounter = watchersCounter;
             return this;
         }
 
-        public Builder itemViewsCounter(int itemViewsCounter) {
-            this.itemViewsCounter = itemViewsCounter;
+        public Builder viewsCounter(int viewsCounter) {
+            this.viewsCounter = viewsCounter;
             return this;
         }
 
-        public Builder itemNote(String itemNote) {
-            this.itemNote = itemNote;
+        public Builder note(String note) {
+            this.note = note;
             return this;
         }
 
@@ -231,10 +231,10 @@ public class Auction {
     @Override
     public String toString() {
         return "Auction{" +
-                "itemId=" + itemId +
-                ", itemStartQuantity=" + itemStartQuantity +
-                ", itemSoldQuantity=" + itemSoldQuantity +
-                ", itemViewsCounter=" + itemViewsCounter +
+                "id=" + id +
+                ", startQuantity=" + startQuantity +
+                ", soldQuantity=" + soldQuantity +
+                ", vewsCounter=" + viewsCounter +
                 ", special=" + special +
                 ", shop=" + shop +
                 ", payu=" + payu +
