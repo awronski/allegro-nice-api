@@ -1,5 +1,6 @@
 package com.apwglobal.nice.command;
 
+import java.util.Date;
 import java.util.Optional;
 
 public class SearchPostBuyForm {
@@ -10,6 +11,9 @@ public class SearchPostBuyForm {
 
     private Optional<Boolean> withInvoice;
     private Optional<Boolean> withMsg;
+
+    private Optional<Date> from;
+    private Optional<Date> to;
 
     private Optional<Integer> limit;
 
@@ -22,6 +26,8 @@ public class SearchPostBuyForm {
         withInvoice = builder.withInvoice;
         limit = builder.limit;
         withMsg = builder.withMsg;
+        from = builder.from;
+        to = builder.to;
     }
 
     public Optional<Long> getTransactionId() {
@@ -42,6 +48,12 @@ public class SearchPostBuyForm {
     public Optional<Integer> getLimit() {
         return limit;
     }
+    public Optional<Date> getFrom() {
+        return from;
+    }
+    public Optional<Date> getTo() {
+        return to;
+    }
 
     public static final class Builder {
         private Optional<Long> transactionId;
@@ -49,6 +61,8 @@ public class SearchPostBuyForm {
         private Optional<String> email;
         private Optional<Boolean> withInvoice;
         private Optional<Boolean> withMsg;
+        private Optional<Date> from;
+        private Optional<Date> to;
         private Optional<Integer> limit;
 
         public Builder() {
@@ -84,6 +98,16 @@ public class SearchPostBuyForm {
             return this;
         }
 
+        public Builder from(Date from) {
+            this.from = Optional.of(from);
+            return this;
+        }
+
+        public Builder to(Date to) {
+            this.to = Optional.of(to);
+            return this;
+        }
+
         public SearchPostBuyForm build() {
             return new SearchPostBuyForm(this);
         }
@@ -97,8 +121,9 @@ public class SearchPostBuyForm {
                 ", email=" + email +
                 ", withInvoice=" + withInvoice +
                 ", withMsg=" + withMsg +
+                ", from=" + from +
+                ", to=" + to +
                 ", limit=" + limit +
                 '}';
     }
-
 }
