@@ -1,5 +1,7 @@
 package com.apwglobal.nice.domain;
 
+import com.apwglobal.bd.BD;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -133,18 +135,18 @@ public class PostBuyForm {
             return this;
         }
 
-        public Builder amount(double amount) {
-            this.amount = amount;
+        public Builder amount(float amount) {
+            this.amount = new BD(amount).doubleValue();
             return this;
         }
 
-        public Builder postageAmount(double postageAmount) {
-            this.postageAmount = postageAmount;
+        public Builder postageAmount(float postageAmount) {
+            this.postageAmount = new BD(postageAmount).doubleValue();
             return this;
         }
 
-        public Builder paymentAmount(double paymentAmount) {
-            this.paymentAmount = paymentAmount;
+        public Builder paymentAmount(float paymentAmount) {
+            this.paymentAmount = new BD(paymentAmount).doubleValue();;
             return this;
         }
 

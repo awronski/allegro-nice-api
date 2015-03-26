@@ -78,8 +78,8 @@ public class Item {
             return this;
         }
 
-        public Builder amount(double amount) {
-            this.amount = amount;
+        public Builder amount(float amount) {
+            this.amount = new BD(amount).doubleValue();
             return this;
         }
 
