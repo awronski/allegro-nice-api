@@ -5,17 +5,17 @@ import java.util.Optional;
 
 public class SearchPostBuyForm {
 
-    private Optional<Long> transactionId;
-    private Optional<Long> buyerId;
-    private Optional<String> email;
+    private Optional<Long> transactionId = Optional.empty();
+    private Optional<Long> buyerId = Optional.empty();
+    private Optional<String> email = Optional.empty();
 
-    private Optional<Boolean> withInvoice;
-    private Optional<Boolean> withMsg;
+    private Optional<Boolean> withInvoice = Optional.empty();
+    private Optional<Boolean> withMsg = Optional.empty();
 
-    private Optional<Date> from;
-    private Optional<Date> to;
+    private Optional<Date> from = Optional.empty();
+    private Optional<Date> to = Optional.empty();
 
-    private Optional<Integer> limit;
+    private Optional<Integer> limit = Optional.empty();
 
     public SearchPostBuyForm() { }
 
