@@ -5,7 +5,6 @@ import java.util.Date;
 public class PaymentProcessed {
 
     private long transactionId;
-    private boolean processed;
     private Date date;
     private String ref;
 
@@ -13,16 +12,12 @@ public class PaymentProcessed {
 
     private PaymentProcessed(Builder builder) {
         transactionId = builder.transactionId;
-        processed = builder.processed;
         date = builder.date;
         ref = builder.ref;
     }
 
     public long getTransactionId() {
         return transactionId;
-    }
-    public boolean isProcessed() {
-        return processed;
     }
     public Date getDate() {
         return date;
@@ -69,7 +64,6 @@ public class PaymentProcessed {
     public String toString() {
         return "PaymentProcessed{" +
                 "transactionId=" + transactionId +
-                ", processed=" + processed +
                 ", date=" + date +
                 ", ref='" + ref + '\'' +
                 '}';
