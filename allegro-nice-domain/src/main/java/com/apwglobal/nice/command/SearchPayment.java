@@ -12,6 +12,8 @@ public class SearchPayment {
     private Optional<Boolean> withInvoice = Optional.empty();
     private Optional<Boolean> withMsg = Optional.empty();
 
+    private Optional<Boolean> processed = Optional.empty();
+
     private Optional<Date> from = Optional.empty();
     private Optional<Date> to = Optional.empty();
 
@@ -28,6 +30,7 @@ public class SearchPayment {
         withMsg = builder.withMsg;
         from = builder.from;
         to = builder.to;
+        processed = builder.processed;
     }
 
     public Optional<Long> getTransactionId() {
@@ -54,6 +57,9 @@ public class SearchPayment {
     public Optional<Date> getTo() {
         return to;
     }
+    public Optional<Boolean> getProcessed() {
+        return processed;
+    }
 
     public static final class Builder {
         private Optional<Long> transactionId;
@@ -61,6 +67,7 @@ public class SearchPayment {
         private Optional<String> email;
         private Optional<Boolean> withInvoice;
         private Optional<Boolean> withMsg;
+        private Optional<Boolean> processed;
         private Optional<Date> from;
         private Optional<Date> to;
         private Optional<Integer> limit;
@@ -108,6 +115,11 @@ public class SearchPayment {
             return this;
         }
 
+        public Builder processed(Boolean processed) {
+            this.processed = Optional.of(processed);
+            return this;
+        }
+
         public SearchPayment build() {
             return new SearchPayment(this);
         }
@@ -124,6 +136,7 @@ public class SearchPayment {
                 ", from=" + from +
                 ", to=" + to +
                 ", limit=" + limit +
+                ", processed=" + processed +
                 '}';
     }
 }
