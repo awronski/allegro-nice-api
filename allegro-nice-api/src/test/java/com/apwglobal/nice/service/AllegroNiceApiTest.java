@@ -51,12 +51,12 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     }
 
     @Test
-    public void shouldResturnPostBuyFormsForGivenDeals() {
+    public void shouldResturnPaymentsForGivenDeals() {
         api.login();
         Observable<Deal> deals = api.getDeals(0);
 
-        Observable<PostBuyForm> postBuyForms = api.getPostBuyForms(deals);
-        postBuyForms
+        Observable<Payment> payments = api.getPayments(deals);
+        payments
                 .forEach(f -> assertNotNull(f.getEmail()));
     }
 

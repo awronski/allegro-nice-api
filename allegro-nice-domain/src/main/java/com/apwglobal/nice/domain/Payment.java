@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-public class PostBuyForm {
+public class Payment {
 
     private long transactionId;
     private long buyerId;
@@ -30,9 +30,11 @@ public class PostBuyForm {
 
     private List<Item> items;
 
-    public PostBuyForm() { }
+    private boolean processed;
 
-    private PostBuyForm(Builder builder) {
+    public Payment() { }
+
+    private Payment(Builder builder) {
         transactionId = builder.transactionId;
         buyerId = builder.buyerId;
         email = builder.email;
@@ -48,6 +50,7 @@ public class PostBuyForm {
         orderer = builder.orderer;
         receiver = builder.receiver;
         items = builder.items;
+        processed = builder.processed;
     }
 
     public long getTransactionId() {
@@ -95,6 +98,9 @@ public class PostBuyForm {
     public List<Item> getItems() {
         return items;
     }
+    public boolean isProcessed() {
+        return processed;
+    }
 
     public static final class Builder {
         private long buyerId;
@@ -112,6 +118,7 @@ public class PostBuyForm {
         private Address receiver;
         private long transactionId;
         private List<Item> items;
+        private boolean processed;
 
         public Builder() {
         }
@@ -204,18 +211,23 @@ public class PostBuyForm {
             return this;
         }
 
-        public PostBuyForm build() {
+        public Builder processed(boolean processed) {
+            this.processed = processed;
+            return this;
+        }
+
+        public Payment build() {
             if (!this.withInvoice) {
                 this.orderer = receiver;
             }
-            return new PostBuyForm(this);
+            return new Payment(this);
         }
 
     }
 
     @Override
     public String toString() {
-        return "PostBuyForm{" +
+        return "Payment{" +
                 "transactionId=" + transactionId +
                 ", email='" + email + '\'' +
                 ", amount=" + amount +
@@ -223,6 +235,7 @@ public class PostBuyForm {
                 ", withInvoice=" + withInvoice +
                 ", payStatus='" + payStatus + '\'' +
                 ", items.size='" + (items != null ? items.size() : 0) + '\'' +
+                ", processed=" + processed +
                 '}';
     }
 

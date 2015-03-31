@@ -1,11 +1,11 @@
 package com.apwglobal.nice.deal;
 
 import com.apwglobal.nice.conv.DealConv;
-import com.apwglobal.nice.conv.PostBuyFormConv;
+import com.apwglobal.nice.conv.PaymentConv;
 import com.apwglobal.nice.country.InfoService;
 import com.apwglobal.nice.domain.Deal;
 import com.apwglobal.nice.domain.DealType;
-import com.apwglobal.nice.domain.PostBuyForm;
+import com.apwglobal.nice.domain.Payment;
 import com.apwglobal.nice.exception.AllegroExecutor;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractAllegroIterator;
@@ -32,7 +32,7 @@ public class DealService extends AbstractService {
         return Observable.from(() -> new DealsIterator(session, startingPoint));
     }
 
-    public Observable<PostBuyForm> getPostBuyForms(String session, Observable<Deal> deals) {
+    public Observable<Payment> getPayments(String session, Observable<Deal> deals) {
         Observable<Long> transactionsIds = deals
                 .filter(d -> d.getTransactionId().isPresent())
                 .filter(d -> d.getDealType().equals(DealType.PAYMENT))
@@ -43,7 +43,7 @@ public class DealService extends AbstractService {
         return transactionsIds
                 .buffer(25)
                 .flatMap(l -> Observable.from(getPostBuyFormsDataForSellers(session, l)))
-                .map(f -> PostBuyFormConv.convert(f, infoService.getCountries()));
+                .map(f -> PaymentConv.convert(f, infoService.getCountries()));
     }
 
     /**

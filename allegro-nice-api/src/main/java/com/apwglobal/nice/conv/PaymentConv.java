@@ -2,7 +2,7 @@ package com.apwglobal.nice.conv;
 
 import com.apwglobal.nice.domain.Address;
 import com.apwglobal.nice.domain.Item;
-import com.apwglobal.nice.domain.PostBuyForm;
+import com.apwglobal.nice.domain.Payment;
 import pl.allegro.webapi.PostBuyFormAddressStruct;
 import pl.allegro.webapi.PostBuyFormDataStruct;
 
@@ -11,9 +11,9 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.toList;
 
-public class PostBuyFormConv {
+public class PaymentConv {
 
-    public static PostBuyForm convert(PostBuyFormDataStruct f, Map<Integer, String> countries) {
+    public static Payment convert(PostBuyFormDataStruct f, Map<Integer, String> countries) {
 
         Address receiver = convertAddress(f.getPostBuyFormShipmentAddress(), countries);
         Address orderer = convertAddress(f.getPostBuyFormInvoiceData(), countries);
@@ -24,7 +24,7 @@ public class PostBuyFormConv {
                 .map(i -> ItemConv.convert(i, f.getPostBuyFormId()))
                 .collect(toList());
 
-        return new PostBuyForm.Builder()
+        return new Payment.Builder()
                 .transactionId(f.getPostBuyFormId())
                 .buyerId(f.getPostBuyFormBuyerId())
                 .email(f.getPostBuyFormBuyerEmail())

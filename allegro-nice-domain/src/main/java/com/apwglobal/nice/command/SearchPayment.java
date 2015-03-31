@@ -3,7 +3,7 @@ package com.apwglobal.nice.command;
 import java.util.Date;
 import java.util.Optional;
 
-public class SearchPostBuyForm {
+public class SearchPayment {
 
     private Optional<Long> transactionId = Optional.empty();
     private Optional<Long> buyerId = Optional.empty();
@@ -17,9 +17,9 @@ public class SearchPostBuyForm {
 
     private Optional<Integer> limit = Optional.empty();
 
-    public SearchPostBuyForm() { }
+    public SearchPayment() { }
 
-    private SearchPostBuyForm(Builder builder) {
+    private SearchPayment(Builder builder) {
         transactionId = builder.transactionId;
         buyerId = builder.buyerId;
         email = builder.email;
@@ -108,14 +108,14 @@ public class SearchPostBuyForm {
             return this;
         }
 
-        public SearchPostBuyForm build() {
-            return new SearchPostBuyForm(this);
+        public SearchPayment build() {
+            return new SearchPayment(this);
         }
     }
 
     @Override
     public String toString() {
-        return "SearchPostBuyForm{" +
+        return "SearchPayment{" +
                 "transactionId=" + transactionId +
                 ", buyerId=" + buyerId +
                 ", email=" + email +
