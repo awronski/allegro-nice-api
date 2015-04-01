@@ -27,9 +27,7 @@ public class Auction {
 
     private double price;
     private ItemPriceType priceType;
-
-    private AuctionStatusType status;
-    private String ref;
+    private boolean open;
 
     public Auction() { }
 
@@ -52,6 +50,7 @@ public class Auction {
         payu = builder.payu;
         price = builder.price;
         priceType = builder.priceType;
+        open = builder.open;
     }
 
     public long getId() {
@@ -108,11 +107,8 @@ public class Auction {
     public ItemPriceType getPriceType() {
         return priceType;
     }
-    public AuctionStatusType getStatus() {
-        return status;
-    }
-    public String getRef() {
-        return ref;
+    public boolean isOpen() {
+        return open;
     }
 
     public static final class Builder {
@@ -134,8 +130,7 @@ public class Auction {
         private boolean payu;
         private double price;
         private ItemPriceType priceType;
-        private AuctionStatusType status;
-        private String ref;
+        private boolean open;
 
         public Builder() {
         }
@@ -234,13 +229,8 @@ public class Auction {
             return this;
         }
 
-        public Builder status(AuctionStatusType status) {
-            this.status = status;
-            return this;
-        }
-
-        public Builder ref(String ref) {
-            this.ref = ref;
+        public Builder open(boolean open) {
+            this.open = open;
             return this;
         }
 
@@ -260,8 +250,7 @@ public class Auction {
                 ", shop=" + shop +
                 ", payu=" + payu +
                 ", price=" + price +
-                ", status=" + status +
-                ", ref=" + ref +
+                ", open=" + open +
                 '}';
     }
 }

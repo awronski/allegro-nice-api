@@ -4,8 +4,6 @@ import com.apwglobal.nice.domain.Auction;
 import pl.allegro.webapi.ItemPriceStruct;
 import pl.allegro.webapi.SellItemStruct;
 
-import static com.apwglobal.nice.domain.AuctionStatusType.OPEN;
-
 public class AuctionConv {
 
     public static Auction convert(SellItemStruct s, ItemPriceStruct itemPriceStruct) {
@@ -28,8 +26,7 @@ public class AuctionConv {
                 .payu(s.getItemPayuInfo())
                 .price(itemPriceStruct.getPriceValue())
                 .priceType(itemPriceStruct.getPriceType())
-                .status(OPEN)
-                .ref("?")
+                .open(true)
                 .build();
     }
 }
