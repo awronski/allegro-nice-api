@@ -7,7 +7,7 @@
     <groupId>com.apwglobal</groupId>
     <artifactId>allegro-nice-parent</artifactId>
     <packaging>pom</packaging>
-    <version>0.1.2-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <modules>
         <module>allegro-nice-api</module>
