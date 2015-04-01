@@ -27,9 +27,9 @@ Configuration conf = new Configuration(countryId);
 Credentials cred = new Credentials("username", "password", "key");
 
 IAllegroNiceApi allegro = AllegroNiceApi.Builder()
-                            .conf(conf)
-                            .cred(cred)
-                            .build();
+        .conf(conf)
+        .cred(cred)
+        .build();
 ```
 
 ## Login
@@ -37,22 +37,26 @@ IAllegroNiceApi allegro = AllegroNiceApi.Builder()
 allegro.login();
 ```
 
-## Get system messages
+## Get user's auctions
 ```java
-List<AllegroMessage> msgs = allegro.getAllMessages(LocalDateTime.now().minusDays(30));
+Observable<Auction> auctions = api.getAuctions();
 ```
 
-## Subscribe to journal
-You can subscribe to user's journal using ```api.getSiteJournal(startingPoint)```.
-This method returns [Observable](http://reactivex.io/documentation/observable.html) object.
+## Get list of deals
 ```java
 long startingPoint = 0;
-api.getSiteJournal(startingPoint)
-    .subscribe(System.out::println);
+Observable<Deal> deals =  api.getDeals(startingPoint);
 ```
 
-To handle errors and on complete use:
+## Get list of payments with clients data
 ```java
+Observable<Payment> payments - getPayments(deals);
+```
+## Subscribe to journal
+You can subscribe to user's journal using ```api.getSiteJournal(startingPoint)```.
+Like aboce methods this one returns [Observable](http://reactivex.io/documentation/observable.html) object too.
+```java
+long startingPoint = 0;
 api.getSiteJournal(startingPoint)
     .subscribe(
         j -> System.out.println("on next: " + j),
@@ -60,17 +64,28 @@ api.getSiteJournal(startingPoint)
         () -> System.out.println("on complete")
     );
 ```
-Read more on [RxJava](https://github.com/ReactiveX/RxJava).
+Read more about [RxJava](https://github.com/ReactiveX/RxJava).
 
-## Get list of deals
+## Get system messages
 ```java
-long startingPoint = 0;
-Observable<Deal> deals =  api.getDeals(startingPoint);
+List<AllegroMessage> msgs = allegro.getAllMessages(LocalDateTime.now().minusDays(30));
 ```
-### Get list of Post buy forms for given deals
+
+## Create new auction
+To create new auction you need to create list of auctions fields.
+Id of the field is the same as on the allegro service. Check ```java getSellFormFields(categoryId)``` to get
+all possible fields for a given category.
+
 ```java
-api.getPostBuyForms(deals)
-    .forEach(f -> System.out::println);
+List<NewAuctionField> fields = new ArrayList<>();
+fields.add( new NewAuctionField(1, FieldType.Type.STRING, "Auction title") );
+[...]
+CreatedAuction created = api.createNewAuction(fields);
+```
+
+## Finish auctions
+```java
+List<FinishAuctionFailure> failures = api.finishAuctions(List<Long> itemsIds);
 ```
 
 ### _... work in progress_
