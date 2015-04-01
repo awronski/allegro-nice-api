@@ -28,6 +28,9 @@ public class Auction {
     private double price;
     private ItemPriceType priceType;
 
+    private AuctionStatusType status;
+    private String ref;
+
     public Auction() { }
 
     private Auction(Builder builder) {
@@ -105,6 +108,12 @@ public class Auction {
     public ItemPriceType getPriceType() {
         return priceType;
     }
+    public AuctionStatusType getStatus() {
+        return status;
+    }
+    public String getRef() {
+        return ref;
+    }
 
     public static final class Builder {
         private long id;
@@ -125,6 +134,8 @@ public class Auction {
         private boolean payu;
         private double price;
         private ItemPriceType priceType;
+        private AuctionStatusType status;
+        private String ref;
 
         public Builder() {
         }
@@ -223,6 +234,16 @@ public class Auction {
             return this;
         }
 
+        public Builder status(AuctionStatusType status) {
+            this.status = status;
+            return this;
+        }
+
+        public Builder ref(String ref) {
+            this.ref = ref;
+            return this;
+        }
+
         public Auction build() {
             return new Auction(this);
         }
@@ -239,6 +260,8 @@ public class Auction {
                 ", shop=" + shop +
                 ", payu=" + payu +
                 ", price=" + price +
+                ", status=" + status +
+                ", ref=" + ref +
                 '}';
     }
 }

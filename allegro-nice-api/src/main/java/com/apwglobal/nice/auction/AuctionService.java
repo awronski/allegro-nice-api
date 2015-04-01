@@ -1,7 +1,7 @@
 package com.apwglobal.nice.auction;
 
+import com.apwglobal.nice.conv.AuctionConv;
 import com.apwglobal.nice.domain.Auction;
-import com.apwglobal.nice.domain.ItemPriceType;
 import com.apwglobal.nice.exception.AllegroExecutor;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractAllegroIterator;
@@ -11,7 +11,9 @@ import pl.allegro.webapi.*;
 import rx.Observable;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static com.apwglobal.nice.domain.ItemPriceType.BUY_NOW;
+import static java.util.stream.Collectors.toList;
 
 public class AuctionService extends AbstractService {
 
@@ -36,37 +38,18 @@ public class AuctionService extends AbstractService {
             return response.getSellItemsList().getItem()
                     .stream()
                     .map(this::createAuction)
-                    .collect(Collectors.toList());
+                    .collect(toList());
         }
 
         private Auction createAuction(SellItemStruct s) {
             List<ItemPriceStruct> item = s.getItemPrice().getItem();
             ItemPriceStruct itemPriceStruct;
 
-            if (item.size() != 1 || (itemPriceStruct = item.get(0)).getPriceType() != ItemPriceType.BUY_NOW.getType()) {
+            if (item.size() != 1 || (itemPriceStruct = item.get(0)).getPriceType() != BUY_NOW.getType()) {
                 throw new IllegalArgumentException("Cannot support auction with sale diffrent than buy now");
             }
 
-            return new Auction.Builder()
-                    .id(s.getItemId())
-                    .title(s.getItemTitle())
-                    .thumbnailUrl(s.getItemThumbnailUrl())
-                    .startQuantity(s.getItemStartQuantity())
-                    .soldQuantity(s.getItemSoldQuantity())
-                    .quantityType(s.getItemQuantityType())
-                    .startTime(s.getItemStartTime())
-                    .endTime(s.getItemEndTime())
-                    .biddersCounter(s.getItemBiddersCounter())
-                    .categoryId(s.getItemCategoryId())
-                    .watchersCounter(s.getItemWatchersCounter())
-                    .viewsCounter(s.getItemViewsCounter())
-                    .note(s.getItemNote())
-                    .special(s.getItemSpecialInfo())
-                    .shop(s.getItemShopInfo())
-                    .payu(s.getItemPayuInfo())
-                    .price(itemPriceStruct.getPriceValue())
-                    .priceType(itemPriceStruct.getPriceType())
-                    .build();
+            return AuctionConv.convert(s, itemPriceStruct);
         }
 
         @Override
