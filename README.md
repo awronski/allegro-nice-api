@@ -54,7 +54,7 @@ Observable<Payment> payments - getPayments(deals);
 ```
 ## Subscribe to journal
 You can subscribe to user's journal using ```api.getSiteJournal(startingPoint)```.
-Like aboce methods this one returns [Observable](http://reactivex.io/documentation/observable.html) object too.
+Like above methods this one returns [Observable](http://reactivex.io/documentation/observable.html) object too.
 ```java
 long startingPoint = 0;
 api.getSiteJournal(startingPoint)
@@ -66,14 +66,9 @@ api.getSiteJournal(startingPoint)
 ```
 Read more about [RxJava](https://github.com/ReactiveX/RxJava).
 
-## Get system messages
-```java
-List<AllegroMessage> msgs = allegro.getAllMessages(LocalDateTime.now().minusDays(30));
-```
-
 ## Create new auction
 To create new auction you need to create list of auctions fields.
-Id of the field is the same as on the allegro service. Check ```java getSellFormFields(categoryId)``` to get
+Id of the field is the same as on the allegro service. Check ```getSellFormFields(categoryId)``` to get
 all possible fields for a given category.
 
 ```java
@@ -86,6 +81,11 @@ CreatedAuction created = api.createNewAuction(fields);
 ## Finish auctions
 ```java
 List<FinishAuctionFailure> failures = api.finishAuctions(List<Long> itemsIds);
+```
+
+## Get system messages
+```java
+List<AllegroMessage> msgs = allegro.getAllMessages(LocalDateTime.now().minusDays(30));
 ```
 
 ### _... work in progress_
