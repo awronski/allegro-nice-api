@@ -1,6 +1,7 @@
 package com.apwglobal.nice.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +31,22 @@ public class ShopCategory {
     }
     public void addChild(ShopCategory child) {
         this.children.add(child);
+    }
+
+    public List<ShopCategory> getAllCategoriesFromRoot() {
+        List<ShopCategory> categories = new ArrayList<>();
+        addShopCategory(categories, Optional.of(this));
+        Collections.reverse(categories);
+        return categories;
+    }
+
+    private List<ShopCategory> addShopCategory(List<ShopCategory> categories, Optional<ShopCategory> cat) {
+        if (cat.isPresent()) {
+            categories.add(cat.get());
+            return addShopCategory(categories, cat.get().getParent());
+        } else {
+            return categories;
+        }
     }
 
     private ShopCategory(Builder builder) {
