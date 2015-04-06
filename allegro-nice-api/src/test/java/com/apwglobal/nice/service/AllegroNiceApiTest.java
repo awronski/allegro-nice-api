@@ -159,4 +159,12 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         );
     }
 
+    @Test
+    public void shouldReturnShopCategories() {
+        List<ShopCategory> shopCategories = api.login()
+                .getShopCategories();
+
+        assertNotNull(shopCategories);
+    }
+
 }
