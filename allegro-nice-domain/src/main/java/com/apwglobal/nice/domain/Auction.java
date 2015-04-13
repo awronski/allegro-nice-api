@@ -110,7 +110,7 @@ public class Auction {
     public boolean isOpen() {
         return open;
     }
-    public int leftQty() {
+    public int getLeftQty() {
         return startQuantity - soldQuantity;
     }
 
