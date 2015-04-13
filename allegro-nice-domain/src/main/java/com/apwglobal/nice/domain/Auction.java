@@ -110,6 +110,9 @@ public class Auction {
     public boolean isOpen() {
         return open;
     }
+    public int leftQty() {
+        return startQuantity - soldQuantity;
+    }
 
     public static final class Builder {
         private long id;
