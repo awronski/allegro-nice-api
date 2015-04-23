@@ -78,9 +78,20 @@ fields.add( new NewAuctionField(1, FieldType.Type.STRING, "Auction title") );
 CreatedAuction created = api.createNewAuction(fields);
 ```
 
+## Change auction's quantity
+```java
+ChangedQty changedQty = api.changeQty(itemId, 5);
+```
+
 ## Finish auctions
 ```java
 List<FinishAuctionFailure> failures = api.finishAuctions(List<Long> itemsIds);
+```
+
+## Get waiting feedback
+```java
+int counter = api.getWaintingFeedbackCounter();
+Observable<Feedback> api.getWaitingFeedbacks();
 ```
 
 ## Get system messages
