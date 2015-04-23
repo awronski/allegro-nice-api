@@ -1,5 +1,6 @@
 package com.apwglobal.nice.feedback;
 
+import com.apwglobal.nice.conv.CreatedFeedbackConv;
 import com.apwglobal.nice.conv.WaitingFeedbackConv;
 import com.apwglobal.nice.domain.CreateFeedback;
 import com.apwglobal.nice.domain.CreatedFeedback;
@@ -9,11 +10,13 @@ import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractAllegroIterator;
 import com.apwglobal.nice.service.AbstractService;
 import com.apwglobal.nice.service.Configuration;
+import com.google.common.collect.Lists;
 import pl.allegro.webapi.*;
 import rx.Observable;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class FeedbackService extends AbstractService {
 
@@ -40,10 +43,37 @@ public class FeedbackService extends AbstractService {
     /**
      * http://allegro.pl/webapi/documentation.php/show/id,43#method-output
      */
-    public List<CreatedFeedback> createFeedback(List<CreateFeedback> feedbacks) {
-
-        return null;
+    public List<CreatedFeedback> createFeedbacks(String session, List<CreateFeedback> feedbacks) {
+        return Lists.partition(feedbacks, 25)
+                .stream()
+                .flatMap(f -> createFeedback(session, f).stream())
+                .collect(toList());
     }
+
+    private List<CreatedFeedback> createFeedback(String session, List<CreateFeedback> cf) {
+        ArrayOfFeedbackmanystruct feedbacks = new ArrayOfFeedbackmanystruct(
+                cf.stream()
+                        .map(this::convertFeedbackManyStruct)
+                        .collect(toList())
+        );
+        DoFeedbackManyRequest req = new DoFeedbackManyRequest(session, feedbacks);
+        DoFeedbackManyResponse res = AllegroExecutor.execute(() -> allegro.doFeedbackMany(req));
+        return res.getFeResults().getItem()
+                .stream()
+                .map(CreatedFeedbackConv::convert)
+                .collect(toList());
+    }
+
+    private FeedbackManyStruct convertFeedbackManyStruct(CreateFeedback f) {
+        FeedbackManyStruct struct = new FeedbackManyStruct();
+        struct.setFeComment(f.getComment());
+        struct.setFeCommentType(f.getFeedbackType().getType());
+        struct.setFeItemId(f.getItemId());
+        struct.setFeToUserId(f.getToUserId());
+        struct.setFeOp(f.getFeedbackFor().getType());
+        return struct;
+    }
+
     private class FeedbackIterator extends AbstractAllegroIterator<WaitingFeedback> {
 
         public FeedbackIterator(String session, long startingPoint) {
@@ -56,7 +86,7 @@ public class FeedbackService extends AbstractService {
             return AllegroExecutor.execute(() -> allegro.doGetWaitingFeedbacks(req)).getFeWaitList().getItem()
                     .stream()
                     .map(WaitingFeedbackConv::convert)
-                    .collect(Collectors.toList());
+                    .collect(toList());
         }
 
         @Override

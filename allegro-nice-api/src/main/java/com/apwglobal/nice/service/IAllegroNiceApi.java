@@ -48,5 +48,6 @@ public interface IAllegroNiceApi {
     //feedback
     int getWaintingFeedbackCounter();
     Observable<WaitingFeedback> getWaitingFeedbacks();
+    List<CreatedFeedback> createFeedbacks(List<CreateFeedback> feedbacks);
 
 }

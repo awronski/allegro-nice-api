@@ -88,10 +88,13 @@ ChangedQty changedQty = api.changeQty(itemId, 5);
 List<FinishAuctionFailure> failures = api.finishAuctions(List<Long> itemsIds);
 ```
 
-## Get waiting feedback
+## Get and create feedbacks
 ```java
 int counter = api.getWaintingFeedbackCounter();
 Observable<WaitingFeedback> api.getWaitingFeedbacks();
+
+List<CreateFeedback> create = new ArrayList<>(..)
+List<CreatedFeedback> =  api.createFeedbacks(create)
 ```
 
 ## Get system messages

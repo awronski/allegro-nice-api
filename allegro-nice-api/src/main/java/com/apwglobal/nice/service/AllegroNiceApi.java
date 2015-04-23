@@ -187,6 +187,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         return feedbackService.getWaitingFeedbacks(session.getSessionId());
     }
 
+    @Override
+    public List<CreatedFeedback> createFeedbacks(List<CreateFeedback> feedbacks) {
+        return feedbackService.createFeedbacks(session.getSessionId(), feedbacks);
+    }
+
     public static final class Builder {
         private Credentials cred;
         private Configuration conf;
