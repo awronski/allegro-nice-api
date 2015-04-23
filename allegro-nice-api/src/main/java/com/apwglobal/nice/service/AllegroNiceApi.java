@@ -183,7 +183,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     }
 
     @Override
-    public Observable<Feedback> getWaitingFeedbacks() {
+    public Observable<WaitingFeedback> getWaitingFeedbacks() {
         return feedbackService.getWaitingFeedbacks(session.getSessionId());
     }
 

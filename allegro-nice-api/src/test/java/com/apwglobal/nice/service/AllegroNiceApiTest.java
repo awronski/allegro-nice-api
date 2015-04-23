@@ -177,7 +177,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
 
     @Test
     public void shouldReturnWaitingFeedbacks() {
-        Observable<Feedback> feedbacks = api.login()
+        Observable<WaitingFeedback> feedbacks = api.login()
                 .getWaitingFeedbacks();
 
         feedbacks

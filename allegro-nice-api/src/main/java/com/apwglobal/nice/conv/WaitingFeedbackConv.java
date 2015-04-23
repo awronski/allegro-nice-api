@@ -1,12 +1,12 @@
 package com.apwglobal.nice.conv;
 
-import com.apwglobal.nice.domain.Feedback;
+import com.apwglobal.nice.domain.WaitingFeedback;
 import pl.allegro.webapi.WaitFeedbackStruct;
 
-public class FeedbackConv {
+public class WaitingFeedbackConv {
 
-    public static Feedback convert(WaitFeedbackStruct f) {
-        return new Feedback.Builder()
+    public static WaitingFeedback convert(WaitFeedbackStruct f) {
+        return new WaitingFeedback.Builder()
                 .itemId(f.getFeItemId())
                 .userId(f.getFeToUserId())
                 .possibilityToAdd(f.getFePossibilityToAdd())

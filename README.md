@@ -91,7 +91,7 @@ List<FinishAuctionFailure> failures = api.finishAuctions(List<Long> itemsIds);
 ## Get waiting feedback
 ```java
 int counter = api.getWaintingFeedbackCounter();
-Observable<Feedback> api.getWaitingFeedbacks();
+Observable<WaitingFeedback> api.getWaitingFeedbacks();
 ```
 
 ## Get system messages

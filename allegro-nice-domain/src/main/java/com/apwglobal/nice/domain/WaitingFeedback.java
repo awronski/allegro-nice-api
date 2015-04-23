@@ -1,6 +1,6 @@
 package com.apwglobal.nice.domain;
 
-public class Feedback {
+public class WaitingFeedback {
 
     private long itemId;
     private int userId;
@@ -8,9 +8,9 @@ public class Feedback {
     private ReceivedFeedbackType receivedFeedbackType;
     private boolean possibilityToAdd;
 
-    public Feedback() { }
+    public WaitingFeedback() { }
 
-    private Feedback(Builder builder) {
+    private WaitingFeedback(Builder builder) {
         itemId = builder.itemId;
         userId = builder.userId;
         feedbackFor = builder.feedbackFor;
@@ -69,14 +69,14 @@ public class Feedback {
             return this;
         }
 
-        public Feedback build() {
-            return new Feedback(this);
+        public WaitingFeedback build() {
+            return new WaitingFeedback(this);
         }
     }
 
     @Override
     public String toString() {
-        return "Feedback{" +
+        return "WaitingFeedback{" +
                 "itemId=" + itemId +
                 ", userId=" + userId +
                 ", feedbackFor=" + feedbackFor +

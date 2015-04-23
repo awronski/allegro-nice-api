@@ -1,7 +1,8 @@
 package com.apwglobal.nice.feedback;
 
-import com.apwglobal.nice.conv.FeedbackConv;
-import com.apwglobal.nice.domain.Feedback;
+import com.apwglobal.nice.conv.WaitingFeedbackConv;
+import com.apwglobal.nice.domain.CreatedFeedback;
+import com.apwglobal.nice.domain.WaitingFeedback;
 import com.apwglobal.nice.exception.AllegroExecutor;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractAllegroIterator;
@@ -28,27 +29,30 @@ public class FeedbackService extends AbstractService {
         return res.getFeedbackCount();
     }
 
-    public Observable<Feedback> getWaitingFeedbacks(String session) {
+    public Observable<WaitingFeedback> getWaitingFeedbacks(String session) {
         return Observable.from(() -> new FeedbackIterator(session, 0));
     }
 
-    private class FeedbackIterator extends AbstractAllegroIterator<Feedback> {
+    public List<CreatedFeedback> createFeedback() {
+        return null;
+    }
+    private class FeedbackIterator extends AbstractAllegroIterator<WaitingFeedback> {
 
         public FeedbackIterator(String session, long startingPoint) {
             super(session, startingPoint);
         }
 
         @Override
-        protected List<Feedback> doFetch() {
+        protected List<WaitingFeedback> doFetch() {
             DoGetWaitingFeedbacksRequest req = new DoGetWaitingFeedbacksRequest(session, (int) startingPoint, 200);
             return AllegroExecutor.execute(() -> allegro.doGetWaitingFeedbacks(req)).getFeWaitList().getItem()
                     .stream()
-                    .map(FeedbackConv::convert)
+                    .map(WaitingFeedbackConv::convert)
                     .collect(Collectors.toList());
         }
 
         @Override
-        protected long getItemId(Feedback journal) {
+        protected long getItemId(WaitingFeedback journal) {
             this.startingPoint += 200;
             return startingPoint;
         }
