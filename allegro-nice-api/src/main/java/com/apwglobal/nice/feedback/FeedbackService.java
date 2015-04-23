@@ -1,6 +1,7 @@
 package com.apwglobal.nice.feedback;
 
 import com.apwglobal.nice.conv.WaitingFeedbackConv;
+import com.apwglobal.nice.domain.CreateFeedback;
 import com.apwglobal.nice.domain.CreatedFeedback;
 import com.apwglobal.nice.domain.WaitingFeedback;
 import com.apwglobal.nice.exception.AllegroExecutor;
@@ -8,10 +9,7 @@ import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractAllegroIterator;
 import com.apwglobal.nice.service.AbstractService;
 import com.apwglobal.nice.service.Configuration;
-import pl.allegro.webapi.DoGetWaitingFeedbacksCountRequest;
-import pl.allegro.webapi.DoGetWaitingFeedbacksCountResponse;
-import pl.allegro.webapi.DoGetWaitingFeedbacksRequest;
-import pl.allegro.webapi.ServicePort;
+import pl.allegro.webapi.*;
 import rx.Observable;
 
 import java.util.List;
@@ -33,7 +31,8 @@ public class FeedbackService extends AbstractService {
         return Observable.from(() -> new FeedbackIterator(session, 0));
     }
 
-    public List<CreatedFeedback> createFeedback() {
+    public List<CreatedFeedback> createFeedback(List<CreateFeedback> feedbacks) {
+        //TODO
         return null;
     }
     private class FeedbackIterator extends AbstractAllegroIterator<WaitingFeedback> {

@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public enum ReceivedFeedbackType {
+public enum FeedbackType {
 
     POS("POS"),
     NEG("NEG"),
@@ -13,7 +13,7 @@ public enum ReceivedFeedbackType {
     MISSING("NULL");
 
     private String type;
-    ReceivedFeedbackType(String type) {
+    FeedbackType(String type) {
         this.type = type;
     }
 
@@ -21,11 +21,11 @@ public enum ReceivedFeedbackType {
         return type;
     }
 
-    public static final Map<String, ReceivedFeedbackType> VALUES;
+    public static final Map<String, FeedbackType> VALUES;
     static {
         VALUES = Collections.unmodifiableMap(
-                Arrays.stream(ReceivedFeedbackType.values())
-                        .collect(Collectors.toMap((ReceivedFeedbackType v) -> v.type, v -> v))
+                Arrays.stream(FeedbackType.values())
+                        .collect(Collectors.toMap((FeedbackType v) -> v.type, v -> v))
         );
     }
 }

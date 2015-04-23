@@ -5,7 +5,7 @@ public class WaitingFeedback {
     private long itemId;
     private int userId;
     private FeedbackFor feedbackFor;
-    private ReceivedFeedbackType receivedFeedbackType;
+    private FeedbackType feedbackType;
     private boolean possibilityToAdd;
 
     public WaitingFeedback() { }
@@ -14,7 +14,7 @@ public class WaitingFeedback {
         itemId = builder.itemId;
         userId = builder.userId;
         feedbackFor = builder.feedbackFor;
-        receivedFeedbackType = builder.receivedFeedbackType;
+        feedbackType = builder.feedbackType;
         possibilityToAdd = builder.possibilityToAdd;
     }
 
@@ -27,8 +27,8 @@ public class WaitingFeedback {
     public FeedbackFor getFeedbackFor() {
         return feedbackFor;
     }
-    public ReceivedFeedbackType getReceivedFeedbackType() {
-        return receivedFeedbackType;
+    public FeedbackType getFeedbackType() {
+        return feedbackType;
     }
     public boolean isPossibilityToAdd() {
         return possibilityToAdd;
@@ -38,7 +38,7 @@ public class WaitingFeedback {
         private long itemId;
         private int userId;
         private FeedbackFor feedbackFor;
-        private ReceivedFeedbackType receivedFeedbackType;
+        private FeedbackType feedbackType;
         private boolean possibilityToAdd;
 
         public Builder() {
@@ -60,7 +60,7 @@ public class WaitingFeedback {
         }
 
         public Builder receivedFeedbackType(String receivedFeedbackType) {
-            this.receivedFeedbackType = ReceivedFeedbackType.VALUES.get(receivedFeedbackType);
+            this.feedbackType = FeedbackType.VALUES.get(receivedFeedbackType);
             return this;
         }
 
@@ -80,7 +80,7 @@ public class WaitingFeedback {
                 "itemId=" + itemId +
                 ", userId=" + userId +
                 ", feedbackFor=" + feedbackFor +
-                ", receivedFeedbackType=" + receivedFeedbackType +
+                ", feedbackType=" + feedbackType +
                 ", possibilityToAdd=" + possibilityToAdd +
                 '}';
     }
