@@ -21,18 +21,27 @@ public class FeedbackService extends AbstractService {
         super(allegro, cred, conf);
     }
 
+    /**
+     * http://allegro.pl/webapi/documentation.php/show/id,106#method-output
+     */
     public int getWaitingFeedbackCounter(String session) {
         DoGetWaitingFeedbacksCountRequest req = new DoGetWaitingFeedbacksCountRequest(session);
         DoGetWaitingFeedbacksCountResponse res = AllegroExecutor.execute(() -> allegro.doGetWaitingFeedbacksCount(req));
         return res.getFeedbackCount();
     }
 
+    /**
+     * http://allegro.pl/webapi/documentation.php/show/id,105#method-output
+     */
     public Observable<WaitingFeedback> getWaitingFeedbacks(String session) {
         return Observable.from(() -> new FeedbackIterator(session, 0));
     }
 
+    /**
+     * http://allegro.pl/webapi/documentation.php/show/id,43#method-output
+     */
     public List<CreatedFeedback> createFeedback(List<CreateFeedback> feedbacks) {
-        //TODO
+
         return null;
     }
     private class FeedbackIterator extends AbstractAllegroIterator<WaitingFeedback> {
