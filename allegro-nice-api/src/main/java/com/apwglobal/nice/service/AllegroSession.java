@@ -11,6 +11,9 @@ public class AllegroSession {
     }
 
     public String getSessionId() {
+        if (sessionId == null) {
+            throw new IllegalStateException("Session was not initalized. You need to use .login() first");
+        }
         return sessionId;
     }
     public long getUserId() {
