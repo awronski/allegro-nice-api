@@ -167,4 +167,22 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         assertNotNull(shopCategories);
     }
 
+    @Test
+    public void shouldReturnWaitingFeedbackCounter() {
+        int counter = api.login()
+                .getWaintingFeedbackCounter();
+
+        assertTrue(counter >= 0);
+    }
+
+    @Test
+    public void shouldReturnWaitingFeedbacks() {
+        Observable<Feedback> feedbacks = api.login()
+                .getWaitingFeedbacks();
+
+        feedbacks
+                .forEach(f -> assertNotNull(f.getItemId()));
+    }
+
+
 }

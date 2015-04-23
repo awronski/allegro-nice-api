@@ -45,4 +45,8 @@ public interface IAllegroNiceApi {
     //shop
     List<ShopCategory> getShopCategories();
 
+    //feedback
+    int getWaintingFeedbackCounter();
+    Observable<Feedback> getWaitingFeedbacks();
+
 }

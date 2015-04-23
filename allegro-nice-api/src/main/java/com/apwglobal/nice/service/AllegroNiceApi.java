@@ -5,6 +5,7 @@ import com.apwglobal.nice.client.ClientService;
 import com.apwglobal.nice.country.InfoService;
 import com.apwglobal.nice.deal.DealService;
 import com.apwglobal.nice.domain.*;
+import com.apwglobal.nice.feedback.FeedbackService;
 import com.apwglobal.nice.journal.JournalService;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.login.LoginService;
@@ -12,10 +13,7 @@ import com.apwglobal.nice.message.MessageService;
 import com.apwglobal.nice.sell.SellService;
 import com.apwglobal.nice.shop.ShopService;
 import com.apwglobal.nice.system.SystemService;
-import pl.allegro.webapi.ItemPostBuyDataStruct;
-import pl.allegro.webapi.ServicePort;
-import pl.allegro.webapi.ServiceService;
-import pl.allegro.webapi.SysStatusType;
+import pl.allegro.webapi.*;
 import rx.Observable;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -46,6 +44,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     private AuctionService auctionService;
     private SellService sellService;
     private ShopService shopService;
+    private FeedbackService feedbackService;
 
     private AllegroNiceApi(Builder builder) {
         allegro = createAllegro(builder);
@@ -62,6 +61,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         auctionService = new AuctionService(allegro, cred, conf);
         sellService = new SellService(allegro, cred, conf);
         shopService = new ShopService(allegro, cred, conf);
+        feedbackService = new FeedbackService(allegro, cred, conf);
     }
 
     private ServicePort createAllegro(Builder builder) {
@@ -175,6 +175,16 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     @Override
     public List<ShopCategory> getShopCategories() {
         return shopService.getShopCategories(session.getSessionId());
+    }
+
+    @Override
+    public int getWaintingFeedbackCounter() {
+        return feedbackService.getWaitingFeedbackCounter(session.getSessionId());
+    }
+
+    @Override
+    public Observable<Feedback> getWaitingFeedbacks() {
+        return feedbackService.getWaitingFeedbacks(session.getSessionId());
     }
 
     public static final class Builder {
