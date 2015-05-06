@@ -54,7 +54,7 @@ public class AuctionService extends AbstractService {
 
         @Override
         protected long getItemId(Auction auction) {
-            this.startingPoint += 1000;
+            this.startingPoint += 1;
             return startingPoint;
         }
 
