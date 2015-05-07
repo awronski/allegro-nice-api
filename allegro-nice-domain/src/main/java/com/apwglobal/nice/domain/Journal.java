@@ -1,5 +1,6 @@
 package com.apwglobal.nice.domain;
 
+import com.apwglobal.bd.BD;
 import com.apwglobal.nice.util.UnixDate;
 
 import java.util.Date;
@@ -70,6 +71,7 @@ public class Journal {
         }
 
         public Builder currentPrice(double currentPrice) {
+            currentPrice = new BD(currentPrice).doubleValue(2);
             if (currentPrice == 0.0) {
                 this.currentPrice = Optional.empty();
             } else {
