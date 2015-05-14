@@ -11,9 +11,11 @@ import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.login.LoginService;
 import com.apwglobal.nice.message.MessageService;
 import com.apwglobal.nice.sell.SellService;
-import com.apwglobal.nice.shop.ShopService;
 import com.apwglobal.nice.system.SystemService;
-import pl.allegro.webapi.*;
+import pl.allegro.webapi.ItemPostBuyDataStruct;
+import pl.allegro.webapi.ServicePort;
+import pl.allegro.webapi.ServiceService;
+import pl.allegro.webapi.SysStatusType;
 import rx.Observable;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -43,7 +45,6 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     private DealService dealService;
     private AuctionService auctionService;
     private SellService sellService;
-    private ShopService shopService;
     private FeedbackService feedbackService;
 
     private AllegroNiceApi(Builder builder) {
@@ -60,7 +61,6 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         dealService = new DealService(allegro, cred, conf, infoService);
         auctionService = new AuctionService(allegro, cred, conf);
         sellService = new SellService(allegro, cred, conf);
-        shopService = new ShopService(allegro, cred, conf);
         feedbackService = new FeedbackService(allegro, cred, conf);
     }
 
@@ -170,11 +170,6 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     @Override
     public List<FinishAuctionFailure> finishAuctions(List<Long> itemsIds) {
         return sellService.finishAuctions(session.getSessionId(), itemsIds);
-    }
-
-    @Override
-    public List<ShopCategory> getShopCategories() {
-        return shopService.getShopCategories(session.getSessionId());
     }
 
     @Override

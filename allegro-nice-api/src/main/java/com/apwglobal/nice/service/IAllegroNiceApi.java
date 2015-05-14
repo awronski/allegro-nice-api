@@ -42,9 +42,6 @@ public interface IAllegroNiceApi {
     ChangedQty changeQty(long itemId, int newQty);
     List<FinishAuctionFailure> finishAuctions(List<Long> itemsIds);
 
-    //shop
-    List<ShopCategory> getShopCategories();
-
     //feedback
     int getWaintingFeedbackCounter();
     Observable<WaitingFeedback> getWaitingFeedbacks();
