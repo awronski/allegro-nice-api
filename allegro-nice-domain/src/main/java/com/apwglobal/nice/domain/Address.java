@@ -11,7 +11,7 @@ public class Address {
     private String fullname;
     private String country;
     private Optional<String> company;
-    private String phone;
+    private Optional<String> phone;
     private Optional<String> nip;
 
     public Address() { }
@@ -48,7 +48,7 @@ public class Address {
     public Optional<String> getCompany() {
         return company;
     }
-    public String getPhone() {
+    public Optional<String> getPhone() {
         return phone;
     }
     public Optional<String> getNip() {
@@ -62,7 +62,7 @@ public class Address {
         private String city;
         private String fullname;
         private Optional<String> company;
-        private String phone;
+        private Optional<String> phone;
         private Optional<String> nip;
 
         public Builder() {
@@ -103,7 +103,11 @@ public class Address {
         }
 
         public Builder phone(String phone) {
-            this.phone = phone;
+            if (phone.isEmpty()) {
+                this.phone = Optional.empty();
+            } else {
+                this.phone = Optional.of(phone);
+            }
             return this;
         }
 

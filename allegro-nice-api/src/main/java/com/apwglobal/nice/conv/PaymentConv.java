@@ -15,8 +15,12 @@ public class PaymentConv {
 
     public static Payment convert(PostBuyFormDataStruct f, Map<Integer, String> countries) {
 
-        Address receiver = convertAddress(f.getPostBuyFormShipmentAddress(), countries);
-        Address orderer = convertAddress(f.getPostBuyFormInvoiceData(), countries);
+        PostBuyFormAddressStruct receiverData = f.getPostBuyFormShipmentAddress();
+        PostBuyFormAddressStruct ordererData = f.getPostBuyFormInvoiceData();
+        fillMissingFields(f, receiverData, ordererData);
+
+        Address receiver = convertAddress(receiverData, countries);
+        Address orderer = convertAddress(ordererData, countries);
 
         List<Item> items = f.getPostBuyFormItems()
                 .getItem()
@@ -41,6 +45,12 @@ public class PaymentConv {
                 .orderer(orderer)
                 .items(items)
                 .build();
+    }
+
+    private static void fillMissingFields(PostBuyFormDataStruct f, PostBuyFormAddressStruct receiverData, PostBuyFormAddressStruct ordererData) {
+        if (ordererData.getPostBuyFormAdrPhone().isEmpty() && !receiverData.getPostBuyFormAdrPhone().isEmpty() && f.getPostBuyFormInvoiceOption() == 1) {
+            ordererData.setPostBuyFormAdrPhone(receiverData.getPostBuyFormAdrPhone());
+        }
     }
 
     private static Address convertAddress(PostBuyFormAddressStruct address, Map<Integer, String> countries) {
