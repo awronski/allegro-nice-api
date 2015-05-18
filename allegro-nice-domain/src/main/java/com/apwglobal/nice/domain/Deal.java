@@ -7,15 +7,15 @@ import java.util.Optional;
 
 public class Deal {
 
-    protected long eventId;
-    protected DealType dealType;
-    protected Date eventTime;
-    protected long dealId;
-    protected Optional<Long> transactionId;
-    protected int sellerId;
-    protected long itemId;
-    protected int buyerId;
-    protected int quantity;
+    private long eventId;
+    private DealType dealType;
+    private Date eventTime;
+    private long dealId;
+    private Optional<Long> transactionId;
+    private int sellerId;
+    private long itemId;
+    private int buyerId;
+    private int quantity;
 
     public Deal() { }
 
