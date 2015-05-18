@@ -102,8 +102,6 @@ List<CreatedFeedback> =  api.createFeedbacks(create)
 List<AllegroMessage> msgs = allegro.getAllMessages(LocalDateTime.now().minusDays(30));
 ```
 
-### _... work in progress_
-
 License
 =======
 
