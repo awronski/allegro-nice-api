@@ -6,9 +6,10 @@ import pl.allegro.webapi.SellItemStruct;
 
 public class AuctionConv {
 
-    public static Auction convert(SellItemStruct s, ItemPriceStruct itemPriceStruct) {
+    public static Auction convert(SellItemStruct s, ItemPriceStruct itemPriceStruct, long sellerId) {
         return new Auction.Builder()
                 .id(s.getItemId())
+                .sellerId(sellerId)
                 .title(s.getItemTitle())
                 .thumbnailUrl(s.getItemThumbnailUrl())
                 .startQuantity(s.getItemStartQuantity())

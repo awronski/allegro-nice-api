@@ -13,6 +13,7 @@ public class Journal {
     private JournalType changeType;
     private Date changeDate;
     private Optional<Double> currentPrice;
+    private long sellerId;
 
     public Journal() { }
 
@@ -22,6 +23,7 @@ public class Journal {
         changeType = builder.changeType;
         changeDate = builder.changeDate;
         currentPrice = builder.currentPrice;
+        sellerId = builder.sellerId;
     }
 
     public long getRowId() {
@@ -39,6 +41,9 @@ public class Journal {
     public Optional<Double> getCurrentPrice() {
         return currentPrice;
     }
+    public long getSellerId() {
+        return sellerId;
+    }
 
     public static final class Builder {
         private long rowId;
@@ -46,6 +51,7 @@ public class Journal {
         private JournalType changeType;
         private Date changeDate;
         private Optional<Double> currentPrice;
+        private long sellerId;
 
         public Builder() {
         }
@@ -77,6 +83,11 @@ public class Journal {
             } else {
                 this.currentPrice = Optional.of(currentPrice);
             }
+            return this;
+        }
+
+        public Builder sellerId(long sellerId) {
+            this.sellerId = sellerId;
             return this;
         }
 

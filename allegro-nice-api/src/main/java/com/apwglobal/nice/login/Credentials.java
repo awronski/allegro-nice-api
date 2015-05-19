@@ -2,22 +2,27 @@ package com.apwglobal.nice.login;
 
 public class Credentials {
 
+    private long clientId;
     private String username;
-    private String passowrd;
+    private String passoword;
     private String key;
 
 
-    public Credentials(String username, String passowrd, String key) {
+    public Credentials(long clientId, String username, String passowrd, String key) {
+        this.clientId = clientId;
         this.username = username;
-        this.passowrd = passowrd;
+        this.passoword = passowrd;
         this.key = key;
     }
 
+    public long getClientId() {
+        return clientId;
+    }
     public String getUsername() {
         return username;
     }
-    public String getPassowrd() {
-        return passowrd;
+    public String getPassoword() {
+        return passoword;
     }
     public String getKey() {
         return key;
@@ -33,17 +38,22 @@ public class Credentials {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Credentials)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Credentials that = (Credentials) o;
 
-        return key.equals(that.key) && passowrd.equals(that.passowrd) && username.equals(that.username);
+        if (clientId != that.clientId) return false;
+        if (!username.equals(that.username)) return false;
+        if (!passoword.equals(that.passoword)) return false;
+        return key.equals(that.key);
+
     }
 
     @Override
     public int hashCode() {
-        int result = username.hashCode();
-        result = 31 * result + passowrd.hashCode();
+        int result = (int) (clientId ^ (clientId >>> 32));
+        result = 31 * result + username.hashCode();
+        result = 31 * result + passoword.hashCode();
         result = 31 * result + key.hashCode();
         return result;
     }

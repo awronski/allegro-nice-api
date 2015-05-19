@@ -32,7 +32,7 @@ public class DealService extends AbstractService {
         return Observable.from(() -> new DealsIterator(session, startingPoint));
     }
 
-    public Observable<Payment> getPayments(String session, Observable<Deal> deals) {
+    public Observable<Payment> getPayments(String session, long sellerId, Observable<Deal> deals) {
         Observable<Long> transactionsIds = deals
                 .filter(d -> d.getTransactionId().isPresent())
                 .filter(d -> d.getDealType().equals(DealType.PAYMENT))
@@ -43,7 +43,7 @@ public class DealService extends AbstractService {
         return transactionsIds
                 .buffer(25)
                 .flatMap(l -> Observable.from(getPostBuyFormsDataForSellers(session, l)))
-                .map(f -> PaymentConv.convert(f, infoService.getCountries()));
+                .map(f -> PaymentConv.convert(f, sellerId, infoService.getCountries()));
     }
 
     /**

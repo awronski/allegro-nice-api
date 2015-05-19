@@ -12,7 +12,7 @@ public class Deal {
     private Date eventTime;
     private long dealId;
     private Optional<Long> transactionId;
-    private int sellerId;
+    private long sellerId;
     private long itemId;
     private int buyerId;
     private int quantity;
@@ -47,7 +47,7 @@ public class Deal {
     public Optional<Long> getTransactionId() {
         return transactionId;
     }
-    public int getSellerId() {
+    public long getSellerId() {
         return sellerId;
     }
     public long getItemId() {
@@ -66,7 +66,7 @@ public class Deal {
         private Date eventTime;
         private long dealId;
         private Optional<Long> transactionId;
-        private int sellerId;
+        private long sellerId;
         private long itemId;
         private int buyerId;
         private int quantity;
@@ -103,7 +103,7 @@ public class Deal {
             return this;
         }
 
-        public Builder sellerId(int sellerId) {
+        public Builder sellerId(long sellerId) {
             this.sellerId = sellerId;
             return this;
         }

@@ -93,6 +93,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     }
 
     @Override
+    public long getClientId() {
+        return cred.getClientId();
+    }
+
+    @Override
     public AllegroSession getSession() {
         return session;
     }
@@ -134,7 +139,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
 
     @Override
     public Observable<Payment> getPayments(Observable<Deal> deals) {
-        return dealService.getPayments(session.getSessionId(), deals);
+        return dealService.getPayments(session.getSessionId(), cred.getClientId(), deals);
     }
 
     @Override

@@ -24,7 +24,7 @@ public class LoginService extends AbstractService {
     public AllegroSession login() {
         long version = AllegroExecutor.execute(() -> VersionUtil.getVersion(allegro, conf.getCountryId(), cred.getKey()));
 
-        DoLoginEncRequest request = new DoLoginEncRequest(cred.getUsername(), encPassword(cred.getPassowrd()), conf.getCountryId(), cred.getKey(), version);
+        DoLoginEncRequest request = new DoLoginEncRequest(cred.getUsername(), encPassword(cred.getPassoword()), conf.getCountryId(), cred.getKey(), version);
         DoLoginEncResponse response = AllegroExecutor.execute(() -> allegro.doLoginEnc(request));
 
         return new AllegroSession.Builder()

@@ -9,7 +9,7 @@ public class LoginExceptionTest extends AbstractServiceBaseTest {
 
     @Test(expected = WebApiKeyException.class)
     public void shouldThrowWebApiKeyException() {
-        Credentials badCred = new Credentials("some_user", cred.getPassowrd(), "incorrect");
+        Credentials badCred = new Credentials(0, "some_user", cred.getPassoword(), "incorrect");
 
         IAllegroNiceApi api = new AllegroNiceApi.Builder()
                 .conf(conf)

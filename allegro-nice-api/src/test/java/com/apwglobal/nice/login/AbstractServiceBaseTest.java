@@ -20,6 +20,7 @@ public abstract class AbstractServiceBaseTest {
         properties.load(resourceAsStream);
 
         cred = new Credentials(
+                Long.parseLong(properties.getProperty("allegro.clientId")),
                 properties.getProperty("allegro.username"),
                 properties.getProperty("allegro.password"),
                 properties.getProperty("allegro.key")

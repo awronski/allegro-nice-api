@@ -9,6 +9,7 @@ public class JournalConv {
         return new Journal.Builder()
                 .rowId(sj.getRowId())
                 .itemId(sj.getItemId())
+                .sellerId(sj.getItemSellerId())
                 .currentPrice(sj.getCurrentPrice())
                 .changeType(sj.getChangeType())
                 .changeDate(sj.getChangeDate())

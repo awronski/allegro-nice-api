@@ -29,6 +29,8 @@ public class Auction {
     private ItemPriceType priceType;
     private boolean open;
 
+    private long sellerId;
+
     public Auction() { }
 
     private Auction(Builder builder) {
@@ -51,6 +53,7 @@ public class Auction {
         price = builder.price;
         priceType = builder.priceType;
         open = builder.open;
+        sellerId = builder.sellerId;
     }
 
     public long getId() {
@@ -113,6 +116,9 @@ public class Auction {
     public int getLeftQty() {
         return startQuantity - soldQuantity;
     }
+    public long getSellerId() {
+        return sellerId;
+    }
 
     public static final class Builder {
         private long id;
@@ -134,6 +140,7 @@ public class Auction {
         private double price;
         private ItemPriceType priceType;
         private boolean open;
+        private long sellerId;
 
         public Builder() {
         }
@@ -234,6 +241,11 @@ public class Auction {
 
         public Builder open(boolean open) {
             this.open = open;
+            return this;
+        }
+
+        public Builder sellerId(long sellerId) {
+            this.sellerId = sellerId;
             return this;
         }
 

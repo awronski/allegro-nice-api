@@ -14,6 +14,7 @@ public interface IAllegroNiceApi {
     //login
     IAllegroNiceApi login();
     AllegroSession getSession();
+    long getClientId();
 
     //info
     Map<Integer, String> getCountries();

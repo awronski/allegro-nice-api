@@ -12,6 +12,8 @@ public class Payment {
 
     private long transactionId;
     private long buyerId;
+    private long sellerId;
+
     private String email;
     private Date date;
 
@@ -37,6 +39,7 @@ public class Payment {
     private Payment(Builder builder) {
         transactionId = builder.transactionId;
         buyerId = builder.buyerId;
+        sellerId = builder.sellerId;
         email = builder.email;
         amount = builder.amount;
         date = builder.date;
@@ -102,8 +105,13 @@ public class Payment {
         return processed;
     }
 
+    public long getSellerId() {
+        return sellerId;
+    }
+
     public static final class Builder {
         private long buyerId;
+        private long sellerId;
         private String email;
         private Date date;
         private double amount;
@@ -213,6 +221,11 @@ public class Payment {
 
         public Builder processed(boolean processed) {
             this.processed = processed;
+            return this;
+        }
+
+        public Builder sellerId(long sellerId) {
+            this.sellerId = sellerId;
             return this;
         }
 

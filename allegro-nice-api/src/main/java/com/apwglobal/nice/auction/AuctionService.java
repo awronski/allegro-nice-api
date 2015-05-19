@@ -49,7 +49,7 @@ public class AuctionService extends AbstractService {
                 throw new IllegalArgumentException("Cannot support auction with sale diffrent than buy now");
             }
 
-            return AuctionConv.convert(s, itemPriceStruct);
+            return AuctionConv.convert(s, itemPriceStruct, cred.getClientId());
         }
 
         @Override

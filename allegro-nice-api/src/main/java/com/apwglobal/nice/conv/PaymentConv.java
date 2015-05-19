@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toList;
 
 public class PaymentConv {
 
-    public static Payment convert(PostBuyFormDataStruct f, Map<Integer, String> countries) {
+    public static Payment convert(PostBuyFormDataStruct f, long sellerId, Map<Integer, String> countries) {
 
         PostBuyFormAddressStruct receiverData = f.getPostBuyFormShipmentAddress();
         PostBuyFormAddressStruct ordererData = f.getPostBuyFormInvoiceData();
@@ -31,6 +31,7 @@ public class PaymentConv {
         return new Payment.Builder()
                 .transactionId(f.getPostBuyFormId())
                 .buyerId(f.getPostBuyFormBuyerId())
+                .sellerId(sellerId)
                 .email(f.getPostBuyFormBuyerEmail())
                 .date(f.getPostBuyFormDateInit())
                 .amount(f.getPostBuyFormAmount())
