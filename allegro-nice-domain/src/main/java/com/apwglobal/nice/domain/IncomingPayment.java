@@ -20,6 +20,8 @@ public class IncomingPayment {
     private boolean incomplete;
     private Optional<Long> mainTransactionId;
 
+    public IncomingPayment() { }
+
     private IncomingPayment(Builder builder) {
         transactionId = builder.transactionId;
         buyerId = builder.buyerId;
