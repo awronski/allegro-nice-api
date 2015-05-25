@@ -151,4 +151,20 @@ public class IncomingPayment {
             return new IncomingPayment(this);
         }
     }
+
+    @Override
+    public String toString() {
+        return "IncomingPayment{" +
+                "transactionId=" + transactionId +
+                ", sellerId=" + sellerId +
+                ", buyerId=" + buyerId +
+                ", status=" + status +
+                ", amount=" + amount +
+                ", receiveDate=" + receiveDate +
+                ", itemsCounter=" + itemsCounter +
+                ", incomplete=" + incomplete +
+                ", mainTransactionId=" + mainTransactionId +
+                '}';
+    }
+
 }
