@@ -176,5 +176,15 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
                 .forEach(f -> assertNotNull(f.getItemId()));
     }
 
+    @Test
+    public void shouldReturnIncomingPayments() {
+        List<IncomingPayment> incomingPayments = api.login()
+                .getIncomingPayments()
+                .toList()
+                .toBlocking()
+                .single();
+
+        assertNotNull(incomingPayments);
+    }
 
 }

@@ -10,12 +10,10 @@ import com.apwglobal.nice.journal.JournalService;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.login.LoginService;
 import com.apwglobal.nice.message.MessageService;
+import com.apwglobal.nice.payment.IncomingPaymentService;
 import com.apwglobal.nice.sell.SellService;
 import com.apwglobal.nice.system.SystemService;
-import pl.allegro.webapi.ItemPostBuyDataStruct;
-import pl.allegro.webapi.ServicePort;
-import pl.allegro.webapi.ServiceService;
-import pl.allegro.webapi.SysStatusType;
+import pl.allegro.webapi.*;
 import rx.Observable;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -46,6 +44,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     private AuctionService auctionService;
     private SellService sellService;
     private FeedbackService feedbackService;
+    private IncomingPaymentService incomingPaymentService;
 
     private AllegroNiceApi(Builder builder) {
         allegro = createAllegro(builder);
@@ -62,6 +61,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         auctionService = new AuctionService(allegro, cred, conf);
         sellService = new SellService(allegro, cred, conf);
         feedbackService = new FeedbackService(allegro, cred, conf);
+        incomingPaymentService = new IncomingPaymentService(allegro, cred, conf);
     }
 
     private ServicePort createAllegro(Builder builder) {
@@ -190,6 +190,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     @Override
     public List<CreatedFeedback> createFeedbacks(List<CreateFeedback> feedbacks) {
         return feedbackService.createFeedbacks(session.getSessionId(), feedbacks);
+    }
+
+    @Override
+    public Observable<IncomingPayment> getIncomingPayments() {
+        return incomingPaymentService.getIncomingPayments(session.getSessionId());
     }
 
     public static final class Builder {
