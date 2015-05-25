@@ -26,6 +26,9 @@ public class IncomingPaymentService extends AbstractService {
         return Observable.from(() -> new IncomingPaymentIterator(session));
     };
 
+    /**
+     * http://allegro.pl/webapi/documentation.php/show/id,85#method-output
+     */
     private class IncomingPaymentIterator extends AbstractAllegroIterator<IncomingPayment> {
         public IncomingPaymentIterator(String session) {
             super(session, 0);
