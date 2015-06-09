@@ -9,11 +9,13 @@ import com.apwglobal.nice.feedback.FeedbackService;
 import com.apwglobal.nice.journal.JournalService;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.login.LoginService;
-import com.apwglobal.nice.message.MessageService;
 import com.apwglobal.nice.payment.IncomingPaymentService;
 import com.apwglobal.nice.sell.SellService;
 import com.apwglobal.nice.system.SystemService;
-import pl.allegro.webapi.*;
+import pl.allegro.webapi.ItemPostBuyDataStruct;
+import pl.allegro.webapi.ServicePort;
+import pl.allegro.webapi.ServiceService;
+import pl.allegro.webapi.SysStatusType;
 import rx.Observable;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -23,7 +25,6 @@ import javax.net.ssl.X509TrustManager;
 import javax.xml.namespace.QName;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +38,6 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     private LoginService loginService;
     private InfoService infoService;
     private SystemService systemService;
-    private MessageService messageService;
     private JournalService journalService;
     private ClientService clientService;
     private DealService dealService;
@@ -54,7 +54,6 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         loginService = new LoginService(allegro, cred, conf);
         infoService = new InfoService(allegro, cred, conf);
         systemService = new SystemService(allegro, cred, conf);
-        messageService = new MessageService(allegro, cred, conf);
         journalService = new JournalService(allegro, cred, conf);
         clientService = new ClientService(allegro, cred, conf);
         dealService = new DealService(allegro, cred, conf, infoService);
@@ -115,11 +114,6 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     @Override
     public SysStatusType getStatus() {
         return systemService.getStatus();
-    }
-
-    @Override
-    public List<AllegroMessage> getAllMessages(Date from) {
-        return messageService.getAllMessages(from);
     }
 
     @Override
