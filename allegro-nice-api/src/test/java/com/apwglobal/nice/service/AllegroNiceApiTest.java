@@ -69,8 +69,8 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     public void shouldChangeAuction() {
         List<Auction> single = api.login().getAuctions().limit(1).toList().toBlocking().single();
         if (!single.isEmpty()) {
-            List<NewAuctionField> fields = Collections.singletonList(
-                    new NewAuctionField(1, FieldType.Type.STRING, System.nanoTime() + ": Testing 123")
+            List<AuctionField> fields = Collections.singletonList(
+                    new AuctionField(1, FieldType.Type.STRING, System.nanoTime() + ": Testing 123")
             );
             ChangedAuctionInfo changedAuctionInfo = api
                     .login()
@@ -103,7 +103,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     @Test
     public void shouldReturnPriceForAuction() throws IOException {
 
-        List<NewAuctionField> fields = createNewAuctionFields();
+        List<AuctionField> fields = createNewAuctionFields();
 
         NewAuctionPrice res = api
                 .login()
@@ -113,7 +113,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
 
     @Test
     public void shouldCreateNewAuctionAndChangeQty() throws IOException {
-        List<NewAuctionField> fields = createNewAuctionFields();
+        List<AuctionField> fields = createNewAuctionFields();
 
         CreatedAuction auction = api
                 .login()
@@ -126,7 +126,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
 
     @Test
     public void shouldCreateNewAuctionAndThanFinishIt() throws IOException {
-        List<NewAuctionField> fields = createNewAuctionFields();
+        List<AuctionField> fields = createNewAuctionFields();
 
         CreatedAuction auction = api
                 .login()
@@ -137,34 +137,34 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         assertTrue(failures.isEmpty());
     }
 
-    private List<NewAuctionField> createNewAuctionFields() throws IOException {
+    private List<AuctionField> createNewAuctionFields() throws IOException {
         InputStream is = getClass().getResourceAsStream("/resources/test.png");
         String img = Base64.getEncoder().encodeToString(IOUtils.toByteArray(is));
 
         return Arrays.asList(
-                new NewAuctionField(1, FieldType.Type.STRING, System.nanoTime() + ": Testing 123"),      //title
-                new NewAuctionField(2, FieldType.Type.INTEGER, 76661),                                   //category
-                new NewAuctionField(4, FieldType.Type.INTEGER, 99),                                      //duration
-                new NewAuctionField(29, FieldType.Type.INTEGER, 1),                                      //sell type, shop
-                new NewAuctionField(5, FieldType.Type.INTEGER, 10),                                      //qty
-                new NewAuctionField(8, FieldType.Type.FLOAT, 1.99f),                                     //price, buy now
-                new NewAuctionField(9, FieldType.Type.INTEGER, 1),                                       //country
-                new NewAuctionField(10, FieldType.Type.INTEGER, 7),                                      //state, mazowieckie
-                new NewAuctionField(11, FieldType.Type.STRING, "Warszawa"),                              //city
-                new NewAuctionField(12, FieldType.Type.INTEGER, 1),                                      //transport, paid by buyer
-                new NewAuctionField(14, FieldType.Type.INTEGER, 32),                                     //invoice possible
-                new NewAuctionField(16, FieldType.Type.IMAGE, img),                                      //image
-                new NewAuctionField(24, FieldType.Type.STRING, "This is description <b>with html</b>"),  //desc
-                new NewAuctionField(28, FieldType.Type.INTEGER, 0),                                      //unit, pcs
-                new NewAuctionField(32, FieldType.Type.STRING, "01-234"),                                //zip
-                new NewAuctionField(43, FieldType.Type.FLOAT, 7.99f),                                    //price for letter
-                new NewAuctionField(44, FieldType.Type.FLOAT, 14.99f),                                   //price for courier
-                new NewAuctionField(143, FieldType.Type.FLOAT, 0f),                                      //price for letter, next pcs
-                new NewAuctionField(144, FieldType.Type.FLOAT, 0f),                                      //price for courier, next pcs
-                new NewAuctionField(243, FieldType.Type.INTEGER, 50),                                    //qty in letter
-                new NewAuctionField(244, FieldType.Type.INTEGER, 250),                                   //qty in parcel
-                new NewAuctionField(340, FieldType.Type.INTEGER, 1),                                     //sending time
-                new NewAuctionField(3110, FieldType.Type.INTEGER, 1)                                     //color
+                new AuctionField(1, FieldType.Type.STRING, System.nanoTime() + ": Testing 123"),      //title
+                new AuctionField(2, FieldType.Type.INTEGER, 76661),                                   //category
+                new AuctionField(4, FieldType.Type.INTEGER, 99),                                      //duration
+                new AuctionField(29, FieldType.Type.INTEGER, 1),                                      //sell type, shop
+                new AuctionField(5, FieldType.Type.INTEGER, 10),                                      //qty
+                new AuctionField(8, FieldType.Type.FLOAT, 1.99f),                                     //price, buy now
+                new AuctionField(9, FieldType.Type.INTEGER, 1),                                       //country
+                new AuctionField(10, FieldType.Type.INTEGER, 7),                                      //state, mazowieckie
+                new AuctionField(11, FieldType.Type.STRING, "Warszawa"),                              //city
+                new AuctionField(12, FieldType.Type.INTEGER, 1),                                      //transport, paid by buyer
+                new AuctionField(14, FieldType.Type.INTEGER, 32),                                     //invoice possible
+                new AuctionField(16, FieldType.Type.IMAGE, img),                                      //image
+                new AuctionField(24, FieldType.Type.STRING, "This is description <b>with html</b>"),  //desc
+                new AuctionField(28, FieldType.Type.INTEGER, 0),                                      //unit, pcs
+                new AuctionField(32, FieldType.Type.STRING, "01-234"),                                //zip
+                new AuctionField(43, FieldType.Type.FLOAT, 7.99f),                                    //price for letter
+                new AuctionField(44, FieldType.Type.FLOAT, 14.99f),                                   //price for courier
+                new AuctionField(143, FieldType.Type.FLOAT, 0f),                                      //price for letter, next pcs
+                new AuctionField(144, FieldType.Type.FLOAT, 0f),                                      //price for courier, next pcs
+                new AuctionField(243, FieldType.Type.INTEGER, 50),                                    //qty in letter
+                new AuctionField(244, FieldType.Type.INTEGER, 250),                                   //qty in parcel
+                new AuctionField(340, FieldType.Type.INTEGER, 1),                                     //sending time
+                new AuctionField(3110, FieldType.Type.INTEGER, 1)                                     //color
                 //3120 - shape
         );
     }

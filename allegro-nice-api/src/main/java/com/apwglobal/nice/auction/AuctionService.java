@@ -4,7 +4,7 @@ import com.apwglobal.nice.conv.AuctionConv;
 import com.apwglobal.nice.conv.AuctionFieldConv;
 import com.apwglobal.nice.domain.Auction;
 import com.apwglobal.nice.domain.ChangedAuctionInfo;
-import com.apwglobal.nice.domain.NewAuctionField;
+import com.apwglobal.nice.domain.AuctionField;
 import com.apwglobal.nice.exception.AllegroExecutor;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractAllegroIterator;
@@ -29,7 +29,7 @@ public class AuctionService extends AbstractService {
         return Observable.from(() -> new AuctionIterator(session, 0));
     }
 
-    public ChangedAuctionInfo changeAuctions(Long itemId, List<NewAuctionField> fieldsToModify, String session) {
+    public ChangedAuctionInfo changeAuctions(Long itemId, List<AuctionField> fieldsToModify, String session) {
         DoChangeItemFieldsRequest req = new DoChangeItemFieldsRequest();
         req.setItemId(itemId);
         req.setSessionId(session);

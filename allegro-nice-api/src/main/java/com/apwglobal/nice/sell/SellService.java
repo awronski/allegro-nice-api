@@ -49,7 +49,7 @@ public class SellService extends AbstractService {
     /**
      * http://allegro.pl/webapi/documentation.php/show/id,41#method-output
      */
-    public NewAuctionPrice checkNewAuction(List<NewAuctionField> fields, String session) {
+    public NewAuctionPrice checkNewAuction(List<AuctionField> fields, String session) {
         DoCheckNewAuctionExtRequest req = new DoCheckNewAuctionExtRequest();
         req.setSessionHandle(session);
         req.setFields(AuctionFieldConv.convert(fields));
@@ -65,7 +65,7 @@ public class SellService extends AbstractService {
     /**
      * http://allegro.pl/webapi/documentation.php/show/id,113#method-output
      */
-    public CreatedAuction createNewAuction(List<NewAuctionField> fields, String session) {
+    public CreatedAuction createNewAuction(List<AuctionField> fields, String session) {
         DoNewAuctionExtRequest req = createDoNewAuctionExtRequest(fields, session);
         DoNewAuctionExtResponse res = execute(() -> allegro.doNewAuctionExt(req));
         return new CreatedAuction.Builder()
@@ -75,7 +75,7 @@ public class SellService extends AbstractService {
                 .build();
     }
 
-    private DoNewAuctionExtRequest createDoNewAuctionExtRequest(List<NewAuctionField> fields, String session) {
+    private DoNewAuctionExtRequest createDoNewAuctionExtRequest(List<AuctionField> fields, String session) {
         DoNewAuctionExtRequest req = new DoNewAuctionExtRequest();
         req.setSessionHandle(session);
         req.setFields(AuctionFieldConv.convert(fields));

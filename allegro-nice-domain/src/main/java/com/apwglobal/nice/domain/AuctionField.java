@@ -1,14 +1,14 @@
 package com.apwglobal.nice.domain;
 
-public class NewAuctionField {
+public class AuctionField {
 
     private int id;
     private FieldType.Type type;
     private Object value;
 
-    public NewAuctionField() { }
+    public AuctionField() { }
 
-    public NewAuctionField(int id, FieldType.Type type, Object value) {
+    public AuctionField(int id, FieldType.Type type, Object value) {
         this.id = id;
         this.type = type;
         this.value = value;
@@ -26,7 +26,7 @@ public class NewAuctionField {
 
     @Override
     public String toString() {
-        return "NewAuctionField{" +
+        return "AuctionField{" +
                 "id=" + id +
                 ", type=" + type +
                 ", value=" + value +

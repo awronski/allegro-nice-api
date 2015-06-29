@@ -1,7 +1,7 @@
 package com.apwglobal.nice.conv;
 
 import com.apwglobal.bd.BD;
-import com.apwglobal.nice.domain.NewAuctionField;
+import com.apwglobal.nice.domain.AuctionField;
 import pl.allegro.webapi.ArrayOfFieldsvalue;
 import pl.allegro.webapi.FieldsValue;
 
@@ -18,7 +18,7 @@ public class AuctionFieldConv {
     // 7 - image (base64Binary),
     // 9 - datetime (Unix time),
     // 13 - date (dd-mm-yyyy)
-    public static FieldsValue convert(NewAuctionField f) {
+    public static FieldsValue convert(AuctionField f) {
         FieldsValue fv = new FieldsValue();
         fv.setFid(f.getId());
         switch (f.getType()) {
@@ -53,7 +53,7 @@ public class AuctionFieldConv {
         return fv;
     }
 
-    public static ArrayOfFieldsvalue convert(List<NewAuctionField> fields) {
+    public static ArrayOfFieldsvalue convert(List<AuctionField> fields) {
         return new ArrayOfFieldsvalue(
                 fields
                         .stream()

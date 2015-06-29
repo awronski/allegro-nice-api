@@ -142,7 +142,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     }
 
     @Override
-    public ChangedAuctionInfo changeAuctions(long itemId, List<NewAuctionField> fieldsToModify) {
+    public ChangedAuctionInfo changeAuctions(long itemId, List<AuctionField> fieldsToModify) {
         return auctionService.changeAuctions(itemId, fieldsToModify, session.getSessionId());
     }
 
@@ -157,12 +157,12 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     }
 
     @Override
-    public NewAuctionPrice checkNewAuction(List<NewAuctionField> fields) {
+    public NewAuctionPrice checkNewAuction(List<AuctionField> fields) {
         return sellService.checkNewAuction(fields, session.getSessionId());
     }
 
     @Override
-    public CreatedAuction createNewAuction(List<NewAuctionField> fields) {
+    public CreatedAuction createNewAuction(List<AuctionField> fields) {
         return sellService.createNewAuction(fields, session.getSessionId());
     }
 
