@@ -9,10 +9,7 @@ import rx.Observable;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
@@ -68,6 +65,19 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
                 .forEach(Assert::assertNotNull);
     }
 
+    @Test
+    public void shouldChangeAuction() {
+        List<Auction> single = api.login().getAuctions().limit(1).toList().toBlocking().single();
+        if (!single.isEmpty()) {
+            List<NewAuctionField> fields = Collections.singletonList(
+                    new NewAuctionField(1, FieldType.Type.STRING, System.nanoTime() + ": Testing 123")
+            );
+            ChangedAuctionInfo changedAuctionInfo = api
+                    .login()
+                    .changeAuctions(single.get(0).getId(), fields);
+            assertNotNull(changedAuctionInfo);
+        }
+    }
     @Test
     public void shouldReturnListCategories() {
         List<Category> categories = api

@@ -83,9 +83,10 @@ CreatedAuction created = api.createNewAuction(fields);
 ChangedQty changedQty = api.changeQty(itemId, 5);
 ```
 
-## Finish auctions
+## Change or finish auctions
 ```java
-List<FinishAuctionFailure> failures = api.finishAuctions(List<Long> itemsIds);
+ChangedAuctionInfo changedAuctionInfo = api.changeAuctions(itemId, fields);
+List<FinishAuctionFailure> failures = api.finishAuctions(itemsIds);
 ```
 
 ## Get and create feedbacks

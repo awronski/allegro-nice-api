@@ -2,9 +2,14 @@ package com.apwglobal.nice.conv;
 
 import com.apwglobal.bd.BD;
 import com.apwglobal.nice.domain.NewAuctionField;
+import pl.allegro.webapi.ArrayOfFieldsvalue;
 import pl.allegro.webapi.FieldsValue;
 
-public class NewAuctionFieldConv {
+import java.util.List;
+
+import static java.util.stream.Collectors.toList;
+
+public class AuctionFieldConv {
 
 
     // 1 - string,
@@ -46,6 +51,15 @@ public class NewAuctionFieldConv {
                 break;
         }
         return fv;
+    }
+
+    public static ArrayOfFieldsvalue convert(List<NewAuctionField> fields) {
+        return new ArrayOfFieldsvalue(
+                fields
+                        .stream()
+                        .map(AuctionFieldConv::convert)
+                        .collect(toList())
+        );
     }
 
 }

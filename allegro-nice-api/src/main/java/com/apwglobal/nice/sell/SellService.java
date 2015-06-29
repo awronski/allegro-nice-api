@@ -2,7 +2,7 @@ package com.apwglobal.nice.sell;
 
 import com.apwglobal.nice.conv.CategoryConv;
 import com.apwglobal.nice.conv.FormFieldConv;
-import com.apwglobal.nice.conv.NewAuctionFieldConv;
+import com.apwglobal.nice.conv.AuctionFieldConv;
 import com.apwglobal.nice.domain.*;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractService;
@@ -52,7 +52,7 @@ public class SellService extends AbstractService {
     public NewAuctionPrice checkNewAuction(List<NewAuctionField> fields, String session) {
         DoCheckNewAuctionExtRequest req = new DoCheckNewAuctionExtRequest();
         req.setSessionHandle(session);
-        req.setFields(convert(fields));
+        req.setFields(AuctionFieldConv.convert(fields));
         DoCheckNewAuctionExtResponse res = execute(() -> allegro.doCheckNewAuctionExt(req));
 
         return new NewAuctionPrice.Builder()
@@ -60,15 +60,6 @@ public class SellService extends AbstractService {
                 .priceDesc(res.getItemPriceDesc())
                 .allegroStandard(res.getItemIsAllegroStandard())
                 .build();
-    }
-
-    private ArrayOfFieldsvalue convert(List<NewAuctionField> fields) {
-        return new ArrayOfFieldsvalue(
-                fields
-                        .stream()
-                        .map(NewAuctionFieldConv::convert)
-                        .collect(toList())
-        );
     }
 
     /**
@@ -87,7 +78,7 @@ public class SellService extends AbstractService {
     private DoNewAuctionExtRequest createDoNewAuctionExtRequest(List<NewAuctionField> fields, String session) {
         DoNewAuctionExtRequest req = new DoNewAuctionExtRequest();
         req.setSessionHandle(session);
-        req.setFields(convert(fields));
+        req.setFields(AuctionFieldConv.convert(fields));
         req.setLocalId((int) (Math.random() * Integer.MAX_VALUE));
         return req;
     }
