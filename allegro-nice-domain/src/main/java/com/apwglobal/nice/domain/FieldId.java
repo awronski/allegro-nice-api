@@ -18,6 +18,7 @@ public enum FieldId {
     CITY(11),
     TRANSPORT_PAID_BY(12),
     INVOICE(14),
+    EXTRA_OPTIONS(15),
     IMAGE(16),
     DESC(24),
     UNIT(28),
