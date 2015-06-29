@@ -14,6 +14,12 @@ public class AuctionField {
         this.value = value;
     }
 
+    public AuctionField(FieldId id, FieldType.Type type, Object value) {
+        this.id = id.getId();
+        this.type = type;
+        this.value = value;
+    }
+
     public int getId() {
         return id;
     }

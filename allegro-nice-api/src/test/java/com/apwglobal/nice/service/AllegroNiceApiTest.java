@@ -142,30 +142,29 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         String img = Base64.getEncoder().encodeToString(IOUtils.toByteArray(is));
 
         return Arrays.asList(
-                new AuctionField(1, FieldType.Type.STRING, System.nanoTime() + ": Testing 123"),      //title
-                new AuctionField(2, FieldType.Type.INTEGER, 76661),                                   //category
-                new AuctionField(4, FieldType.Type.INTEGER, 99),                                      //duration
-                new AuctionField(29, FieldType.Type.INTEGER, 1),                                      //sell type, shop
-                new AuctionField(5, FieldType.Type.INTEGER, 10),                                      //qty
-                new AuctionField(8, FieldType.Type.FLOAT, 1.99f),                                     //price, buy now
-                new AuctionField(9, FieldType.Type.INTEGER, 1),                                       //country
-                new AuctionField(10, FieldType.Type.INTEGER, 7),                                      //state, mazowieckie
-                new AuctionField(11, FieldType.Type.STRING, "Warszawa"),                              //city
-                new AuctionField(12, FieldType.Type.INTEGER, 1),                                      //transport, paid by buyer
-                new AuctionField(14, FieldType.Type.INTEGER, 32),                                     //invoice possible
-                new AuctionField(16, FieldType.Type.IMAGE, img),                                      //image
-                new AuctionField(24, FieldType.Type.STRING, "This is description <b>with html</b>"),  //desc
-                new AuctionField(28, FieldType.Type.INTEGER, 0),                                      //unit, pcs
-                new AuctionField(32, FieldType.Type.STRING, "01-234"),                                //zip
-                new AuctionField(43, FieldType.Type.FLOAT, 7.99f),                                    //price for letter
-                new AuctionField(44, FieldType.Type.FLOAT, 14.99f),                                   //price for courier
-                new AuctionField(143, FieldType.Type.FLOAT, 0f),                                      //price for letter, next pcs
-                new AuctionField(144, FieldType.Type.FLOAT, 0f),                                      //price for courier, next pcs
-                new AuctionField(243, FieldType.Type.INTEGER, 50),                                    //qty in letter
-                new AuctionField(244, FieldType.Type.INTEGER, 250),                                   //qty in parcel
-                new AuctionField(340, FieldType.Type.INTEGER, 1),                                     //sending time
-                new AuctionField(3110, FieldType.Type.INTEGER, 1)                                     //color
-                //3120 - shape
+                new AuctionField(FieldId.TITLE, FieldType.Type.STRING, System.nanoTime() + ": Testing 123"),
+                new AuctionField(FieldId.CATEGORY, FieldType.Type.INTEGER, 76661),
+                new AuctionField(FieldId.DURATION, FieldType.Type.INTEGER, 99),
+                new AuctionField(FieldId.SELL_TYPE, FieldType.Type.INTEGER, 1),
+                new AuctionField(FieldId.QTY, FieldType.Type.INTEGER, 10),
+                new AuctionField(FieldId.PRICE, FieldType.Type.FLOAT, 1.99f),
+                new AuctionField(FieldId.COUNTRY, FieldType.Type.INTEGER, 1),
+                new AuctionField(FieldId.STATE, FieldType.Type.INTEGER, 7),
+                new AuctionField(FieldId.CITY, FieldType.Type.STRING, "Warszawa"),
+                new AuctionField(FieldId.TRANSPORT_PAID_BY, FieldType.Type.INTEGER, 1),
+                new AuctionField(FieldId.INVOICE, FieldType.Type.INTEGER, 32),
+                new AuctionField(FieldId.IMAGE, FieldType.Type.IMAGE, img),
+                new AuctionField(FieldId.DESC, FieldType.Type.STRING, "This is description <b>with html</b>"),
+                new AuctionField(FieldId.UNIT, FieldType.Type.INTEGER, 0),
+                new AuctionField(FieldId.ZIP, FieldType.Type.STRING, "01-234"),
+                new AuctionField(FieldId.PRICE_FOR_LETTER, FieldType.Type.FLOAT, 7.99f),
+                new AuctionField(FieldId.PRICE_FOR_COURIER, FieldType.Type.FLOAT, 14.99f),
+                new AuctionField(FieldId.PRICE_FOR_LETTER_NEXT_UNIT, FieldType.Type.FLOAT, 0f),
+                new AuctionField(FieldId.PRICE_FOR_COURIER_NEXT_UNIT, FieldType.Type.FLOAT, 0f),
+                new AuctionField(FieldId.MAX_QTY_IN_LETTER, FieldType.Type.INTEGER, 50),
+                new AuctionField(FieldId.MAX_QTY_IN_COURIER, FieldType.Type.INTEGER, 250),
+                new AuctionField(FieldId.SENDING_TIME, FieldType.Type.INTEGER, 1),
+                new AuctionField(FieldId.COLOR, FieldType.Type.INTEGER, 1)
         );
     }
 
