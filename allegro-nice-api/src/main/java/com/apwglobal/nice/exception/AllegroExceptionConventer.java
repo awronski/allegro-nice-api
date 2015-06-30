@@ -12,7 +12,7 @@ public class AllegroExceptionConventer {
         mapping = new ConcurrentHashMap<>();
         mapping.put("ERR_USER_PASSWD", UserPasswordException.class);
         mapping.put("ERR_WEBAPI_KEY", WebApiKeyException.class);
-        mapping.put("ERR_CANT_CHANGE_.+_AFTER_BID", CantChangeItemAfterBid.class);
+        mapping.put("ERR_CANT_CHANGE_.+_AFTER_BID", CantChangeItemAfterBidException.class);
     }
 
     public AllegroException convertException(String code, Exception e) {
