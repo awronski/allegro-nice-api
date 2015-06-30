@@ -32,6 +32,7 @@ public interface IAllegroNiceApi {
 
     //selling
     Observable<Auction> getAuctions();
+    List<AuctionField> getAuctionFields(long itemId);
     ChangedAuctionInfo changeAuctions(long itemId, List<AuctionField> fieldsToModify);
     List<Category> getCategories();
     List<FormField> getSellFormFields(int categoryId);

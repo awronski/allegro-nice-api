@@ -29,6 +29,12 @@ public class AuctionService extends AbstractService {
         return Observable.from(() -> new AuctionIterator(session, 0));
     }
 
+    public List<AuctionField> getAuctionFields(String session, long itemId) {
+        DoGetItemFieldsRequest req = new DoGetItemFieldsRequest(session, itemId);
+        DoGetItemFieldsResponse res = execute(() -> allegro.doGetItemFields(req));
+        return AuctionFieldConv.convert(res.getItemFields());
+    }
+
     public ChangedAuctionInfo changeAuctions(Long itemId, List<AuctionField> fieldsToModify, String session) {
         DoChangeItemFieldsRequest req = new DoChangeItemFieldsRequest();
         req.setItemId(itemId);

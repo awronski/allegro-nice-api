@@ -66,11 +66,21 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     }
 
     @Test
+    public void shouldReturnAuctionFields() {
+        List<Auction> single = api.login().getAuctions().limit(1).toList().toBlocking().single();
+        if (!single.isEmpty()) {
+            List<AuctionField> auctionFields = api
+                    .login()
+                    .getAuctionFields(single.get(0).getId());
+            assertNotNull(auctionFields);
+        }
+    }
+    @Test
     public void shouldChangeAuction() {
         List<Auction> single = api.login().getAuctions().limit(1).toList().toBlocking().single();
         if (!single.isEmpty()) {
             List<AuctionField> fields = Collections.singletonList(
-                    new AuctionField(1, FieldType.Type.STRING, System.nanoTime() + ": Testing 123")
+                    new AuctionField<>(1, FieldType.Type.STRING, System.nanoTime() + ": Testing 123")
             );
             ChangedAuctionInfo changedAuctionInfo = api
                     .login()

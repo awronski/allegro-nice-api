@@ -2,6 +2,7 @@ package com.apwglobal.nice.conv;
 
 import com.apwglobal.bd.BD;
 import com.apwglobal.nice.domain.AuctionField;
+import com.apwglobal.nice.domain.FieldType;
 import pl.allegro.webapi.ArrayOfFieldsvalue;
 import pl.allegro.webapi.FieldsValue;
 
@@ -53,6 +54,27 @@ public class AuctionFieldConv {
         return fv;
     }
 
+    public static AuctionField convert(FieldsValue f) {
+
+        AuctionField<?> af;
+        if (!f.getFvalueString().isEmpty()) {
+            af = new AuctionField<>(f.getFid(), FieldType.Type.STRING, f.getFvalueString());
+        } else if (f.getFvalueDatetime() > 0) {
+            af = new AuctionField<>(f.getFid(), FieldType.Type.UNIX_DATE, f.getFvalueDatetime());
+        } else if (!f.getFvalueDate().isEmpty()) {
+            af = new AuctionField<>(f.getFid(), FieldType.Type.DATE, f.getFvalueDate());
+        } else if (f.getFvalueImage().length > 0) {
+            af = new AuctionField<>(f.getFid(), FieldType.Type.IMAGE, f.getFvalueImage());
+        } else if (f.getFvalueInt() > 0) {
+            af = new AuctionField<>(f.getFid(), FieldType.Type.INTEGER, f.getFvalueInt());
+        } else {
+            //just a guess
+            af = new AuctionField<>(f.getFid(), FieldType.Type.FLOAT, f.getFvalueFloat());
+        }
+
+        return af;
+    }
+
     public static ArrayOfFieldsvalue convert(List<AuctionField> fields) {
         return new ArrayOfFieldsvalue(
                 fields
@@ -62,4 +84,10 @@ public class AuctionFieldConv {
         );
     }
 
+    public static List<AuctionField> convert(ArrayOfFieldsvalue values) {
+        return values.getItem()
+                .stream()
+                .map(AuctionFieldConv::convert)
+                .collect(toList());
+    }
 }

@@ -141,6 +141,10 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         return auctionService.getAuctions(session.getSessionId());
     }
 
+    public List<AuctionField> getAuctionFields(long itemId) {
+        return auctionService.getAuctionFields(session.getSessionId(), itemId);
+    }
+
     @Override
     public ChangedAuctionInfo changeAuctions(long itemId, List<AuctionField> fieldsToModify) {
         return auctionService.changeAuctions(itemId, fieldsToModify, session.getSessionId());
