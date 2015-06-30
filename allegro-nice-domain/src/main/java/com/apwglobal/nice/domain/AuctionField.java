@@ -1,20 +1,20 @@
 package com.apwglobal.nice.domain;
 
-public class AuctionField {
+public class AuctionField<T> {
 
     private int id;
     private FieldType.Type type;
-    private Object value;
+    private T value;
 
     public AuctionField() { }
 
-    public AuctionField(int id, FieldType.Type type, Object value) {
+    public AuctionField(int id, FieldType.Type type, T value) {
         this.id = id;
         this.type = type;
         this.value = value;
     }
 
-    public AuctionField(FieldId id, FieldType.Type type, Object value) {
+    public AuctionField(FieldId id, FieldType.Type type, T value) {
         this.id = id.getId();
         this.type = type;
         this.value = value;
@@ -26,7 +26,7 @@ public class AuctionField {
     public FieldType.Type getType() {
         return type;
     }
-    public Object getValue() {
+    public T getValue() {
         return value;
     }
 
