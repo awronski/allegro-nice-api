@@ -6,4 +6,8 @@ public class UserPasswordException extends AllegroException {
         super(message, cause);
     }
 
+    public UserPasswordException(String message) {
+        super(message);
+    }
+
 }

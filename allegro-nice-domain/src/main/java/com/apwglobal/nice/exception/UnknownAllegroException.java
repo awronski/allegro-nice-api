@@ -6,4 +6,8 @@ public class UnknownAllegroException extends AllegroException {
         super(message, cause);
     }
 
+    public UnknownAllegroException(String message) {
+        super(message);
+    }
+
 }

@@ -6,4 +6,8 @@ public abstract class AllegroException extends RuntimeException {
         super(message, cause);
     }
 
+    public AllegroException(String message) {
+        super(message);
+    }
+
 }

@@ -6,4 +6,8 @@ public class WebApiKeyException extends AllegroException {
         super(message, cause);
     }
 
+    public WebApiKeyException(String message) {
+        super(message);
+    }
+
 }

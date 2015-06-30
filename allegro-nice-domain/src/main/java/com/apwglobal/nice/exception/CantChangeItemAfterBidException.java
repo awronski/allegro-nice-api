@@ -6,4 +6,8 @@ public class CantChangeItemAfterBidException extends AllegroException {
         super(message, cause);
     }
 
+    public CantChangeItemAfterBidException(String message) {
+        super(message);
+    }
+
 }
