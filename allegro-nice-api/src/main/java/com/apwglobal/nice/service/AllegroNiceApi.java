@@ -27,6 +27,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
 
@@ -139,6 +140,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     @Override
     public Observable<Auction> getAuctions() {
         return auctionService.getAuctions(session.getSessionId());
+    }
+
+    @Override
+    public Optional<Auction> getAuctionById(long itemId) {
+        return auctionService.getAuctionById(session.getSessionId(), itemId);
     }
 
     public List<AuctionField> getAuctionFields(long itemId) {

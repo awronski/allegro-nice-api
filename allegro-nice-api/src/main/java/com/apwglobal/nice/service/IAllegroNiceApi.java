@@ -7,6 +7,7 @@ import rx.Observable;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public interface IAllegroNiceApi {
 
@@ -32,6 +33,7 @@ public interface IAllegroNiceApi {
 
     //selling
     Observable<Auction> getAuctions();
+    Optional<Auction> getAuctionById(long itemId);
     List<AuctionField> getAuctionFields(long itemId);
     ChangedAuctionInfo changeAuctions(long itemId, List<AuctionField> fieldsToModify);
     List<Category> getCategories();
