@@ -241,6 +241,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     * Workaround for allegro ssl cert bug
      */
     private static void allegroIncorrectCertificateWorkaround() {
+//        Properties systemProperties = System.getProperties();
+//        systemProperties.setProperty( "http.proxyHost", "127.0.0.1" );
+//        systemProperties.setProperty( "http.proxyPort", "8888" );
+//        systemProperties.setProperty( "https.proxyHost", "127.0.0.1" );
+//        systemProperties.setProperty( "https.proxyPort", "8888" );
         TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
             public java.security.cert.X509Certificate[] getAcceptedIssuers() {
                 return null;
