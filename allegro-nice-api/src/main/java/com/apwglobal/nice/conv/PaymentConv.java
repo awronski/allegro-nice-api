@@ -25,7 +25,7 @@ public class PaymentConv {
         List<Item> items = f.getPostBuyFormItems()
                 .getItem()
                 .stream()
-                .map(i -> ItemConv.convert(i, f.getPostBuyFormId()))
+                .map(i -> ItemConv.convert(i, f.getPostBuyFormId(), sellerId))
                 .collect(toList());
 
         return new Payment.Builder()

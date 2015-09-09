@@ -5,6 +5,7 @@ import com.apwglobal.bd.BD;
 public class Item {
 
     private long id;
+    private long sellerId;
     private long transactionId;
     private String title;
 
@@ -16,6 +17,7 @@ public class Item {
 
     private Item(Builder builder) {
         id = builder.id;
+        sellerId = builder.sellerId;
         transactionId = builder.transactionId;
         title = builder.title;
         price = builder.price;
@@ -41,9 +43,13 @@ public class Item {
     public long getTransactionId() {
         return transactionId;
     }
+    public long getSellerId() {
+        return sellerId;
+    }
 
     public static final class Builder {
         private long id;
+        private long sellerId;
         private long transactionId;
         private String title;
         private double price;
@@ -55,6 +61,11 @@ public class Item {
 
         public Builder id(long id) {
             this.id = id;
+            return this;
+        }
+
+        public Builder sellerId(long sellerId) {
+            this.sellerId = sellerId;
             return this;
         }
 
@@ -92,6 +103,7 @@ public class Item {
     public String toString() {
         return "Item{" +
                 "id=" + id +
+                ", sellerId='" + sellerId + '\'' +
                 ", transactionId='" + transactionId + '\'' +
                 ", title='" + title + '\'' +
                 ", price=" + price +
