@@ -7,6 +7,8 @@ import pl.allegro.webapi.DoQueryAllSysStatusRequest;
 import pl.allegro.webapi.ServicePort;
 import pl.allegro.webapi.SysStatusType;
 
+import static com.apwglobal.nice.exception.AllegroExecutor.execute;
+
 public class SystemService extends AbstractService {
 
 
@@ -19,13 +21,14 @@ public class SystemService extends AbstractService {
      */
     public SysStatusType getStatus() {
         DoQueryAllSysStatusRequest request = new DoQueryAllSysStatusRequest(conf.getCountryId(), cred.getKey());
-        return allegro.doQueryAllSysStatus(request)
+        return execute(() -> allegro.doQueryAllSysStatus(request)
                 .getSysCountryStatus()
                 .getItem()
                 .stream()
                 .filter(type -> type.getCountryId() == conf.getCountryId())
                 .findAny()
-                .get();
+                .get()
+        );
     }
 
 }
