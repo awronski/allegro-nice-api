@@ -23,8 +23,9 @@ mvn compile test -P testprof
 ## Initialize object
 ```java
 int countryId = 1;
+long clientId = 44556677;
 Configuration conf = new Configuration(countryId);
-Credentials cred = new Credentials("username", "password", "key");
+Credentials cred = new Credentials(clientId, "username", "password", "key");
 
 IAllegroNiceApi allegro = AllegroNiceApi.Builder()
         .conf(conf)
