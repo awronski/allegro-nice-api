@@ -36,7 +36,7 @@ public class ItemConv {
     //-- helpers for understand how allegro is really working :)
     private static void logPriceDataForAllegroBehaviourAnalyze(PostBuyFormItemStruct s, long transactionId) {
         ArrayOfPostbuyformitemdealsstruct postBuyFormItDeals = s.getPostBuyFormItDeals();
-        String log = String.format("** Transaction = %s. PostBuyFormItDeals is %s. ", transactionId, postBuyFormItDeals != null ? "Present" : "Null");
+        String log = String.format("\n** Transaction = %s. PostBuyFormItDeals is %s. ", transactionId, postBuyFormItDeals != null ? "Present" : "Null");
         log += String.format("\n**\tpostBuyFormItPrice = %s, getPostBuyFormItAmount = %s, getPostBuyFormItQuantity = %s", s.getPostBuyFormItPrice(), s.getPostBuyFormItAmount(), s.getPostBuyFormItQuantity());
 
         if (postBuyFormItDeals != null) {
