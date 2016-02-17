@@ -32,7 +32,7 @@ public class ItemConv {
     private static Item createItem(PostBuyFormItemStruct s, PostBuyFormItemDealsStruct d, long transactionId, long sellerId, Optional<Float> defaultPrice) {
         float price = defaultPrice.orElse(d.getDealFinalPrice());
         return new Item.Builder()
-                .formId(s.getPostBuyFormItId())
+                .auctionId(s.getPostBuyFormItId())
                 .title(s.getPostBuyFormItTitle())
                 .formDealId(d.getDealId())
                 .transactionId(transactionId)

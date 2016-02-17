@@ -4,7 +4,7 @@ import com.apwglobal.bd.BD;
 
 public class Item {
 
-    private long formId;
+    private long auctionId;
     private long formDealId;
     private long sellerId;
     private long transactionId;
@@ -17,7 +17,7 @@ public class Item {
     public Item() { }
 
     private Item(Builder builder) {
-        formId = builder.formId;
+        auctionId = builder.auctionId;
         formDealId = builder.formDealId;
         sellerId = builder.sellerId;
         transactionId = builder.transactionId;
@@ -27,8 +27,8 @@ public class Item {
         amount = builder.amount;
     }
 
-    public long getFormId() {
-        return formId;
+    public long getAuctionId() {
+        return auctionId;
     }
     public long getFormDealId() {
         return formDealId;
@@ -53,7 +53,7 @@ public class Item {
     }
 
     public static final class Builder {
-        private long formId;
+        private long auctionId;
         private long formDealId;
         private long sellerId;
         private long transactionId;
@@ -65,8 +65,8 @@ public class Item {
         public Builder() {
         }
 
-        public Builder formId(long formId) {
-            this.formId = formId;
+        public Builder auctionId(long auctionId) {
+            this.auctionId = auctionId;
             return this;
         }
 
@@ -113,7 +113,7 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "formId=" + formId +
+                "auctionId=" + auctionId +
                 ", formDealId=" + formDealId +
                 ", sellerId='" + sellerId + '\'' +
                 ", transactionId='" + transactionId + '\'' +
