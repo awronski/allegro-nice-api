@@ -4,7 +4,8 @@ import com.apwglobal.bd.BD;
 
 public class Item {
 
-    private long id;
+    private long formId;
+    private long formDealId;
     private long sellerId;
     private long transactionId;
     private String title;
@@ -16,7 +17,8 @@ public class Item {
     public Item() { }
 
     private Item(Builder builder) {
-        id = builder.id;
+        formId = builder.formId;
+        formDealId = builder.formDealId;
         sellerId = builder.sellerId;
         transactionId = builder.transactionId;
         title = builder.title;
@@ -25,8 +27,11 @@ public class Item {
         amount = builder.amount;
     }
 
-    public long getId() {
-        return id;
+    public long getFormId() {
+        return formId;
+    }
+    public long getFormDealId() {
+        return formDealId;
     }
     public String getTitle() {
         return title;
@@ -48,7 +53,8 @@ public class Item {
     }
 
     public static final class Builder {
-        private long id;
+        private long formId;
+        private long formDealId;
         private long sellerId;
         private long transactionId;
         private String title;
@@ -59,8 +65,13 @@ public class Item {
         public Builder() {
         }
 
-        public Builder id(long id) {
-            this.id = id;
+        public Builder formId(long formId) {
+            this.formId = formId;
+            return this;
+        }
+
+        public Builder formDealId(long formDealId) {
+            this.formDealId = formDealId;
             return this;
         }
 
@@ -102,7 +113,8 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "id=" + id +
+                "formId=" + formId +
+                ", formDealId=" + formDealId +
                 ", sellerId='" + sellerId + '\'' +
                 ", transactionId='" + transactionId + '\'' +
                 ", title='" + title + '\'' +
