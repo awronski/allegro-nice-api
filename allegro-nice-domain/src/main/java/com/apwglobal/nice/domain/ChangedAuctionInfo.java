@@ -54,4 +54,13 @@ public class ChangedAuctionInfo {
         }
     }
 
+    @Override
+    public String toString() {
+        return "ChangedAuctionInfo{" +
+                "itemId=" + itemId +
+                ", surchargeAmount=" + surchargeAmount +
+                ", totalAmount=" + totalAmount +
+                '}';
+    }
+    
 }
