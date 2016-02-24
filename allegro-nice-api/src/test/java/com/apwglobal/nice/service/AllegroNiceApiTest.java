@@ -145,7 +145,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         ChangedQty changedQty = api.changeQty(auction.getItemId(), 5);
         assertEquals(5, changedQty.getLeft());
 
-        String changedPrice = api.login().changePrice(auction.getItemId(), 2.85);
+        ChangedPrice changedPrice = api.login().changePrice(auction.getItemId(), 2.85);
     }
 
     @Test

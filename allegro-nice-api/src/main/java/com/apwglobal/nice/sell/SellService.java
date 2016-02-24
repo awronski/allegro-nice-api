@@ -96,11 +96,14 @@ public class SellService extends AbstractService {
                 .build();
     }
 
-    public String changeAuctionPrice(String session, long itemId, double newPrice) {
+    public ChangedPrice changeAuctionPrice(String session, long itemId, double newPrice) {
         DoChangePriceItemRequest req = new DoChangePriceItemRequest(session, itemId, null, null, new BD(newPrice).floatValue(2));
         DoChangePriceItemResponse res = execute(() -> allegro.doChangePriceItem(req));
 
-        return res.getItemInfo();
+        return new ChangedPrice.Builder()
+                .info(res.getItemInfo())
+                .itemId(res.getItemId())
+                .build();
     }
 
     /**
