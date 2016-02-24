@@ -182,7 +182,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     }
 
     @Override
-    public String changePrice(long itemId, double newPrice) {
+    public ChangedPrice changePrice(long itemId, double newPrice) {
         return sellService.changeAuctionPrice(session.getSessionId(), itemId, newPrice);
     }
 
