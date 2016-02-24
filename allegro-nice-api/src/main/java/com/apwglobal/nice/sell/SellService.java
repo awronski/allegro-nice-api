@@ -1,5 +1,6 @@
 package com.apwglobal.nice.sell;
 
+import com.apwglobal.bd.BD;
 import com.apwglobal.nice.conv.CategoryConv;
 import com.apwglobal.nice.conv.FormFieldConv;
 import com.apwglobal.nice.conv.AuctionFieldConv;
@@ -93,6 +94,13 @@ public class SellService extends AbstractService {
                 .sold(res.getItemQuantitySold())
                 .info(res.getItemInfo())
                 .build();
+    }
+
+    public String changeAuctionPrice(String session, long itemId, double newPrice) {
+        DoChangePriceItemRequest req = new DoChangePriceItemRequest(session, itemId, null, null, new BD(newPrice).floatValue(2));
+        DoChangePriceItemResponse res = execute(() -> allegro.doChangePriceItem(req));
+
+        return res.getItemInfo();
     }
 
     /**

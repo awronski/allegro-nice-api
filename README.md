@@ -53,6 +53,7 @@ Observable<Deal> deals =  api.getDeals(startingPoint);
 ```java
 Observable<Payment> payments - getPayments(deals);
 ```
+
 ## Subscribe to journal
 You can subscribe to user's journal using ```api.getSiteJournal(startingPoint)```.
 Like above methods this one returns [Observable](http://reactivex.io/documentation/observable.html) object too.
@@ -79,9 +80,10 @@ fields.add( new NewAuctionField(1, FieldType.Type.STRING, "Auction title") );
 CreatedAuction created = api.createNewAuction(fields);
 ```
 
-## Change auction's quantity
+## Change auction's quantity and price, even if auction has offers
 ```java
 ChangedQty changedQty = api.changeQty(itemId, 5);
+String fee = api.changePrice(itemId, 1.99);
 ```
 
 ## Change or finish auctions

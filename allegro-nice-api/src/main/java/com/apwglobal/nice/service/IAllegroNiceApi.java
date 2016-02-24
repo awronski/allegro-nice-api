@@ -41,6 +41,7 @@ public interface IAllegroNiceApi {
     NewAuctionPrice checkNewAuction(List<AuctionField> fields);
     CreatedAuction createNewAuction(List<AuctionField> fields);
     ChangedQty changeQty(long itemId, int newQty);
+    String changePrice(long itemId, double newPrice);
     List<FinishAuctionFailure> finishAuctions(List<Long> itemsIds);
 
     //incoming payments
