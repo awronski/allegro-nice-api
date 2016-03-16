@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
-public enum PromotionalOptions {
+public enum ExtraOptionsType {
 
     BOLD(1),
     THUMB(2),
@@ -18,19 +18,19 @@ public enum PromotionalOptions {
     WATERMARK(64);
 
     private Integer type;
-    PromotionalOptions(Integer type) {
+    ExtraOptionsType(Integer type) {
         this.type = type;
     }
 
-    public static final Map<Integer, PromotionalOptions> VALUES;
+    public static final Map<Integer, ExtraOptionsType> VALUES;
     static {
         VALUES = Collections.unmodifiableMap(
-                Arrays.stream(PromotionalOptions.values())
-                        .collect(toMap((PromotionalOptions v) -> v.type, v -> v))
+                Arrays.stream(ExtraOptionsType.values())
+                        .collect(toMap((ExtraOptionsType v) -> v.type, v -> v))
         );
     }
 
-    public static List<PromotionalOptions> getOptions(int value) {
+    public static List<ExtraOptionsType> getOptions(int value) {
         return  VALUES
                 .entrySet()
                 .stream()
