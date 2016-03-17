@@ -4,6 +4,7 @@ import com.apwglobal.bd.BD;
 import com.apwglobal.nice.util.UnixDate;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 public class Auction {
@@ -24,6 +25,7 @@ public class Auction {
     private boolean special;
     private boolean shop;
     private boolean payu;
+    private int extraOptions;
 
     private double price;
     private ItemPriceType priceType;
@@ -50,6 +52,7 @@ public class Auction {
         special = builder.special;
         shop = builder.shop;
         payu = builder.payu;
+        extraOptions = builder.extraOptions;
         price = builder.price;
         priceType = builder.priceType;
         open = builder.open;
@@ -104,6 +107,12 @@ public class Auction {
     public boolean isPayu() {
         return payu;
     }
+    public int getExtraOptions() {
+        return extraOptions;
+    }
+    public List<ExtraOptionsType> getExtraOptionsList() {
+        return ExtraOptionsType.getOptions(extraOptions);
+    }
     public double getPrice() {
         return price;
     }
@@ -137,6 +146,7 @@ public class Auction {
         private boolean special;
         private boolean shop;
         private boolean payu;
+        private int extraOptions;
         private double price;
         private ItemPriceType priceType;
         private boolean open;
@@ -229,6 +239,11 @@ public class Auction {
             return this;
         }
 
+        public Builder extraOptions(int extraOptions) {
+            this.extraOptions = extraOptions;
+            return this;
+        }
+
         public Builder price(float price) {
             this.price = new BD(price).doubleValue();
             return this;
@@ -264,6 +279,7 @@ public class Auction {
                 ", special=" + special +
                 ", shop=" + shop +
                 ", payu=" + payu +
+                ", extraOptions=" + extraOptions +
                 ", price=" + price +
                 ", open=" + open +
                 '}';
