@@ -1,9 +1,12 @@
 package com.apwglobal.nice.service;
 
+import java.util.Date;
+
 public class AllegroSession {
 
     private String sessionId;
     private long userId;
+    private Date lastLoginDate;
 
     private AllegroSession(Builder builder) {
         sessionId = builder.sessionId;
@@ -20,9 +23,14 @@ public class AllegroSession {
         return userId;
     }
 
+    public Date getLastLoginDate() {
+        return lastLoginDate;
+    }
+
     public static final class Builder {
         private String sessionId;
         private long userId;
+        private Date lastLoginDate;
 
         public Builder() {
         }
@@ -34,6 +42,11 @@ public class AllegroSession {
 
         public Builder userId(long userId) {
             this.userId = userId;
+            return this;
+        }
+
+        public Builder lastLoginDate(Date lastLoginDate) {
+            this.lastLoginDate = lastLoginDate;
             return this;
         }
 

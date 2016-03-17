@@ -12,6 +12,7 @@ import pl.allegro.webapi.ServicePort;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
+import java.util.Date;
 
 public class LoginService extends AbstractService {
 
@@ -30,6 +31,7 @@ public class LoginService extends AbstractService {
         return new AllegroSession.Builder()
                 .sessionId(response.getSessionHandlePart())
                 .userId(response.getUserId())
+                .lastLoginDate(new Date())
                 .build();
     }
 
