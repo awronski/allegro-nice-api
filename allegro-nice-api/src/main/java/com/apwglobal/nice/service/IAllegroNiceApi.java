@@ -13,6 +13,8 @@ public interface IAllegroNiceApi {
 
     //login
     IAllegroNiceApi login();
+    IAllegroNiceApi loginIfNeeded();
+    boolean isLogged();
     AllegroSession getSession();
     long getClientId();
 

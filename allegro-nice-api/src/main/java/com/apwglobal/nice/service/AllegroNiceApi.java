@@ -93,6 +93,16 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     }
 
     @Override
+    public IAllegroNiceApi loginIfNeeded() {
+        return isLogged() ? this : login();
+    }
+
+    @Override
+    public boolean isLogged() {
+        return session != null;
+    }
+
+    @Override
     public long getClientId() {
         return cred.getClientId();
     }
