@@ -46,12 +46,12 @@ Observable<Auction> auctions = api.getAuctions();
 ## Get list of deals
 ```java
 long startingPoint = 0;
-Observable<Deal> deals =  api.getDeals(startingPoint);
+Observable<Deal> deals = api.getDeals(startingPoint);
 ```
 
 ## Get list of payments with clients data
 ```java
-Observable<Payment> payments - getPayments(deals);
+Observable<Payment> payments = getPayments(deals);
 ```
 
 ## Subscribe to journal
@@ -95,15 +95,10 @@ List<FinishAuctionFailure> failures = api.finishAuctions(itemsIds);
 ## Get and create feedbacks
 ```java
 int counter = api.getWaintingFeedbackCounter();
-Observable<WaitingFeedback> api.getWaitingFeedbacks();
+Observable<WaitingFeedback> = api.getWaitingFeedbacks();
 
 List<CreateFeedback> create = new ArrayList<>(..)
-List<CreatedFeedback> =  api.createFeedbacks(create)
-```
-
-## Get system messages
-```java
-List<AllegroMessage> msgs = allegro.getAllMessages(LocalDateTime.now().minusDays(30));
+List<CreatedFeedback> = api.createFeedbacks(create)
 ```
 
 License
