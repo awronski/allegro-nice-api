@@ -24,6 +24,10 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         assertNotNull(restApiSession);
         assertNotNull(restApiSession.getAccessToken());
         assertNotNull(restApiSession.getRefreshRoken());
+
+        api.refreshRestApiSession();
+        assertNotNull(restApiSession.getAccessToken());
+        assertNotNull(restApiSession.getRefreshRoken());
     }
 
     @Test

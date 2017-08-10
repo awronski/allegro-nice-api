@@ -92,13 +92,24 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         }
     }
 
+
+
     /*
     *  REST API
     */
-
     @Override
     public IAllegroNiceApi restLogin(@NotNull String code) {
         this.restApiSession = restLoginService.login(code);
+        return this;
+    }
+
+    @Override
+    public AllegroNiceApi refreshRestApiSession() {
+        if (this.restApiSession == null) {
+            return this;
+        }
+
+        this.restApiSession = restLoginService.refreshToken(restApiSession);
         return this;
     }
 

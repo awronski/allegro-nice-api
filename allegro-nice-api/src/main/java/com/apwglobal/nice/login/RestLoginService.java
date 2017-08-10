@@ -29,10 +29,15 @@ public class RestLoginService {
     }
 
     public RestApiSession login(@NotNull String code) throws RestApiException {
+        return execute(createLognHttpPost(code));
+    }
+
+    public RestApiSession refreshToken(@NotNull RestApiSession restApiSession) {
+        return execute(createRefreshTokenPost(restApiSession));
+    }
+
+    private RestApiSession execute(HttpPost post) {
         CloseableHttpClient client = HttpClients.createDefault();
-
-        HttpPost post = createHttpPost(code);
-
         try (CloseableHttpResponse res = client.execute(post);) {
             HttpEntity entity = res.getEntity();
             String response = EntityUtils.toString(entity, "UTF-8");
@@ -54,9 +59,7 @@ public class RestLoginService {
     }
 
     @NotNull
-    private HttpPost createHttpPost(@NotNull String code) {
-        String authValue = credentials.getRestClientId() + ":" + credentials.getRestClientSecret();
-        String auth = String.format("Basic %s", getEncoder().encodeToString(authValue.getBytes()));
+    private HttpPost createLognHttpPost(@NotNull String code) {
         URIBuilder builder = new URIBuilder()
                 .setScheme("https").setHost("ssl.allegro.pl").setPath("/auth/oauth/token")
                 .setParameter("grant_type", "authorization_code")
@@ -70,8 +73,32 @@ public class RestLoginService {
         } catch (URISyntaxException e) {
             throw new IllegalStateException(e);
         }
-        post.setHeader("Authorization", auth);
+        post.setHeader("Authorization", getAuth());
         return post;
+    }
+
+    @NotNull
+    private HttpPost createRefreshTokenPost(RestApiSession restApiSession) {
+        URIBuilder builder = new URIBuilder()
+                .setScheme("https").setHost("ssl.allegro.pl").setPath("/auth/oauth/token")
+                .setParameter("grant_type", "refresh_token")
+                .setParameter("refresh_token", restApiSession.getRefreshRoken())
+                .setParameter("redirect_uri", credentials.getRestRedirectUri());
+
+        HttpPost post = null;
+        try {
+            post = new HttpPost(builder.build());
+        } catch (URISyntaxException e) {
+            throw new IllegalStateException(e);
+        }
+        post.setHeader("Authorization", getAuth());
+        post.setHeader("Api-Key", credentials.getRestClientApiKey());
+        return post;
+    }
+
+    private String getAuth() {
+        String authValue = credentials.getRestClientId() + ":" + credentials.getRestClientSecret();
+        return String.format("Basic %s", getEncoder().encodeToString(authValue.getBytes()));
     }
 
 }
