@@ -12,6 +12,7 @@ public abstract class AbstractServiceBaseTest {
     protected static Credentials cred;
     protected static Configuration conf;
     protected static boolean test;
+    protected static String code;
 
     @BeforeClass
     public static void abstractServiceSetup() throws IOException {
@@ -23,8 +24,14 @@ public abstract class AbstractServiceBaseTest {
                 Long.parseLong(properties.getProperty("allegro.clientId")),
                 properties.getProperty("allegro.username"),
                 properties.getProperty("allegro.password"),
-                properties.getProperty("allegro.key")
+                properties.getProperty("allegro.key"),
+                properties.getProperty("allegro.rest.clientid"),
+                properties.getProperty("allegro.rest.client.secret"),
+                properties.getProperty("allegro.rest.client.api.key"),
+                properties.getProperty("allegro.rest.redirect.uri")
         );
+
+        code = properties.getProperty("allegro.rest.ten.seconds.code");
 
         int countryId = Integer.valueOf(properties.getProperty("allegro.country"));
         conf = new Configuration(countryId);

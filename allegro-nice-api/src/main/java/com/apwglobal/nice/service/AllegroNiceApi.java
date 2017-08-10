@@ -9,9 +9,13 @@ import com.apwglobal.nice.feedback.FeedbackService;
 import com.apwglobal.nice.journal.JournalService;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.login.LoginService;
+import com.apwglobal.nice.login.RestLoginService;
 import com.apwglobal.nice.payment.IncomingPaymentService;
+import com.apwglobal.nice.rest.RestApiSession;
 import com.apwglobal.nice.sell.SellService;
 import com.apwglobal.nice.system.SystemService;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pl.allegro.webapi.ItemPostBuyDataStruct;
 import pl.allegro.webapi.ServicePort;
 import pl.allegro.webapi.ServiceService;
@@ -32,10 +36,11 @@ import java.util.Optional;
 public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
 
     private static final String URN_SANDBOX_WEB_API = "urn:SandboxWebApi";
-    private static final String ALLEGRO_WEBAPISANDBOX_WSDL =
-            "https://webapi.allegro.pl.webapisandbox.pl/service.php?wsdl";
+    private static final String ALLEGRO_WEBAPISANDBOX_WSDL = "https://webapi.allegro.pl.webapisandbox.pl/service.php?wsdl";
 
+    private RestApiSession restApiSession;
     private AllegroSession session;
+    private RestLoginService restLoginService;
     private LoginService loginService;
     private InfoService infoService;
     private SystemService systemService;
@@ -53,6 +58,7 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         conf = builder.conf;
 
         loginService = new LoginService(allegro, cred, conf);
+        restLoginService = new RestLoginService(cred);
         infoService = new InfoService(allegro, cred, conf);
         systemService = new SystemService(allegro, cred, conf);
         journalService = new JournalService(allegro, cred, conf);
@@ -85,6 +91,28 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
             throw new IllegalStateException(e.getMessage(), e);
         }
     }
+
+    /*
+    *  REST API
+    */
+
+    @Override
+    public IAllegroNiceApi restLogin(@NotNull String code) {
+        this.restApiSession = restLoginService.login(code);
+        return this;
+    }
+
+    @Nullable
+    @Override
+    public RestApiSession getRestApiSession() {
+        return restApiSession;
+    }
+
+
+
+    /*
+     *  WEB API
+     */
 
     @Override
     public IAllegroNiceApi login() {
@@ -256,11 +284,6 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     * Workaround for allegro ssl cert bug
      */
     private static void allegroIncorrectCertificateWorkaround() {
-//        Properties systemProperties = System.getProperties();
-//        systemProperties.setProperty( "http.proxyHost", "127.0.0.1" );
-//        systemProperties.setProperty( "http.proxyPort", "8888" );
-//        systemProperties.setProperty( "https.proxyHost", "127.0.0.1" );
-//        systemProperties.setProperty( "https.proxyPort", "8888" );
         TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
             public java.security.cert.X509Certificate[] getAcceptedIssuers() {
                 return null;

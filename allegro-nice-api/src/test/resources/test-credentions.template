@@ -1,6 +1,17 @@
+#fill it
 allegro.clientId=12345678
 allegro.username=user
 allegro.password=password
 allegro.key=12345
 allegro.country=1
 allegro.sandbox=true
+
+allegro.rest.clientid=xxxx-xxxx-xxxx
+allegro.rest.client.secret=secret
+allegro.rest.client.api.key=yyyy-yyyy-yyyy
+allegro.rest.redirect.uri=https://somepage.pl
+allegro.rest.ten.seconds.code=zzzz-zzzz-zzzz
+
+#To get the code from allegro use the link below
+#Attention, the code is valid only for ten seconds
+#https://ssl.allegro.pl/auth/oauth/authorize?response_type=code&client_id=CLIENT_iD&api-key=API_KEY&redirect_uri=REDIRECT_URI

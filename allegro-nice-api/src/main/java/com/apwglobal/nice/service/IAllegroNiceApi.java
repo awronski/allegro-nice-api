@@ -1,6 +1,9 @@
 package com.apwglobal.nice.service;
 
 import com.apwglobal.nice.domain.*;
+import com.apwglobal.nice.rest.RestApiSession;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import pl.allegro.webapi.ItemPostBuyDataStruct;
 import pl.allegro.webapi.SysStatusType;
 import rx.Observable;
@@ -10,6 +13,10 @@ import java.util.Map;
 import java.util.Optional;
 
 public interface IAllegroNiceApi {
+
+    //rest
+    IAllegroNiceApi restLogin(@NotNull String code);
+    @Nullable RestApiSession getRestApiSession();
 
     //login
     IAllegroNiceApi login();

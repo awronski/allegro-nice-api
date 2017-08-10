@@ -7,7 +7,7 @@
    <parent>
         <groupId>com.apwglobal</groupId>
         <artifactId>allegro-nice-parent</artifactId>
-        <version>2.5.0-SNAPSHOT</version>
+        <version>3.0.0</version>
     </parent>
     <artifactId>allegro-nice-domain</artifactId>
     <packaging>jar</packaging>
@@ -21,7 +21,7 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>4.1.5.RELEASE</version>
+            <version>4.1.7.RELEASE</version>
         </dependency>
     </dependencies>
 

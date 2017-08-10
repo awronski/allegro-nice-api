@@ -2,6 +2,7 @@ package com.apwglobal.nice.service;
 
 import com.apwglobal.nice.domain.*;
 import com.apwglobal.nice.login.AbstractLoggedServiceBaseTest;
+import com.apwglobal.nice.rest.RestApiSession;
 import org.apache.commons.io.IOUtils;
 import org.junit.Assert;
 import org.junit.Test;
@@ -16,6 +17,14 @@ import static java.util.stream.Collectors.toList;
 import static org.junit.Assert.*;
 
 public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
+
+    @Test
+    public void shouldResturnRestApiSession() {
+        RestApiSession restApiSession = api.restLogin(code).getRestApiSession();
+        assertNotNull(restApiSession);
+        assertNotNull(restApiSession.getAccessToken());
+        assertNotNull(restApiSession.getRefreshRoken());
+    }
 
     @Test
     public void shouldReturnSessionId() {
