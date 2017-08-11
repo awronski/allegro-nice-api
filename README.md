@@ -1,5 +1,6 @@
 # allegro-nice-api
 Flexible and easy to use java api for allegro service focused on trading operation on allegro platform.
+Supports **BOTH Allegro WebApi** and **Allegro Rest Api**. 
 
 ## Requirements
 - Java 8
@@ -23,9 +24,17 @@ mvn compile test -P testprof
 ## Initialize object
 ```java
 int countryId = 1;
-long clientId = 44556677;
 Configuration conf = new Configuration(countryId);
-Credentials cred = new Credentials(clientId, "username", "password", "key");
+Credentials cred = new Credentials(
+        clientId, 
+        username, 
+        password, 
+        webApiKey,
+        restClientId,
+        restClientSecret,
+        restClientApiKey,
+        restRedirectUri
+        );
 
 IAllegroNiceApi allegro = AllegroNiceApi.Builder()
         .conf(conf)
@@ -33,9 +42,22 @@ IAllegroNiceApi allegro = AllegroNiceApi.Builder()
         .build();
 ```
 
-## Login
+## Login for WebApi
 ```java
 allegro.login();
+```
+
+## Login for RestApi
+To get the code you need to authorize your user with allegro.
+[Documentation](https://developer.allegroapi.io/auth/#user)
+
+```java
+allegro.restLogin(code);
+```
+
+### Refrsh RestApi tokens
+```java
+allegro.refreshRestApiSession();
 ```
 
 ## Get user's auctions
@@ -90,15 +112,6 @@ ChangedPrice changedPrice = api.changePrice(itemId, 1.99);
 ```java
 ChangedAuctionInfo changedAuctionInfo = api.changeAuctions(itemId, fields);
 List<FinishAuctionFailure> failures = api.finishAuctions(itemsIds);
-```
-
-## Get and create feedbacks
-```java
-int counter = api.getWaintingFeedbackCounter();
-Observable<WaitingFeedback> = api.getWaitingFeedbacks();
-
-List<CreateFeedback> create = new ArrayList<>(..)
-List<CreatedFeedback> = api.createFeedbacks(create)
 ```
 
 License

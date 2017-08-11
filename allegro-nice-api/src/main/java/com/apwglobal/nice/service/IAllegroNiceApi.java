@@ -57,9 +57,4 @@ public interface IAllegroNiceApi {
     //incoming payments
     Observable<IncomingPayment> getIncomingPayments();
 
-    //feedback
-    int getWaintingFeedbackCounter();
-    Observable<WaitingFeedback> getWaitingFeedbacks();
-    List<CreatedFeedback> createFeedbacks(List<CreateFeedback> feedbacks);
-
 }

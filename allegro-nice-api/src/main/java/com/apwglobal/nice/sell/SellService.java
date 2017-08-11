@@ -1,23 +1,31 @@
 package com.apwglobal.nice.sell;
 
 import com.apwglobal.bd.BD;
+import com.apwglobal.nice.conv.AuctionFieldConv;
 import com.apwglobal.nice.conv.CategoryConv;
 import com.apwglobal.nice.conv.FormFieldConv;
-import com.apwglobal.nice.conv.AuctionFieldConv;
 import com.apwglobal.nice.domain.*;
+import com.apwglobal.nice.exception.RestApiException;
 import com.apwglobal.nice.login.Credentials;
+import com.apwglobal.nice.rest.RestApiSession;
 import com.apwglobal.nice.service.AbstractService;
 import com.apwglobal.nice.service.Configuration;
+import com.apwglobal.nice.util.ClientExecuteUtil;
+import com.apwglobal.nice.util.RestCommandBuilder;
 import com.google.common.collect.Lists;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import org.apache.http.client.methods.HttpPut;
 import pl.allegro.webapi.*;
 
 import java.util.List;
+import java.util.UUID;
 
 import static com.apwglobal.nice.exception.AllegroExecutor.execute;
 import static java.util.stream.Collectors.toList;
 
 public class SellService extends AbstractService {
-
 
     public SellService(ServicePort allegro, Credentials cred, Configuration conf) {
         super(allegro, cred, conf);
@@ -96,14 +104,32 @@ public class SellService extends AbstractService {
                 .build();
     }
 
-    public ChangedPrice changeAuctionPrice(String session, long itemId, double newPrice) {
-        DoChangePriceItemRequest req = new DoChangePriceItemRequest(session, itemId, null, null, new BD(newPrice).floatValue(2));
-        DoChangePriceItemResponse res = execute(() -> allegro.doChangePriceItem(req));
+    /**
+     * https://developer.allegroapi.io/documentation/#!/default/put_offers_offerId_change_price_commands_commandId
+     */
+    public ChangedPrice changeAuctionPrice(RestApiSession session, long itemId, double newPrice) {
+        String price = String.valueOf(new BD(newPrice).floatValue(2));
+        String input = String.format("{ \"input\": { \"buyNowPrice\": { \"amount\": \"%s\", \"currency\": \"PLN\" } } }", price);
+        String path = String.format("/offers/%d/change-price-commands/%s", itemId, UUID.randomUUID());
 
-        return new ChangedPrice.Builder()
-                .info(res.getItemInfo())
-                .itemId(res.getItemId())
-                .build();
+        HttpPut put = new RestCommandBuilder()
+                .path(path)
+                .entity(input)
+                .addHeader("Accept", "application/vnd.allegro.public.v1+json")
+                .addHeader("Content-Type", "application/vnd.allegro.public.v1+json")
+                .addHeader("Authorization", "Bearer " + session.getAccessToken())
+                .addHeader("Api-Key", cred.getRestClientApiKey())
+                .buildPut();
+
+        String response = ClientExecuteUtil.execute(put);
+        JsonElement element = new JsonParser().parse(response);
+        JsonArray errors = element.getAsJsonObject().getAsJsonArray("errors");
+        if (errors == null) {
+            String info = element.getAsJsonObject().getAsJsonObject("output").get("status").getAsString();
+            return new ChangedPrice.Builder().info(info).itemId(itemId).build();
+        } else {
+            throw new RestApiException(errors.toString());
+        }
     }
 
     /**

@@ -5,7 +5,6 @@ import com.apwglobal.nice.client.ClientService;
 import com.apwglobal.nice.country.InfoService;
 import com.apwglobal.nice.deal.DealService;
 import com.apwglobal.nice.domain.*;
-import com.apwglobal.nice.feedback.FeedbackService;
 import com.apwglobal.nice.journal.JournalService;
 import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.login.LoginService;
@@ -49,7 +48,6 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     private DealService dealService;
     private AuctionService auctionService;
     private SellService sellService;
-    private FeedbackService feedbackService;
     private IncomingPaymentService incomingPaymentService;
 
     private AllegroNiceApi(Builder builder) {
@@ -66,7 +64,6 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         dealService = new DealService(allegro, cred, conf, infoService);
         auctionService = new AuctionService(allegro, cred, conf);
         sellService = new SellService(allegro, cred, conf);
-        feedbackService = new FeedbackService(allegro, cred, conf);
         incomingPaymentService = new IncomingPaymentService(allegro, cred, conf);
     }
 
@@ -232,27 +229,12 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
 
     @Override
     public ChangedPrice changePrice(long itemId, double newPrice) {
-        return sellService.changeAuctionPrice(session.getSessionId(), itemId, newPrice);
+        return sellService.changeAuctionPrice(restApiSession, itemId, newPrice);
     }
 
     @Override
     public List<FinishAuctionFailure> finishAuctions(List<Long> itemsIds) {
         return sellService.finishAuctions(session.getSessionId(), itemsIds);
-    }
-
-    @Override
-    public int getWaintingFeedbackCounter() {
-        return feedbackService.getWaitingFeedbackCounter(session.getSessionId());
-    }
-
-    @Override
-    public Observable<WaitingFeedback> getWaitingFeedbacks() {
-        return feedbackService.getWaitingFeedbacks(session.getSessionId());
-    }
-
-    @Override
-    public List<CreatedFeedback> createFeedbacks(List<CreateFeedback> feedbacks) {
-        return feedbackService.createFeedbacks(session.getSessionId(), feedbacks);
     }
 
     @Override

@@ -28,6 +28,8 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         api.refreshRestApiSession();
         assertNotNull(restApiSession.getAccessToken());
         assertNotNull(restApiSession.getRefreshRoken());
+
+        api.changePrice(6589416020L, 2.29);
     }
 
     @Test
@@ -158,7 +160,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         ChangedQty changedQty = api.changeQty(auction.getItemId(), 5);
         assertEquals(5, changedQty.getLeft());
 
-        ChangedPrice changedPrice = api.login().changePrice(auction.getItemId(), 2.85);
+        ChangedPrice result = api.login().changePrice(auction.getItemId(), 2.85);
     }
 
     @Test
@@ -203,23 +205,6 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
                 new AuctionField(FieldId.SENDING_TIME, FieldType.Type.INTEGER, 1),
                 new AuctionField(FieldId.COLOR, FieldType.Type.INTEGER, 1)
         );
-    }
-
-    @Test
-    public void shouldReturnWaitingFeedbackCounter() {
-        int counter = api.login()
-                .getWaintingFeedbackCounter();
-
-        assertTrue(counter >= 0);
-    }
-
-    @Test
-    public void shouldReturnWaitingFeedbacks() {
-        Observable<WaitingFeedback> feedbacks = api.login()
-                .getWaitingFeedbacks();
-
-        feedbacks
-                .forEach(f -> assertNotNull(f.getItemId()));
     }
 
     @Test
