@@ -17,4 +17,12 @@ public class RestApiSession {
         return refreshRoken;
     }
 
+    @Override
+    public String toString() {
+        return "RestApiSession{" +
+                "accessToken='" + accessToken + '\'' +
+                ", refreshRoken='" + refreshRoken + '\'' +
+                '}';
+    }
+
 }
