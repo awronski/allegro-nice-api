@@ -18,6 +18,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPut;
+import org.jetbrains.annotations.NotNull;
 import pl.allegro.webapi.*;
 
 import java.util.Arrays;
@@ -82,8 +83,8 @@ public class SellService extends AbstractService {
     /**
      * http://allegro.pl/webapi/documentation.php/show/id,113#method-output
      */
-    public CreatedAuction createNewAuction(List<AuctionField> fields, SalesConditions cond, String session) {
-        DoNewAuctionExtRequest req = createDoNewAuctionExtRequest(fields, cond, session);
+    public CreatedAuction createNewAuction(@NotNull NewAuction newAuction, String session) {
+        DoNewAuctionExtRequest req = createDoNewAuctionExtRequest(newAuction, session);
         DoNewAuctionExtResponse res = execute(() -> allegro.doNewAuctionExt(req));
         return new CreatedAuction.Builder()
                 .itemId(res.getItemId())
@@ -92,13 +93,14 @@ public class SellService extends AbstractService {
                 .build();
     }
 
-    private DoNewAuctionExtRequest createDoNewAuctionExtRequest(List<AuctionField> fields, SalesConditions cond, String session) {
+    private DoNewAuctionExtRequest createDoNewAuctionExtRequest(NewAuction newAuction, String session) {
+        SalesConditions cond = newAuction.getSalesConditions();
         AfterSalesServiceConditionsStruct salesCondition = new AfterSalesServiceConditionsStruct(cond.getImpliedWarranty(), cond.getReturnPolicy(), cond.getWarranty());
 
         DoNewAuctionExtRequest req = new DoNewAuctionExtRequest();
         req.setAfterSalesServiceConditions(salesCondition);
         req.setSessionHandle(session);
-        req.setFields(AuctionFieldConv.convert(fields));
+        req.setFields(AuctionFieldConv.convert(newAuction.getFields()));
         req.setLocalId((int) (Math.random() * Integer.MAX_VALUE));
         return req;
     }

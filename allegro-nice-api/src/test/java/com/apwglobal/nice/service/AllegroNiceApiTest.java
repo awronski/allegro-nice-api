@@ -161,10 +161,11 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     public void shouldCreateNewAuctionAndChangeQtyAndChangePrice() throws IOException {
         List<AuctionField> fields = createNewAuctionFields();
         SalesConditions cond = new SalesConditions("XXX", "YYY", "ZZZ");
+        NewAuction newAuction = new NewAuction(fields, cond);
 
         CreatedAuction auction = api
                 .login()
-                .createNewAuction(fields, cond);
+                .createNewAuction(newAuction);
         assertNotNull(auction);
 
         ChangedQty changedQty = api.changeQty(auction.getItemId(), 5);
@@ -177,10 +178,11 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     public void shouldCreateNewAuctionAndThanFinishIt() throws IOException {
         List<AuctionField> fields = createNewAuctionFields();
         SalesConditions cond = new SalesConditions("XXX", "YYY", "ZZZ");
+        NewAuction newAuction = new NewAuction(fields, cond);
 
         CreatedAuction auction = api
                 .login()
-                .createNewAuction(fields, cond);
+                .createNewAuction(newAuction);
         assertNotNull(auction);
 
         List<FinishAuctionFailure> failures = api.finishAuctions(singletonList(auction.getItemId()));

@@ -223,8 +223,8 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     }
 
     @Override
-    public CreatedAuction createNewAuction(@NotNull List<AuctionField> fields, @NotNull SalesConditions cond) {
-        return sellService.createNewAuction(fields, cond, session.getSessionId());
+    public CreatedAuction createNewAuction(@NotNull NewAuction newAuction) {
+        return sellService.createNewAuction(newAuction, session.getSessionId());
     }
 
     @Override
