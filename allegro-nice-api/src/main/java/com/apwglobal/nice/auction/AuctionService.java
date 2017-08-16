@@ -91,7 +91,7 @@ public class AuctionService extends AbstractService {
     }
 
     private class AuctionIterator extends AbstractAllegroIterator<Auction> {
-        public AuctionIterator(String session, long startingPoint) {
+        AuctionIterator(String session, long startingPoint) {
             super(session, startingPoint);
         }
 

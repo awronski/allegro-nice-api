@@ -8,11 +8,14 @@ import com.apwglobal.nice.login.Credentials;
 import com.apwglobal.nice.service.AbstractAllegroIterator;
 import com.apwglobal.nice.service.AbstractService;
 import com.apwglobal.nice.service.Configuration;
-import pl.allegro.webapi.*;
+import pl.allegro.webapi.DoGetSiteJournalRequest;
+import pl.allegro.webapi.ServicePort;
 import rx.Observable;
 
 import java.util.List;
-import java.util.stream.Collectors;
+
+import static java.util.Comparator.comparingLong;
+import static java.util.stream.Collectors.toList;
 
 public class JournalService extends AbstractService {
 
@@ -26,7 +29,7 @@ public class JournalService extends AbstractService {
 
     private class JournalIterator extends AbstractAllegroIterator<Journal> {
 
-        public JournalIterator(String session, long startingPoint) {
+        JournalIterator(String session, long startingPoint) {
             super(session, startingPoint);
         }
 
@@ -36,8 +39,8 @@ public class JournalService extends AbstractService {
             return AllegroExecutor.execute(() -> allegro.doGetSiteJournal(request)).getSiteJournalArray().getItem()
                     .stream()
                     .map(JournalConv::convert)
-                    .sorted((j1, j2) -> Long.valueOf(j1.getRowId()).compareTo(j2.getRowId()))
-                    .collect(Collectors.toList());
+                    .sorted(comparingLong(Journal::getRowId))
+                    .collect(toList());
         }
 
         @Override

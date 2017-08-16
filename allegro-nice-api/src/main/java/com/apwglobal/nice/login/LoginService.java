@@ -35,7 +35,7 @@ public class LoginService extends AbstractService {
                 .build();
     }
 
-    public String encPassword(String password) {
+    private String encPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance(SHA_256);
             md.update(password.getBytes());

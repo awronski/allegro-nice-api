@@ -30,7 +30,7 @@ public class IncomingPaymentService extends AbstractService {
      * http://allegro.pl/webapi/documentation.php/show/id,85#method-output
      */
     private class IncomingPaymentIterator extends AbstractAllegroIterator<IncomingPayment> {
-        public IncomingPaymentIterator(String session) {
+        IncomingPaymentIterator(String session) {
             super(session, 0);
         }
 

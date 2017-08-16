@@ -60,7 +60,7 @@ public class DealService extends AbstractService {
      */
     private class DealsIterator extends AbstractAllegroIterator<Deal> {
 
-        public DealsIterator(String session, long startingPoint) {
+        DealsIterator(String session, long startingPoint) {
             super(session, startingPoint);
         }
 

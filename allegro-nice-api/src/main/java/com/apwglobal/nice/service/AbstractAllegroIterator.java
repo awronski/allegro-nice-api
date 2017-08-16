@@ -8,7 +8,7 @@ public abstract class AbstractAllegroIterator<T> implements Iterator<T> {
 
     protected String session;
     protected long startingPoint;
-    protected List<T> items;
+    private List<T> items;
     private boolean fetched;
     private int index;
 
