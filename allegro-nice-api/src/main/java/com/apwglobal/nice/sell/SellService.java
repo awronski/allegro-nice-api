@@ -16,9 +16,11 @@ import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPut;
 import pl.allegro.webapi.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -26,6 +28,12 @@ import static com.apwglobal.nice.exception.AllegroExecutor.execute;
 import static java.util.stream.Collectors.toList;
 
 public class SellService extends AbstractService {
+
+    private static final String[] SALES_CONDITIONS_PATHS = new String[] {
+            "/after-sales-service-conditions/implied-warranties",
+            "/after-sales-service-conditions/return-policies",
+            "/after-sales-service-conditions/warranties"
+    };
 
     public SellService(ServicePort allegro, Credentials cred, Configuration conf) {
         super(allegro, cred, conf);
@@ -133,6 +141,25 @@ public class SellService extends AbstractService {
         } else {
             throw new RestApiException(errors.toString());
         }
+    }
+
+    public List<String> getSalesConditions(RestApiSession session, long clientId) {
+        return Arrays.stream(SALES_CONDITIONS_PATHS)
+                .map(path -> retriveConditions(session, clientId, path))
+                .collect(toList());
+    }
+
+    private String retriveConditions(RestApiSession session, long clientId, String path) {
+        HttpGet get = new RestCommandBuilder()
+                .path(path)
+                .addParam("sellerId", String.valueOf(clientId))
+                .addHeader("Accept", "application/vnd.allegro.public.v1+json")
+                .addHeader("Content-Type", "application/vnd.allegro.public.v1+json")
+                .addHeader("Authorization", "Bearer " + session.getAccessToken())
+                .addHeader("Api-Key", cred.getRestClientApiKey())
+                .buildGet();
+
+        return ClientExecuteUtil.execute(get);
     }
 
     /**

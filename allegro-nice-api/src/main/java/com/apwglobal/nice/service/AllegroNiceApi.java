@@ -110,6 +110,11 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
         return this;
     }
 
+    @Override
+    public List<String> getSalesConditions() {
+        return sellService.getSalesConditions(restApiSession, cred.getClientId());
+    }
+
     @Nullable
     @Override
     public RestApiSession getRestApiSession() {

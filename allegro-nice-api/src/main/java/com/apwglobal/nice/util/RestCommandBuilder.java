@@ -1,6 +1,7 @@
 package com.apwglobal.nice.util;
 
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URIBuilder;
@@ -52,6 +53,14 @@ public class RestCommandBuilder {
     public RestCommandBuilder entity(String val) {
         entity = val;
         return this;
+    }
+
+    public HttpGet buildGet() {
+        URI uri = buildUri();
+        HttpGet post = new HttpGet(uri);
+        headers.forEach(post::setHeader);
+
+        return post;
     }
 
     public HttpPost buildPost() {

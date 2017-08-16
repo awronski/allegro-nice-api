@@ -3,7 +3,7 @@ package com.apwglobal.nice.util;
 import com.apwglobal.nice.exception.RestApiException;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
+import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -16,7 +16,7 @@ public class ClientExecuteUtil {
     private final static Logger logger = LoggerFactory.getLogger(ClientExecuteUtil.class);
 
     @NotNull
-    public static String execute(@NotNull HttpEntityEnclosingRequestBase httpRequest) {
+    public static String execute(@NotNull HttpRequestBase httpRequest) {
         CloseableHttpClient client = HttpClients.createDefault();
 
         try (CloseableHttpResponse res = client.execute(httpRequest)) {

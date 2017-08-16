@@ -33,6 +33,15 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     }
 
     @Test
+    public void shouldReturnSalesConditions() {
+        api.restLogin(code).getRestApiSession();
+        List<String> salesConditions = api.getSalesConditions();
+
+        assertNotNull(salesConditions);
+        assertEquals(3, salesConditions.size());
+    }
+
+    @Test
     public void shouldReturnSessionId() {
         assertNotNull(api.login().getSession());
     }
@@ -151,10 +160,11 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
     @Test
     public void shouldCreateNewAuctionAndChangeQtyAndChangePrice() throws IOException {
         List<AuctionField> fields = createNewAuctionFields();
+        SalesConditions cond = new SalesConditions("XXX", "YYY", "ZZZ");
 
         CreatedAuction auction = api
                 .login()
-                .createNewAuction(fields);
+                .createNewAuction(fields, cond);
         assertNotNull(auction);
 
         ChangedQty changedQty = api.changeQty(auction.getItemId(), 5);

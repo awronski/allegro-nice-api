@@ -18,6 +18,7 @@ public interface IAllegroNiceApi {
     IAllegroNiceApi restLogin(@NotNull String code);
     @Nullable RestApiSession getRestApiSession();
     AllegroNiceApi refreshRestApiSession();
+    List<String> getSalesConditions();
 
     //login
     IAllegroNiceApi login();
