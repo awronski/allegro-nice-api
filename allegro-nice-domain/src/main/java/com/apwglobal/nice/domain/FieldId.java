@@ -21,6 +21,7 @@ public enum FieldId {
     EXTRA_OPTIONS(15),
     IMAGE(16),
     DESC(24),
+    NEW_DESC(341),
     UNIT(28),
     ZIP(32),
     PRICE_FOR_LETTER(43),

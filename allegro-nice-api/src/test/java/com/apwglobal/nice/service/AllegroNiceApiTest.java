@@ -180,6 +180,32 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
         InputStream is = getClass().getResourceAsStream("/resources/test.png");
         String img = Base64.getEncoder().encodeToString(IOUtils.toByteArray(is));
 
+        // https://developer.allegroapi.io/new_desc/
+        String newJsonDesc = "{\n" +
+                "   \"sections\":[\n" +
+                "      {\n" +
+                "         \"items\":[\n" +
+                "            {\n" +
+                "               \"type\":\"TEXT\",\n" +
+                "               \"content\":\"<h1>TITLE</h1>\"\n" +
+                "            }\n" +
+                "         ]\n" +
+                "      },\n" +
+                "      {\n" +
+                "         \"items\":[\n" +
+                "            {\n" +
+                "               \"type\":\"IMAGE\",\n" +
+                "               \"url\":\"PHOTO_FID_16\"\n" +
+                "            },\n" +
+                "            {\n" +
+                "               \"type\":\"TEXT\",\n" +
+                "               \"content\":\"<h2>SUBTITLE</h2>\\n<p><b>DESCRIPTION</b></p>\"\n" +
+                "            }\n" +
+                "         ]\n" +
+                "      }\n" +
+                "   ]\n" +
+                "}";
+
         return Arrays.asList(
                 new AuctionField(FieldId.TITLE, FieldType.Type.STRING, System.nanoTime() + ": Testing 123"),
                 new AuctionField(FieldId.CATEGORY, FieldType.Type.INTEGER, 76661),
@@ -194,6 +220,7 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
                 new AuctionField(FieldId.INVOICE, FieldType.Type.INTEGER, 32),
                 new AuctionField(FieldId.IMAGE, FieldType.Type.IMAGE, img),
                 new AuctionField(FieldId.DESC, FieldType.Type.STRING, "This is description <b>with html</b>"),
+                new AuctionField(FieldId.NEW_DESC, FieldType.Type.STRING, newJsonDesc),
                 new AuctionField(FieldId.UNIT, FieldType.Type.INTEGER, 0),
                 new AuctionField(FieldId.ZIP, FieldType.Type.STRING, "01-234"),
                 new AuctionField(FieldId.PRICE_FOR_LETTER, FieldType.Type.FLOAT, 7.99f),
