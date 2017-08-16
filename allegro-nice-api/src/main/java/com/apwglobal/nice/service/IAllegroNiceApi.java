@@ -49,7 +49,7 @@ public interface IAllegroNiceApi {
     List<Category> getCategories();
     List<FormField> getSellFormFields(int categoryId);
     NewAuctionPrice checkNewAuction(List<AuctionField> fields);
-    CreatedAuction createNewAuction(List<AuctionField> fields);
+    CreatedAuction createNewAuction(List<AuctionField> fields, SalesConditions cond);
     ChangedQty changeQty(long itemId, int newQty);
     ChangedPrice changePrice(long itemId, double newPrice);
     List<FinishAuctionFailure> finishAuctions(List<Long> itemsIds);

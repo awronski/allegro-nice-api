@@ -74,8 +74,8 @@ public class SellService extends AbstractService {
     /**
      * http://allegro.pl/webapi/documentation.php/show/id,113#method-output
      */
-    public CreatedAuction createNewAuction(List<AuctionField> fields, String session) {
-        DoNewAuctionExtRequest req = createDoNewAuctionExtRequest(fields, session);
+    public CreatedAuction createNewAuction(List<AuctionField> fields, SalesConditions cond, String session) {
+        DoNewAuctionExtRequest req = createDoNewAuctionExtRequest(fields, cond, session);
         DoNewAuctionExtResponse res = execute(() -> allegro.doNewAuctionExt(req));
         return new CreatedAuction.Builder()
                 .itemId(res.getItemId())
@@ -84,8 +84,11 @@ public class SellService extends AbstractService {
                 .build();
     }
 
-    private DoNewAuctionExtRequest createDoNewAuctionExtRequest(List<AuctionField> fields, String session) {
+    private DoNewAuctionExtRequest createDoNewAuctionExtRequest(List<AuctionField> fields, SalesConditions cond, String session) {
+        AfterSalesServiceConditionsStruct salesCondition = new AfterSalesServiceConditionsStruct(cond.getImpliedWarranty(), cond.getReturnPolicy(), cond.getWarranty());
+
         DoNewAuctionExtRequest req = new DoNewAuctionExtRequest();
+        req.setAfterSalesServiceConditions(salesCondition);
         req.setSessionHandle(session);
         req.setFields(AuctionFieldConv.convert(fields));
         req.setLocalId((int) (Math.random() * Integer.MAX_VALUE));
