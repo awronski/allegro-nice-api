@@ -6,6 +6,8 @@ public class SalesConditions {
     private String returnPolicy;
     private String warranty;
 
+    public SalesConditions() { }
+
     public SalesConditions(String impliedWarranty, String returnPolicy, String warranty) {
         this.impliedWarranty = impliedWarranty;
         this.returnPolicy = returnPolicy;
