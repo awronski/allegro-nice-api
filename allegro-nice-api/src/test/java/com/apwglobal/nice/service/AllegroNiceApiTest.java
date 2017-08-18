@@ -124,15 +124,6 @@ public class AllegroNiceApiTest extends AbstractLoggedServiceBaseTest {
             assertNotNull(changedAuctionInfo);
         }
     }
-    @Test
-    public void shouldReturnListCategories() {
-        List<Category> categories = api
-                .login()
-                .getCategories();
-        assertNotNull(categories);
-        assertFalse(categories.isEmpty());
-
-    }
 
     @Test
     public void shouldReturnSellFormFields() {

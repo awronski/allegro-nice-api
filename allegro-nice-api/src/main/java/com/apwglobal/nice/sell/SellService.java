@@ -2,7 +2,6 @@ package com.apwglobal.nice.sell;
 
 import com.apwglobal.bd.BD;
 import com.apwglobal.nice.conv.AuctionFieldConv;
-import com.apwglobal.nice.conv.CategoryConv;
 import com.apwglobal.nice.conv.FormFieldConv;
 import com.apwglobal.nice.domain.*;
 import com.apwglobal.nice.exception.RestApiException;
@@ -38,18 +37,6 @@ public class SellService extends AbstractService {
 
     public SellService(ServicePort allegro, Credentials cred, Configuration conf) {
         super(allegro, cred, conf);
-    }
-
-    /**
-     * http://allegro.pl/webapi/documentation.php/show/id,46#method-output
-     */
-    public List<Category> getCategories() {
-        DoGetCatsDataRequest req = new DoGetCatsDataRequest(conf.getCountryId(), 0l, cred.getKey());
-        DoGetCatsDataResponse res = execute(() -> allegro.doGetCatsData(req));
-        return res.getCatsList().getItem()
-                .stream()
-                .map(CategoryConv::convert)
-                .collect(toList());
     }
 
     /**

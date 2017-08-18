@@ -47,7 +47,6 @@ public interface IAllegroNiceApi {
     Optional<Auction> getAuctionById(long itemId);
     List<AuctionField> getAuctionFields(long itemId);
     ChangedAuctionInfo changeAuctions(long itemId, List<AuctionField> fieldsToModify);
-    List<Category> getCategories();
     List<FormField> getSellFormFields(int categoryId);
     NewAuctionPrice checkNewAuction(List<AuctionField> fields);
     CreatedAuction createNewAuction(NewAuction newAuction);

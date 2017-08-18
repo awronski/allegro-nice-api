@@ -208,11 +208,6 @@ public class AllegroNiceApi extends AbstractService implements IAllegroNiceApi {
     }
 
     @Override
-    public List<Category> getCategories() {
-        return sellService.getCategories();
-    }
-
-    @Override
     public List<FormField> getSellFormFields(int categoryId) {
         return sellService.getSellFormFields(categoryId);
     }
