@@ -1,6 +1,7 @@
 # allegro-nice-api
-Flexible and easy to use java api for allegro service focused on trading operation on allegro platform.
-Supports **BOTH Allegro WebApi** and **Allegro Rest Api**. 
+Flexible and easy to use unofficial **java allegro sdk** focused on trading operation on allegro platform.
+Supports **BOTH [Allegro WebApi](https://allegro.pl/webapi)** and 
+**[Allegro Rest Api](https://developer.allegro.pl/)**. 
 
 ## Requirements
 - Java 8
@@ -25,6 +26,7 @@ mvn compile test -P testprof
 ```java
 int countryId = 1;
 Configuration conf = new Configuration(countryId);
+
 Credentials cred = new Credentials(
         clientId, 
         username, 
@@ -48,8 +50,7 @@ allegro.login();
 ```
 
 ## Login for RestApi
-To get the code you need to authorize your user with allegro.
-[Documentation](https://developer.allegroapi.io/auth/#user)
+To get the code you need to authorize your user with [allegro](https://developer.allegroapi.io/auth/#user).
 
 ```java
 allegro.restLogin(code);
@@ -91,15 +92,18 @@ api.getSiteJournal(startingPoint)
 Read more about [RxJava](https://github.com/ReactiveX/RxJava).
 
 ## Create new auction
-To create new auction you need to create list of auctions fields.
-Id of the field is the same as on the allegro service. Check ```getSellFormFields(categoryId)``` to get
-all possible fields for a given category.
+To create new auction you need to create list of auctions fields and [sales conditions](https://developer.allegro.pl/new_desc/).
+Id of the field is the same as on the allegro service. Check ```getSellFormFields(categoryId)``` to get all possible fields for a given category.
 
 ```java
 List<NewAuctionField> fields = new ArrayList<>();
-fields.add( new NewAuctionField(1, FieldType.Type.STRING, "Auction title") );
+fields.add(new NewAuctionField(1, FieldType.Type.STRING, "Auction title"));
 [...]
-CreatedAuction created = api.createNewAuction(fields);
+
+SalesConditions cond = new SalesConditions("XXX", "YYY", "ZZZ");
+NewAuction newAuction = new NewAuction(fields, cond);
+
+CreatedAuction created = api.createNewAuction(newAuction);
 ```
 
 ## Change auction's quantity and price, even if auction has offers

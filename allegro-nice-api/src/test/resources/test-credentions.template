@@ -14,4 +14,4 @@ allegro.rest.ten.seconds.code=zzzz-zzzz-zzzz
 
 #To get the code from allegro use the link below
 #Attention, the code is valid only for ten seconds
-#https://ssl.allegro.pl/auth/oauth/authorize?response_type=code&client_id=CLIENT_iD&api-key=API_KEY&redirect_uri=REDIRECT_URI
+#https://allegro.pl/auth/oauth/authorize?response_type=code&client_id=CLIENT_iD&api-key=API_KEY&redirect_uri=REDIRECT_URI
