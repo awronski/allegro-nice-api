@@ -44,7 +44,7 @@ public class AuctionFieldConv {
                 break;
 
             case UNIX_DATE:
-                fv.setFvalueDatetime((Float) f.getValue());
+                fv.setFvalueDatetime((Long) f.getValue());
                 break;
 
             case DATE:
