@@ -14,6 +14,7 @@ public class Auction {
     private String thumbnailUrl;
     private int startQuantity;
     private int soldQuantity;
+    private Optional<Date> lastSellDate;
     private ItemQuantityType quantityType;
     private Date startTime;
     private Optional<Date> endTime;
@@ -41,6 +42,7 @@ public class Auction {
         thumbnailUrl = builder.thumbnailUrl;
         startQuantity = builder.startQuantity;
         soldQuantity = builder.soldQuantity;
+        lastSellDate = builder.lastSellDate;
         quantityType = builder.quantityType;
         startTime = builder.startTime;
         endTime = builder.endTime;
@@ -73,6 +75,9 @@ public class Auction {
     }
     public int getSoldQuantity() {
         return soldQuantity;
+    }
+    public Optional<Date> getLastSellDate() {
+        return lastSellDate;
     }
     public ItemQuantityType getQuantityType() {
         return quantityType;
@@ -135,6 +140,7 @@ public class Auction {
         private String thumbnailUrl;
         private int startQuantity;
         private int soldQuantity;
+        private Optional<Date> lastSellDate;
         private ItemQuantityType quantityType;
         private Date startTime;
         private Optional<Date> endTime;
@@ -187,6 +193,11 @@ public class Auction {
 
         public Builder startTime(long startTime) {
             this.startTime = UnixDate.toDate(startTime);
+            return this;
+        }
+
+        public Builder lastSaleDate(Date lastSale) {
+            this.lastSellDate = Optional.ofNullable(lastSale);
             return this;
         }
 
